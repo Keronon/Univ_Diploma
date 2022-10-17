@@ -1,4 +1,4 @@
-package seihpe.donntu.admission
+package ru.donntu.admission
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("seihpe.donntu.admission", appContext.packageName)
+        assertEquals("ru.donntu.admission", appContext.packageName)
     }
 }

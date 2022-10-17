@@ -1,4 +1,4 @@
-package seihpe.donntu.admission
+package ru.donntu.admission
 
 import org.junit.Test
 
