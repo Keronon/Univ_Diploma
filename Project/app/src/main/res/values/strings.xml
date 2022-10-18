@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">DonNTU Admission</string>
+    <string name="BTN_back_content_description">BTN for back and reload performing</string>
 </resources>
