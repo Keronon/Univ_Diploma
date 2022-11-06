@@ -6,11 +6,11 @@ import android.app.DownloadManager
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.os.Environment
+import android.view.MotionEvent
 import android.webkit.*
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -21,11 +21,11 @@ import java.net.URI
 class MainActivity : AppCompatActivity()
 {
     private lateinit var webView: WebView
+    var cancelTimer = false
 
     var filePath: ValueCallback<Array<Uri>>? = null
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    @SuppressLint("SetJavaScriptEnabled")
+    @SuppressLint("SetJavaScriptEnabled", "ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
@@ -33,19 +33,46 @@ class MainActivity : AppCompatActivity()
 
         val dm = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
 
-        val backButton: FloatingActionButton = findViewById(R.id.BTN_back)
-        backButton.setOnClickListener { if (webView.canGoBack()) webView.goBack() }
-        backButton.setOnLongClickListener { webView.reload(); return@setOnLongClickListener true; }
+        val btnReload: FloatingActionButton = findViewById(R.id.BTN_reload)
+        btnReload.setOnTouchListener { view, motion_event ->
+            val timer = object : CountDownTimer(1000, 100)
+            {
+                override fun onTick(millisUntilFinished: Long)
+                {
+                    if (cancelTimer) cancel()
+                    else view.alpha -= 0.1f
+                }
+                override fun onFinish()
+                {
+                    view.alpha = 1f
+                    view.background.setTint(getColor(R.color.yellow))
+                    webView.reload()
+                }
+            }
+
+            if (motion_event.action == MotionEvent.ACTION_DOWN)
+            {
+                cancelTimer = false
+                timer.start()
+            }
+            if (motion_event.action == MotionEvent.ACTION_UP)
+            {
+                cancelTimer = true
+                view.alpha = 1f
+                view.background.setTint(getColor(R.color.teal_700))
+            }
+            true
+        }
 
         webView = findViewById(R.id.webView)
         webView.setOnLongClickListener {
             val fileName = File(URI(webView.url).path).name
             if (fileName.contains("."))
-                Snackbar.make(webView, "Save As", Snackbar.LENGTH_LONG)
-                        .setAction("Save") {
+                Snackbar.make(webView, fileName, Snackbar.LENGTH_LONG)
+                        .setAction("Скачать") {
                             val request = DownloadManager.Request(Uri.parse(webView.url))
                                 .setTitle(fileName)
-                                .setDescription("Downloading...")
+                                .setDescription("Загрузка...")
                                 .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName)
                                 .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
                                 .setAllowedOverMetered(true)
@@ -72,14 +99,12 @@ class MainActivity : AppCompatActivity()
             override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?)
             {
                 super.onPageStarted(view, url, favicon)
-                if (view != null)
-                    Snackbar.make(view, "Начата загрузка страницы", Snackbar.LENGTH_SHORT).show()
+                if (view != null) Snackbar.make(view, "Загрузка окна", Snackbar.LENGTH_SHORT).show()
             }
             override fun onPageFinished(view: WebView?, url: String?)
             {
                 super.onPageFinished(view, url)
-                if (view != null)
-                    Snackbar.make(view, "Страница загружена!", Snackbar.LENGTH_SHORT).show()
+                // if (view != null) Snackbar.make(view, "✔", Snackbar.LENGTH_SHORT).show()
             }
         }
 
@@ -87,15 +112,16 @@ class MainActivity : AppCompatActivity()
             val fileName = URLUtil.guessFileName(url, contentDisposition, mimetype)
             val request = DownloadManager.Request(Uri.parse(url))
                 .setTitle(fileName)
-                .setDescription("Downloading...")
-                .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, URLUtil.guessFileName(url, contentDisposition, mimetype))
+                .setDescription("Загрузка...")
+                .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,
+                                                   URLUtil.guessFileName(url, contentDisposition, mimetype))
                 .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
                 .setAllowedOverMetered(true)
 
             dm.enqueue(request)
 
             //To notify the Client that the file is being downloaded
-            Snackbar.make(webView, "Downloading File", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(webView, "$fileName загружается", Snackbar.LENGTH_SHORT).show()
         }
 
         webView.webChromeClient = object : WebChromeClient()

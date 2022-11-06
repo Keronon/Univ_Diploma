@@ -14,7 +14,7 @@
     </WebView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/BTN_back"
+        android:id="@+id/BTN_reload"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="15dp"
@@ -22,10 +22,10 @@
         android:clickable="true"
         android:contentDescription="@string/BTN_back_content_description"
         android:focusable="true"
-        app:backgroundTint="#FFFFFF"
+        android:foreground="@android:drawable/ic_menu_rotate"
+        app:backgroundTint="@color/teal_700"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="?attr/actionModeCloseDrawable"
         tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
