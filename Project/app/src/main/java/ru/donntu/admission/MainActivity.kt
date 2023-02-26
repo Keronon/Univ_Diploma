@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity()
     {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        supportActionBar?.hide()
 
         val dm = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
 
@@ -59,7 +60,7 @@ class MainActivity : AppCompatActivity()
             {
                 cancelTimer = true
                 view.alpha = 1f
-                view.background.setTint(getColor(R.color.teal_700))
+                view.background.setTint(getColor(R.color.teal_900))
             }
             true
         }
@@ -72,11 +73,12 @@ class MainActivity : AppCompatActivity()
                         .setAction("Скачать") {
                             val request = DownloadManager.Request(Uri.parse(webView.url))
                                 .setTitle(fileName)
-                                .setDescription("Загрузка...")
+                                .setDescription("Скачивание...")
                                 .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName)
                                 .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
                                 .setAllowedOverMetered(true)
-                            dm.enqueue(request) }.show()
+                            dm.enqueue(request)
+                        }.show()
             return@setOnLongClickListener true
         }
 
@@ -99,25 +101,23 @@ class MainActivity : AppCompatActivity()
             override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?)
             {
                 super.onPageStarted(view, url, favicon)
-                if (view != null) Snackbar.make(view, "Загрузка окна", Snackbar.LENGTH_SHORT).show()
+                if (view != null) Snackbar.make(view, "Загрузка...", Snackbar.LENGTH_SHORT).show()
             }
             override fun onPageFinished(view: WebView?, url: String?)
             {
                 super.onPageFinished(view, url)
-                // if (view != null) Snackbar.make(view, "✔", Snackbar.LENGTH_SHORT).show()
+                if (view != null) Snackbar.make(view, "✔", Snackbar.LENGTH_SHORT).show()
             }
         }
 
-        webView.setDownloadListener { url, _, contentDisposition, mimetype, _ -> // userAgent ... contentLength
+        webView.setDownloadListener { url, _, contentDisposition, mimetype, _ -> // '_' => userAgent ... contentLength
             val fileName = URLUtil.guessFileName(url, contentDisposition, mimetype)
             val request = DownloadManager.Request(Uri.parse(url))
                 .setTitle(fileName)
-                .setDescription("Загрузка...")
-                .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,
-                                                   URLUtil.guessFileName(url, contentDisposition, mimetype))
+                .setDescription("Скачивание...")
+                .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName)
                 .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
                 .setAllowedOverMetered(true)
-
             dm.enqueue(request)
 
             //To notify the Client that the file is being downloaded
@@ -143,7 +143,7 @@ class MainActivity : AppCompatActivity()
             }
         }
 
-        val targetUrl = "http://pk2022.donntu.ru/"
+        val targetUrl = "http://pk2022.donntu.ru/" // "https://vk.com"
         webView.loadUrl(targetUrl)
     }
 
