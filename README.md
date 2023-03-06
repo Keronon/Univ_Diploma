@@ -1,4 +1,4 @@
-> *( main branch - 'browser_like' )*
+> *( main branch to work - 'browser_like' )*
 
 -----
 -----
