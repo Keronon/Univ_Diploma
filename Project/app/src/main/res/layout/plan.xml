@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ru.donntu.admission.CustomZoom
+        android:id="@+id/IMG_plan"
+        android:layout_width="410dp"
+        android:layout_height="800dp"
+        android:contentDescription="@string/plan"
+        app:srcCompat="@drawable/info_plan" />
+
+    <TextView
+        android:id="@+id/BTN_close"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:clickable="true"
+        android:focusable="false"
+        android:padding="10dp"
+        android:text="@string/x"
+        app:drawableTopCompat="@android:drawable/btn_dialog"
+        tools:ignore="Deprecated" />
+</RelativeLayout>
