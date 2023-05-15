@@ -1,6 +1,7 @@
 package ru.donntu.admission
 
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
 import android.widget.Toast
@@ -65,6 +66,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.menu_register -> {
                     Toast.makeText(applicationContext, "Начинаем регистрацию", Toast.LENGTH_SHORT).show()
                     drawer.closeDrawer(GravityCompat.START)
+
+                    val i = Intent(this, RegisterActivity::class.java)
+                    startActivity(i)
                 }
                 R.id.menu_login -> {
                     Toast.makeText(applicationContext, "Начинаем вход", Toast.LENGTH_SHORT).show()

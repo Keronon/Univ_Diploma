@@ -8,7 +8,7 @@
 
     <!-- !! UI !! -->
 
-    <!-- ! overall ! -->
+    <!-- ! main page ! -->
 
     <string name="x">x</string>
 
@@ -18,6 +18,25 @@
 
     <string name="toolbar_opened">Меню открыто</string>
     <string name="toolbar_closed">Меню закрыто</string>
+
+    <!-- ! reg page ! -->
+
+    <string name="info">* - необязательное поле</string>
+    <string name="reg">Р Е Г И С Т Р А Ц И Я</string>
+
+    <string name="h_login">Имя для системы ( логин )</string>
+    <string name="h_pass">Пароль</string>
+    <string name="h_confirm">Подтвердите пароль</string>
+    <string name="h_surname">Фамилия</string>
+    <string name="h_name">Имя</string>
+    <string name="h_fathername">* Отчество</string>
+    <string name="date">Дата рождения</string>
+    <string name="h_email">Электронная почта</string>
+    <string name="h_phone">Номер телефона ( +7… / +380… )</string>
+    <string name="h_other">* Другая информация\n   для связи с вами</string>
+    <string name="rights">Даю согласие на использование моих персональных данных в электронной базе ДонНТУ и гарантирую их достоверность</string>
+
+    <string name="btn_reg">ЗАРЕГИСТРИРОВАТЬСЯ</string>
 
     <!-- ! menu ! -->
 

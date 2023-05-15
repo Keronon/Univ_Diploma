@@ -37,7 +37,7 @@
             android:padding="10dp"
 
             android:theme="?attr/actionBarTheme"
-            android:background="@color/teal_900"
+            android:background="@drawable/back_gradient_teal_900"
             app:navigationIcon="@android:drawable/ic_menu_compass"
 
             app:subtitle="АСУ Абитуриент"
@@ -90,224 +90,218 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <EditText
+                <TextView
                     android:id="@+id/TXT_faculties"
                     android:layout_width="match_parent"
-
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:background="@color/teal_900"
-                    android:editable="false"
-                    android:ems="10"
-                    android:importantForAutofill="no"
-                    android:inputType="none"
                     android:padding="15dp"
-                    android:selectAllOnFocus="false"
+                    android:background="@color/teal_900"
+
                     android:text="@string/faculties"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="@color/white"
-                    android:textStyle="bold"
-                    tools:ignore="Deprecated, LabelFor" />
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/TXT_faculty_1"
                     android:layout_width="match_parent"
-
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:background="@color/teal_900"
-                    android:editable="false"
-                    android:ems="10"
-                    android:importantForAutofill="no"
-                    android:inputType="none"
                     android:padding="15dp"
-                    android:selectAllOnFocus="true"
+                    android:background="@color/teal_900"
+
                     android:text="@string/faculty_1"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="@color/white"
                     android:textStyle="bold"
+
+                    android:selectAllOnFocus="true"
+                    android:editable="false"
+                    android:inputType="none"
+                    android:importantForAutofill="no"
                     tools:ignore="Deprecated, LabelFor" />
 
                 <EditText
                     android:id="@+id/TXT_faculty_2"
                     android:layout_width="match_parent"
-
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:background="@color/teal_900"
-                    android:editable="false"
-                    android:ems="10"
-                    android:importantForAutofill="no"
-                    android:inputType="none"
                     android:padding="15dp"
-                    android:selectAllOnFocus="true"
+                    android:background="@color/teal_900"
+
                     android:text="@string/faculty_2"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="@color/white"
                     android:textStyle="bold"
+
+                    android:selectAllOnFocus="true"
+                    android:editable="false"
+                    android:inputType="none"
+                    android:importantForAutofill="no"
                     tools:ignore="Deprecated, LabelFor" />
 
                 <EditText
                     android:id="@+id/TXT_faculty_3"
                     android:layout_width="match_parent"
-
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:background="@color/teal_900"
-                    android:editable="false"
-                    android:ems="10"
-                    android:importantForAutofill="no"
-                    android:inputType="none"
                     android:padding="15dp"
-                    android:selectAllOnFocus="true"
+                    android:background="@color/teal_900"
+
                     android:text="@string/faculty_3"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="@color/white"
                     android:textStyle="bold"
+
+                    android:selectAllOnFocus="true"
+                    android:editable="false"
+                    android:inputType="none"
+                    android:importantForAutofill="no"
                     tools:ignore="Deprecated, LabelFor" />
 
                 <EditText
                     android:id="@+id/TXT_faculty_4"
                     android:layout_width="match_parent"
-
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:background="@color/teal_900"
-                    android:editable="false"
-                    android:ems="10"
-                    android:importantForAutofill="no"
-                    android:inputType="none"
                     android:padding="15dp"
-                    android:selectAllOnFocus="true"
+                    android:background="@color/teal_900"
+
                     android:text="@string/faculty_4"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="@color/white"
                     android:textStyle="bold"
+
+                    android:selectAllOnFocus="true"
+                    android:editable="false"
+                    android:inputType="none"
+                    android:importantForAutofill="no"
                     tools:ignore="Deprecated, LabelFor" />
 
                 <EditText
                     android:id="@+id/TXT_faculty_5"
                     android:layout_width="match_parent"
-
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:background="@color/teal_900"
-                    android:editable="false"
-                    android:ems="10"
-                    android:importantForAutofill="no"
-                    android:inputType="none"
                     android:padding="15dp"
-                    android:selectAllOnFocus="true"
+                    android:background="@color/teal_900"
+
                     android:text="@string/faculty_5"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="@color/white"
                     android:textStyle="bold"
+
+                    android:selectAllOnFocus="true"
+                    android:editable="false"
+                    android:inputType="none"
+                    android:importantForAutofill="no"
                     tools:ignore="Deprecated, LabelFor" />
 
                 <EditText
                     android:id="@+id/TXT_faculty_6"
                     android:layout_width="match_parent"
-
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:background="@color/teal_900"
-                    android:editable="false"
-                    android:ems="10"
-                    android:importantForAutofill="no"
-                    android:inputType="none"
                     android:padding="15dp"
-                    android:selectAllOnFocus="true"
+                    android:background="@color/teal_900"
+
                     android:text="@string/faculty_6"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="@color/white"
                     android:textStyle="bold"
+
+                    android:selectAllOnFocus="true"
+                    android:editable="false"
+                    android:inputType="none"
+                    android:importantForAutofill="no"
                     tools:ignore="Deprecated, LabelFor" />
 
                 <EditText
                     android:id="@+id/TXT_faculty_7"
                     android:layout_width="match_parent"
-
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:background="@color/teal_900"
-                    android:editable="false"
-                    android:ems="10"
-                    android:importantForAutofill="no"
-                    android:inputType="none"
                     android:padding="15dp"
-                    android:selectAllOnFocus="true"
+                    android:background="@color/teal_900"
+
                     android:text="@string/faculty_7"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="@color/white"
                     android:textStyle="bold"
+
+                    android:selectAllOnFocus="true"
+                    android:editable="false"
+                    android:inputType="none"
+                    android:importantForAutofill="no"
                     tools:ignore="Deprecated, LabelFor" />
 
                 <EditText
                     android:id="@+id/TXT_faculty_8"
                     android:layout_width="match_parent"
-
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:background="@color/teal_900"
-                    android:editable="false"
-                    android:ems="10"
-                    android:importantForAutofill="no"
-                    android:inputType="none"
                     android:padding="15dp"
-                    android:selectAllOnFocus="true"
+                    android:background="@color/teal_900"
+
                     android:text="@string/faculty_8"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="@color/white"
                     android:textStyle="bold"
+
+                    android:selectAllOnFocus="true"
+                    android:editable="false"
+                    android:inputType="none"
+                    android:importantForAutofill="no"
                     tools:ignore="Deprecated, LabelFor" />
 
                 <EditText
                     android:id="@+id/TXT_faculty_9"
                     android:layout_width="match_parent"
-
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:background="@color/teal_900"
-                    android:editable="false"
-                    android:ems="10"
-                    android:importantForAutofill="no"
-                    android:inputType="none"
                     android:padding="15dp"
-                    android:selectAllOnFocus="true"
+                    android:background="@color/teal_900"
+
                     android:text="@string/faculty_9"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="@color/white"
                     android:textStyle="bold"
+
+                    android:selectAllOnFocus="true"
+                    android:editable="false"
+                    android:inputType="none"
+                    android:importantForAutofill="no"
                     tools:ignore="Deprecated, LabelFor" />
 
                 <EditText
                     android:id="@+id/TXT_faculty_10"
                     android:layout_width="match_parent"
-
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:background="@color/teal_900"
-                    android:editable="false"
-                    android:ems="10"
-                    android:importantForAutofill="no"
-                    android:inputType="none"
                     android:padding="15dp"
-                    android:selectAllOnFocus="true"
+                    android:background="@color/teal_900"
+
                     android:text="@string/faculty_10"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="@color/white"
                     android:textStyle="bold"
+
+                    android:selectAllOnFocus="true"
+                    android:editable="false"
+                    android:inputType="none"
+                    android:importantForAutofill="no"
                     tools:ignore="Deprecated, LabelFor" />
 
             </LinearLayout>
