@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="end">
+
+    <TextView
+        android:id="@+id/BTN_close"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:clickable="true"
+        android:padding="10dp"
+        android:text="@string/x"
+        app:drawableTopCompat="@android:drawable/btn_dialog"
+        tools:ignore="KeyboardInaccessibleWidget" />
 
     <com.github.barteksc.pdfviewer.PDFView
         android:id="@+id/VIEW_pdf"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <TextView
-        android:id="@+id/BTN_close"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:clickable="true"
-        android:focusable="false"
-        android:padding="10dp"
-        android:text="@string/x"
-        app:drawableTopCompat="@android:drawable/btn_dialog"
-        tools:ignore="Deprecated" />
-</RelativeLayout>
+</LinearLayout>

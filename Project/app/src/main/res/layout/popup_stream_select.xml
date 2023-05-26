@@ -1,0 +1,1236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:id="@+id/BTN_close"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:clickable="true"
+        android:padding="10dp"
+        android:text="@string/x"
+        android:layout_gravity="end"
+        app:drawableTopCompat="@android:drawable/btn_dialog"
+        tools:ignore="KeyboardInaccessibleWidget" />
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ToggleButton
+                android:id="@+id/BTN_f_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+
+                android:background="@drawable/drop_down"
+                android:textColor="@color/teal_900"
+                android:textOn="@string/f_1"
+                android:textOff="@string/f_1x"
+                android:textStyle="bold" />
+
+            <HorizontalScrollView
+                android:id="@+id/SCROLL_f_1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <RadioGroup
+                    android:id="@+id/RADIO_f_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp" >
+
+                    <RadioButton
+                        android:id="@+id/RADIO_s_110"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_110"
+                        android:textColor="@color/teal_900"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_111"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_111"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_120"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_120"
+                        android:textColor="@color/teal_900"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_121"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_121"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_130"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_130"
+                        android:textColor="@color/teal_900"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_131"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_131"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_140"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_140"
+                        android:textColor="@color/teal_900"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_141"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_141"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_150"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_150"
+                        android:textColor="@color/teal_900"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_151"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_151"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+
+                </RadioGroup>
+
+            </HorizontalScrollView>
+
+            <ToggleButton
+                android:id="@+id/BTN_f_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+
+                android:background="@drawable/drop_down"
+                android:textColor="@color/teal_900"
+                android:textOn="@string/f_2"
+                android:textOff="@string/f_2x"
+                android:textStyle="bold" />
+
+            <HorizontalScrollView
+                android:id="@+id/SCROLL_f_2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <RadioGroup
+                    android:id="@+id/RADIO_f_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp" >
+
+                    <RadioButton
+                        android:id="@+id/RADIO_s_210"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_210"
+                        android:textColor="@color/teal_900"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_211"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_211"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_220"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_220"
+                        android:textColor="@color/teal_900"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_221"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_221"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_230"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_230"
+                        android:textColor="@color/teal_900"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_231"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_231"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_240"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_240"
+                        android:textColor="@color/teal_900"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_241"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_241"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_250"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_250"
+                        android:textColor="@color/teal_900"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_251"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_251"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_252"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_251"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+
+                </RadioGroup>
+
+            </HorizontalScrollView>
+
+            <ToggleButton
+                android:id="@+id/BTN_f_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+
+                android:background="@drawable/drop_down"
+                android:textColor="@color/teal_900"
+                android:textOn="@string/f_3"
+                android:textOff="@string/f_3x"
+                android:textStyle="bold" />
+
+            <HorizontalScrollView
+                android:id="@+id/SCROLL_f_3"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <RadioGroup
+                    android:id="@+id/RADIO_f_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp" >
+
+                    <RadioButton
+                        android:id="@+id/RADIO_s_310"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_310"
+                        android:textColor="@color/teal_900"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_311"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_311"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_312"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_312"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_320"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_320"
+                        android:textColor="@color/teal_900"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_321"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_321"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_322"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_322"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_323"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_323"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_324"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_324"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_325"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_325"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_330"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_330"
+                        android:textColor="@color/teal_900"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_331"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_331"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_332"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_332"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_333"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_333"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_340"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_340"
+                        android:textColor="@color/teal_900"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_341"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_341"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_350"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_350"
+                        android:textColor="@color/teal_900"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_351"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_351"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_352"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_352"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+
+                </RadioGroup>
+
+            </HorizontalScrollView>
+
+            <ToggleButton
+                android:id="@+id/BTN_f_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+
+                android:background="@drawable/drop_down"
+                android:textColor="@color/teal_900"
+                android:textOn="@string/f_4"
+                android:textOff="@string/f_4x"
+                android:textStyle="bold" />
+
+            <HorizontalScrollView
+                android:id="@+id/SCROLL_f_4"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <RadioGroup
+                    android:id="@+id/RADIO_f_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp" >
+
+                    <RadioButton
+                        android:id="@+id/RADIO_s_410"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_410"
+                        android:textColor="@color/teal_900"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_411"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_411"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_420"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_420"
+                        android:textColor="@color/teal_900"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_421"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_421"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_430"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_430"
+                        android:textColor="@color/teal_900"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_431"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_431"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_432"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_432"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_433"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_433"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_434"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_434"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_435"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_435"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+
+                </RadioGroup>
+
+            </HorizontalScrollView>
+
+            <ToggleButton
+                android:id="@+id/BTN_f_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+
+                android:background="@drawable/drop_down"
+                android:textColor="@color/teal_900"
+                android:textOn="@string/f_5"
+                android:textOff="@string/f_5x"
+                android:textStyle="bold" />
+
+            <HorizontalScrollView
+                android:id="@+id/SCROLL_f_5"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <RadioGroup
+                    android:id="@+id/RADIO_f_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp" >
+
+                    <RadioButton
+                        android:id="@+id/RADIO_s_510"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_510"
+                        android:textColor="@color/teal_900"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_511"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_511"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_512"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_512"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_513"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_513"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_514"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_514"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_520"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_520"
+                        android:textColor="@color/teal_900"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_521"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_521"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_522"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_522"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_523"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_523"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_530"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_530"
+                        android:textColor="@color/teal_900"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_531"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_531"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_532"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_532"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_540"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_540"
+                        android:textColor="@color/teal_900"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_541"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_541"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_542"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_542"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_550"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_550"
+                        android:textColor="@color/teal_900"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_551"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_551"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+
+                </RadioGroup>
+
+            </HorizontalScrollView>
+
+            <ToggleButton
+                android:id="@+id/BTN_f_6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+
+                android:background="@drawable/drop_down"
+                android:textColor="@color/teal_900"
+                android:textOn="@string/f_6"
+                android:textOff="@string/f_6x"
+                android:textStyle="bold" />
+
+            <HorizontalScrollView
+                android:id="@+id/SCROLL_f_6"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <RadioGroup
+                    android:id="@+id/RADIO_f_6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp" >
+
+                    <RadioButton
+                        android:id="@+id/RADIO_s_610"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_610"
+                        android:textColor="@color/teal_900"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_611"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_611"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_620"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_620"
+                        android:textColor="@color/teal_900"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_621"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_621"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_630"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_630"
+                        android:textColor="@color/teal_900"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_631"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_631"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_632"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_632"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_633"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_633"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_640"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_640"
+                        android:textColor="@color/teal_900"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_641"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_641"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+
+                </RadioGroup>
+
+            </HorizontalScrollView>
+
+            <ToggleButton
+                android:id="@+id/BTN_f_7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+
+                android:background="@drawable/drop_down"
+                android:textColor="@color/teal_900"
+                android:textOn="@string/f_7"
+                android:textOff="@string/f_7x"
+                android:textStyle="bold" />
+
+            <HorizontalScrollView
+                android:id="@+id/SCROLL_f_7"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <RadioGroup
+                    android:id="@+id/RADIO_f_7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp" >
+
+                    <RadioButton
+                        android:id="@+id/RADIO_s_710"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_710"
+                        android:textColor="@color/teal_900"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_711"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_711"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_720"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_720"
+                        android:textColor="@color/teal_900"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_721"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_721"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_730"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_730"
+                        android:textColor="@color/teal_900"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_731"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_731"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_740"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_740"
+                        android:textColor="@color/teal_900"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_741"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_741"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_750"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_750"
+                        android:textColor="@color/teal_900"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_751"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_751"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_760"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_760"
+                        android:textColor="@color/teal_900"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_761"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_761"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_770"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_770"
+                        android:textColor="@color/teal_900"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_771"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_771"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+
+                </RadioGroup>
+
+            </HorizontalScrollView>
+
+            <ToggleButton
+                android:id="@+id/BTN_f_8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+
+                android:background="@drawable/drop_down"
+                android:textColor="@color/teal_900"
+                android:textOn="@string/f_8"
+                android:textOff="@string/f_8x"
+                android:textStyle="bold" />
+
+            <HorizontalScrollView
+                android:id="@+id/SCROLL_f_8"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <RadioGroup
+                    android:id="@+id/RADIO_f_8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp" >
+
+                    <RadioButton
+                        android:id="@+id/RADIO_s_810"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_810"
+                        android:textColor="@color/teal_900"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_811"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_811"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_820"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_820"
+                        android:textColor="@color/teal_900"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_821"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_821"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_830"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_830"
+                        android:textColor="@color/teal_900"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_831"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_831"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_832"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_832"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_833"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_833"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_840"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_840"
+                        android:textColor="@color/teal_900"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_841"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_841"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_850"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_850"
+                        android:textColor="@color/teal_900"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_851"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_851"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_852"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_852"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_853"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_853"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_854"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_854"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/RADIO_s_855"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="monospace"
+                        android:text="@string/s_855"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold" />
+
+                </RadioGroup>
+
+            </HorizontalScrollView>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

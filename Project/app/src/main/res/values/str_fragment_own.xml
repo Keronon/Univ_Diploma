@@ -1,51 +1,13 @@
 <resources>
 
-    <!-- !! DESCRIPTIONS !! -->
-
-    <string name="header_logo">header logo</string>
-    <string name="header_title">header background</string>
-    <string name="plan">plan for abits</string>
-
-    <!-- !! UI !! -->
-
-    <!-- ! main page ! -->
-
-    <string name="x">x</string>
-
-    <string name="app_name">DonNTU Admission</string>
-    <string name="app_title">АИС Абитуриент</string>
-    <string name="menu">меню</string>
-
-    <string name="toolbar_opened">Меню открыто</string>
-    <string name="toolbar_closed">Меню закрыто</string>
-
-    <!-- ! reg page ! -->
-
-    <string name="info">* - необязательное поле</string>
-    <string name="reg">Р Е Г И С Т Р А Ц И Я</string>
-
-    <string name="h_login">Имя для системы ( логин )</string>
-    <string name="h_pass">Пароль</string>
-    <string name="h_confirm">Подтвердите пароль</string>
-    <string name="h_surname">Фамилия</string>
-    <string name="h_name">Имя</string>
-    <string name="h_fathername">* Отчество</string>
-    <string name="date">Дата рождения</string>
-    <string name="h_email">Электронная почта</string>
-    <string name="h_phone">Номер телефона ( +7… / +380… )</string>
-    <string name="h_other">* Другая информация\n   для связи с вами</string>
-    <string name="rights">Даю согласие на использование моих персональных данных в электронной базе ДонНТУ и гарантирую их достоверность</string>
-
-    <string name="btn_reg">ЗАРЕГИСТРИРОВАТЬСЯ</string>
-
-    <!-- ! menu ! -->
+    <!-- menu -->
 
     <string name="menu_plan">План действий</string>
     <string name="menu_info">Информация о комиссии</string>
     <string name="menu_register">Регистрация для поступления</string>
     <string name="menu_login">Вход в профиль</string>
 
-    <!-- ! faculties ! -->
+    <!-- faculties -->
 
     <string name="faculties">Наши факультеты</string>
 
@@ -53,38 +15,47 @@
 Горный факультет
 gf_priem@donntu.ru\
 071-323-80-26, 071-334-54-75, 071-334-89-40</string>
+
     <string name="faculty_2">(ФННЗ)
 Факультет недропользования и наук о Земле
 fnnz_priem@donntu.ru
 071-345-71-91, 071-334-90-23, 071-334-90-47</string>
+
     <string name="faculty_3">(ФИМП)
 Факультет интегрированных и мехатронных производств
 fimp_priem@donntu.ru
 071-510-90-74, +7-949-371-08-65</string>
+
     <string name="faculty_4">(ФМТ)
 Факультет металлургии и теплоэнергетики
 fmt_priem@donntu.ru
 071-321-50-15, 071-334-92-08</string>
+
     <string name="faculty_5">(ФИЭР)
 Факультет интеллектуальной электроэнергетики и робототехники
 fier_priem@donntu.ru
 071-352-13-76, 071-360-17-84</string>
+
     <string name="faculty_6">(ФИСП)
 Факультет интеллектуальных систем и программирования
 fisp_priem@donntu.ru
 071-009-03-04, 071-001-03-04</string>
+
     <string name="faculty_7">(ФИСТ)
 Факультет информационных систем и технологий
 fist_priem@donntu.ru
 071-332-13-04</string>
+
     <string name="faculty_8">(ФКИТА)
 Факультет компьютерных информационных технологии и автоматики
 fkita_priem@donntu.ru
 071-336-33-59, 071-464-27-76</string>
+
     <string name="faculty_9">(ИЭФ)
 Инженерно-экономический факультет
 ief_priem@donntu.ru
 071-324-08-70, 071-307-88-03</string>
+
     <string name="faculty_10">(ИИТЗО)
 Институт инновационных технологий заочного обучения
 z_priem@donntu.ru

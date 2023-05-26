@@ -1,0 +1,64 @@
+<resources>
+
+    <!-- menu -->
+
+    <string name="menu_plan">План действий</string>
+    <string name="menu_info">Информация о комиссии</string>
+    <string name="menu_register">Регистрация для поступления</string>
+    <string name="menu_login">Вход в профиль</string>
+
+    <!-- faculties -->
+
+    <string name="faculties">Наши факультеты</string>
+
+    <string name="faculty_1">(ГФ)
+Горный факультет
+gf_priem@donntu.ru\
+071-323-80-26, 071-334-54-75, 071-334-89-40</string>
+
+    <string name="faculty_2">(ФННЗ)
+Факультет недропользования и наук о Земле
+fnnz_priem@donntu.ru
+071-345-71-91, 071-334-90-23, 071-334-90-47</string>
+
+    <string name="faculty_3">(ФИМП)
+Факультет интегрированных и мехатронных производств
+fimp_priem@donntu.ru
+071-510-90-74, +7-949-371-08-65</string>
+
+    <string name="faculty_4">(ФМТ)
+Факультет металлургии и теплоэнергетики
+fmt_priem@donntu.ru
+071-321-50-15, 071-334-92-08</string>
+
+    <string name="faculty_5">(ФИЭР)
+Факультет интеллектуальной электроэнергетики и робототехники
+fier_priem@donntu.ru
+071-352-13-76, 071-360-17-84</string>
+
+    <string name="faculty_6">(ФИСП)
+Факультет интеллектуальных систем и программирования
+fisp_priem@donntu.ru
+071-009-03-04, 071-001-03-04</string>
+
+    <string name="faculty_7">(ФИСТ)
+Факультет информационных систем и технологий
+fist_priem@donntu.ru
+071-332-13-04</string>
+
+    <string name="faculty_8">(ФКИТА)
+Факультет компьютерных информационных технологии и автоматики
+fkita_priem@donntu.ru
+071-336-33-59, 071-464-27-76</string>
+
+    <string name="faculty_9">(ИЭФ)
+Инженерно-экономический факультет
+ief_priem@donntu.ru
+071-324-08-70, 071-307-88-03</string>
+
+    <string name="faculty_10">(ИИТЗО)
+Институт инновационных технологий заочного обучения
+z_priem@donntu.ru
+071-334-93-01, 071-324-08-70</string>
+
+</resources>

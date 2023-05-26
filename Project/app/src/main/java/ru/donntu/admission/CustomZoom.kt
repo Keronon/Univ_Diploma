@@ -195,7 +195,9 @@ class CustomZoom : AppCompatImageView, View.OnTouchListener,
 
         val mDisplay = this.display
         val mLayoutParams = this.layoutParams
+        @Suppress("DEPRECATION")
         mLayoutParams.width = mDisplay.width
+        @Suppress("DEPRECATION")
         mLayoutParams.height = mDisplay.height
         this.layoutParams = mLayoutParams
         when (mMouseEvent.action)

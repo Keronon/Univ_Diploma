@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".RegisterActivity">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,13 +14,13 @@
             android:id="@+id/TXT_reg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="25dp"
             android:background="@drawable/back_gradient_teal_900"
             android:padding="20dp"
 
-            android:text="@string/reg"
+            android:text="@string/HEAD_reg"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="@color/white"
             android:textStyle="bold" />
 
@@ -30,209 +28,264 @@
             android:id="@+id/TXT_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:padding="15dp"
+            android:layout_marginBottom="25dp"
 
-            android:text="@string/info"
+            android:text="@string/HINT_reg_confirm"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/teal_900"
             android:textStyle="bold" />
 
-        <EditText
+        <TextView
+            android:id="@+id/LBL_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/HINT_login"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/teal_900"
+            android:textStyle="bold" />
+
+        <TextView
             android:id="@+id/TXT_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="10dp"
-            android:autofillHints="true"
 
             android:background="@drawable/back_border"
-            android:hint="@string/h_login"
-            android:inputType="textPersonName"
             android:padding="15dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColorHint="@color/teal_900"
             android:textStyle="bold" />
 
-        <EditText
+        <TextView
+            android:id="@+id/LBL_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/HINT_pass"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/teal_900"
+            android:textStyle="bold" />
+
+        <TextView
             android:id="@+id/TXT_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="10dp"
-            android:autofillHints="true"
 
             android:background="@drawable/back_border"
-            android:hint="@string/h_pass"
-            android:inputType="textPassword"
             android:padding="15dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColorHint="@color/teal_900"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/TXT_confirm"
+        <TextView
+            android:id="@+id/LBL_surname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginBottom="10dp"
-            android:autofillHints="true"
 
-            android:background="@drawable/back_border"
-            android:hint="@string/h_confirm"
-            android:inputType="textPassword"
-            android:padding="15dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColorHint="@color/teal_900"
+            android:text="@string/HINT_surname"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/teal_900"
             android:textStyle="bold" />
 
-        <EditText
+        <TextView
             android:id="@+id/TXT_surname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="10dp"
-            android:autofillHints="true"
 
             android:background="@drawable/back_border"
-            android:hint="@string/h_surname"
-            android:inputType="textPersonName"
             android:padding="15dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColorHint="@color/teal_900"
             android:textStyle="bold" />
 
-        <EditText
+        <TextView
+            android:id="@+id/LBL_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/HINT_name"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/teal_900"
+            android:textStyle="bold" />
+
+        <TextView
             android:id="@+id/TXT_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="10dp"
-            android:autofillHints="true"
 
             android:background="@drawable/back_border"
-            android:hint="@string/h_name"
-            android:inputType="textPersonName"
             android:padding="15dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColorHint="@color/teal_900"
             android:textStyle="bold" />
 
-        <EditText
+        <TextView
+            android:id="@+id/LBL_fathername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/HINT_fathername"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/teal_900"
+            android:textStyle="bold" />
+
+        <TextView
             android:id="@+id/TXT_fathername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="10dp"
-            android:autofillHints="true"
 
             android:background="@drawable/back_border"
-            android:hint="@string/h_fathername"
-            android:inputType="textPersonName"
             android:padding="15dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColorHint="@color/teal_900"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/LBL_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/HINT_date"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/teal_900"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/TXT_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="-30dp"
-            android:paddingStart="15dp"
-            android:paddingEnd="15dp"
-
-            android:text="@string/date"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@color/teal_900"
-            android:textColorHint="@color/teal_900"
-            android:textStyle="bold" />
-
-        <DatePicker
-            android:id="@+id/PICK_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/back_border"
-            android:calendarViewShown="false"
-            android:datePickerMode="spinner" />
 
-        <EditText
+            android:background="@drawable/back_border"
+            android:padding="15dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColorHint="@color/teal_900"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/LBL_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/HINT_email"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/teal_900"
+            android:textStyle="bold" />
+
+        <TextView
             android:id="@+id/TXT_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="10dp"
-            android:autofillHints="true"
 
             android:background="@drawable/back_border"
-            android:hint="@string/h_email"
-            android:inputType="textEmailAddress"
             android:padding="15dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColorHint="@color/teal_900"
             android:textStyle="bold" />
 
-        <EditText
+        <TextView
+            android:id="@+id/LBL_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/HINT_phone"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/teal_900"
+            android:textStyle="bold" />
+
+        <TextView
             android:id="@+id/TXT_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="10dp"
-            android:autofillHints="true"
 
             android:background="@drawable/back_border"
-            android:hint="@string/h_phone"
-            android:inputType="phone"
             android:padding="15dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColorHint="@color/teal_900"
             android:textStyle="bold" />
 
-        <EditText
+        <TextView
+            android:id="@+id/LBL_other"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/HINT_other"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/teal_900"
+            android:textStyle="bold" />
+
+        <TextView
             android:id="@+id/TXT_other"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="10dp"
-            android:autofillHints="true"
 
             android:background="@drawable/back_border"
-            android:hint="@string/h_other"
-            android:inputType="textMultiLine"
             android:padding="15dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColorHint="@color/teal_900"
             android:textStyle="bold" />
 
-        <CheckBox
-            android:id="@+id/CHECK_rights"
+        <TextView
+            android:id="@+id/LBL_rights"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/HINT_rights"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/teal_900"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/TXT_rights"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="15dp"
 
-            android:button="@android:drawable/btn_star"
-            android:checked="true"
+            android:text="@string/TXT_rights"
             android:background="@drawable/back_border"
             android:padding="15dp"
-            android:text="@string/rights"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@color/teal_900" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColorHint="@color/teal_900"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -243,12 +296,10 @@
                 android:id="@+id/BTN_back"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:background="@color/purple_700"
+                android:background="@color/teal_900"
+
                 android:foreground="?attr/actionModeCloseDrawable"
                 android:text="@string/x"
                 tools:ignore="ButtonStyle" />
@@ -259,13 +310,14 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
+                android:layout_marginStart="0dp"
                 android:layout_marginEnd="10dp"
                 android:layout_weight="4"
                 android:background="@color/teal_900"
                 android:padding="15dp"
 
-                android:text="@string/btn_reg"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:text="@string/BTN_reg"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textStyle="bold"
                 tools:ignore="ButtonStyle" />
         </LinearLayout>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="end">
+
+    <TextView
+        android:id="@+id/BTN_close"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:clickable="true"
+        android:padding="10dp"
+        android:text="@string/x"
+        app:drawableTopCompat="@android:drawable/btn_dialog"
+        tools:ignore="KeyboardInaccessibleWidget" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/TXT_size_file"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/TXT_case_info"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/teal_900"
+            android:textColorHint="@color/teal_900"
+            android:textStyle="bold" />
+    </ScrollView>
+
+</LinearLayout>
