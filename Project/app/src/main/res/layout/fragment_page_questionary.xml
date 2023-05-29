@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -51,13 +52,14 @@
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/drop_down"
-                android:popupBackground="@drawable/drop_down_list"
+                android:contentDescription="@string/drop_down_list"
 
                 android:minHeight="50dp"
+                android:popupBackground="@drawable/drop_down_list"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@color/teal_900"
                 android:textStyle="bold"
-                android:contentDescription="@string/drop_down_list" />
+                tools:ignore="DuplicateSpeakableTextCheck" />
 
             <LinearLayout
                 android:layout_width="match_parent"

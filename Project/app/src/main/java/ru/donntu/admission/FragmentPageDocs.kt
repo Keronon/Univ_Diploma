@@ -16,7 +16,13 @@ import androidx.fragment.app.Fragment
 
 class FragmentPageDocs: Fragment()
 {
+    companion object {
+        var docs = ""
+    }
+
+    @Suppress("PropertyName")
     private lateinit var _this : View
+
     private lateinit var listAdapter : SimpleAdapter
     private val keys  = arrayOf("file", "path")
     private val items = ArrayList<Map<String, Any>>()
@@ -114,5 +120,11 @@ class FragmentPageDocs: Fragment()
                 }
             }
         }
+    }
+
+    override fun onPause()
+    {
+        super.onPause()
+        docs  = (items.map { v -> v[keys[0]] }).joinToString("\n")
     }
 }

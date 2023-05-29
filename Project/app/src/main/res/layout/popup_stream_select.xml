@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
+    android:layout_width="350dp"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal">
@@ -24,8 +24,9 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:layout_width="350dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:orientation="vertical">
 
             <ToggleButton
@@ -36,8 +37,9 @@
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
 
-                android:background="@drawable/drop_down"
-                android:textColor="@color/teal_900"
+                android:background="@drawable/hider_btn"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
                 android:textOn="@string/f_1"
                 android:textOff="@string/f_1x"
                 android:textStyle="bold" />
@@ -157,8 +159,9 @@
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
 
-                android:background="@drawable/drop_down"
-                android:textColor="@color/teal_900"
+                android:background="@drawable/hider_btn"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
                 android:textOn="@string/f_2"
                 android:textOff="@string/f_2x"
                 android:textStyle="bold" />
@@ -287,8 +290,9 @@
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
 
-                android:background="@drawable/drop_down"
-                android:textColor="@color/teal_900"
+                android:background="@drawable/hider_btn"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
                 android:textOn="@string/f_3"
                 android:textOff="@string/f_3x"
                 android:textStyle="bold" />
@@ -480,8 +484,9 @@
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
 
-                android:background="@drawable/drop_down"
-                android:textColor="@color/teal_900"
+                android:background="@drawable/hider_btn"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
                 android:textOn="@string/f_4"
                 android:textOff="@string/f_4x"
                 android:textStyle="bold" />
@@ -601,8 +606,9 @@
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
 
-                android:background="@drawable/drop_down"
-                android:textColor="@color/teal_900"
+                android:background="@drawable/hider_btn"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
                 android:textOn="@string/f_5"
                 android:textOff="@string/f_5x"
                 android:textStyle="bold" />
@@ -726,7 +732,8 @@
                         android:fontFamily="monospace"
                         android:text="@string/s_532"
                         android:textColor="@color/teal_700"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        tools:ignore="TooManyViews" />
                     <RadioButton
                         android:id="@+id/RADIO_s_540"
                         android:layout_width="match_parent"
@@ -785,8 +792,9 @@
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
 
-                android:background="@drawable/drop_down"
-                android:textColor="@color/teal_900"
+                android:background="@drawable/hider_btn"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
                 android:textOn="@string/f_6"
                 android:textOff="@string/f_6x"
                 android:textStyle="bold" />
@@ -906,8 +914,9 @@
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
 
-                android:background="@drawable/drop_down"
-                android:textColor="@color/teal_900"
+                android:background="@drawable/hider_btn"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
                 android:textOn="@string/f_7"
                 android:textOff="@string/f_7x"
                 android:textStyle="bold" />
@@ -1062,8 +1071,9 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
 
-                android:background="@drawable/drop_down"
-                android:textColor="@color/teal_900"
+                android:background="@drawable/hider_btn"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
                 android:textOn="@string/f_8"
                 android:textOff="@string/f_8x"
                 android:textStyle="bold" />

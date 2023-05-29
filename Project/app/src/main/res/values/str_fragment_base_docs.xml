@@ -1,0 +1,23 @@
+<resources>
+
+    <!-- BASE DOCs -->
+
+    <string name="LBL_base_info_1">Поступать в университет можно по 1-у или 2-ум базовым документам за раз</string>
+    <string name="LBL_base_info_2">Ср. общ. обр. - аттестат 11 классов\nСр. проф. обр. - техникум или СПО\nОП - образовательная программа</string>
+    <string name="HINT_prev_educ">* Укажите, на какую ОП вы уже зачислялись раньше</string>
+    <string name="LBL_doc_1">Базовый документ №1</string>
+    <string name="LBL_doc_2">Базовый документ №2</string>
+    <string name="TXT_doc_2">Только один базовый документ</string>
+
+    <string name="HINT_op">ОП для поступления</string>
+    <string name="HINT_educ">Базисное образование</string>
+    <string name="HINT_educ_status">Уже имеется образование по данной ОП</string>
+    <string name="HINT_yes">Да</string>
+    <string name="HINT_no">Нет</string>
+    <string name="HINT_progress">Получаю</string>
+
+    <string name="bachelor">Бакалавр</string>
+    <string name="expert">Специалист</string>
+    <string name="master">Магистр</string>
+
+</resources>

@@ -27,7 +27,7 @@ class ActivityPersonalData : AppCompatActivity()
         // hooks
 
         @Suppress("LocalVariableName")
-        val TABs = arrayOf("Персональные данные", "Данные о родителях", "Сканы документов", "Базовые документы", "Анкета")
+        val TABs = arrayOf("Персональные данные", "Данные о родителях", "Сканы документов", "Базовые документы", "Анкета", "Подтверждение данных")
         tabs  = findViewById(R.id.tabs)
         pager = findViewById(R.id.view_pager)
         BTN_back = findViewById(R.id.BTN_back)
@@ -54,21 +54,13 @@ class ActivityPersonalData : AppCompatActivity()
                 adapter.fragments[1] == null ||
                 adapter.fragments[2] == null ||
                 adapter.fragments[3] == null ||
-                adapter.fragments[4] == null )
+                adapter.fragments[4] == null ||
+                adapter.fragments[5] == null )
             {
                 Toast.makeText(applicationContext, "Данные внесены не на всех страницах", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            // adapter.fragments[0].requireView().findViewById<TextView>(R.id.TXT_inn).text = "FRAG 1 : ${++click}"
+            // adapter.fragments[5].requireView().findViewById<TextView>(R.id.TXT_inn).text = "FRAG 1 : ${++click}"
         }
     }
 }
-
-/*
-
-Отметьте обязательные поля:
-Уведомлен(-а), что после подачи заявления изменение приоритетов не допускается, а закрытие дела не отменяет факт подачи заявления!
-Предупрежден(-а), что после получения рекомендации к зачислению обязан(-а) представить в ДонНТУ оригиналы необходимых для зачисления документов!
-Подтверждаю факт подачи документов не более чем в две образовательные организации!
-
-*/

@@ -1,6 +1,5 @@
 package ru.donntu.admission
 
-import android.app.ActionBar.LayoutParams
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,15 +8,15 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.widget.SwitchCompat
 
+@Suppress("PropertyName")
 class FragmentPageBaseDocs: Fragment()
 {
-    @Suppress("PropertyName")
-    lateinit var SWITCH_doc_2: SwitchCompat
+    lateinit var _this: View
 
     @Suppress("LocalVariableName")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        val _this = inflater.inflate(R.layout.fragment_page_base_docs, container, false)
+        _this = inflater.inflate(R.layout.fragment_page_base_docs, container, false)
 
         val op   = arrayOf(getString(R.string.bachelor), getString(R.string.expert), getString(R.string.master))
         val educ = arrayOf("Ср. общ.", "Ср. проф.")
@@ -39,12 +38,11 @@ class FragmentPageBaseDocs: Fragment()
         // switch
 
         val layout_doc_2: LinearLayout = _this.findViewById(R.id.LAYOUT_doc_2)
-        SWITCH_doc_2 = _this.findViewById(R.id.SWITCH_doc_2)
-        SWITCH_doc_2.setOnCheckedChangeListener { _: CompoundButton, b: Boolean ->
+        _this.findViewById<SwitchCompat>(R.id.SWITCH_doc_2).setOnCheckedChangeListener { _: CompoundButton, b: Boolean ->
             if (b)
                 layout_doc_2.layoutParams = LinearLayout.LayoutParams(layout_doc_2.layoutParams.width, 0)
             else
-                layout_doc_2.layoutParams = LinearLayout.LayoutParams(layout_doc_2.layoutParams.width, LayoutParams.WRAP_CONTENT)
+                layout_doc_2.layoutParams = LinearLayout.LayoutParams(layout_doc_2.layoutParams.width, LinearLayout.LayoutParams.WRAP_CONTENT)
         }
 
         return _this

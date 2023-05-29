@@ -1,7 +1,7 @@
 package ru.donntu.admission
 
+import android.animation.ValueAnimator
 import android.annotation.SuppressLint
-import android.app.ActionBar
 import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,12 +11,21 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.widget.SwitchCompat
 
-class FragmentPageQuestionary(private val SWITCH_doc_2: SwitchCompat) : Fragment()
+class FragmentPageQuestionary(private val pageBaseDocs: FragmentPageBaseDocs) : Fragment()
 {
+    companion object {
+        var cases = mutableListOf<Case>()
+    }
+
+    @Suppress("PropertyName")
     private lateinit var _this : View
 
     private lateinit var popInfo : Dialog
     private lateinit var popStreamSelect : Dialog
+
+    private lateinit var fo      : MutableList<String>
+    private lateinit var course  : MutableList<String>
+    private lateinit var priority: MutableList<String>
 
     private val docs = mutableListOf("базовый документ не выбран", "базовый документ №1")
     @Suppress("PrivatePropertyName")
@@ -50,7 +59,7 @@ class FragmentPageQuestionary(private val SWITCH_doc_2: SwitchCompat) : Fragment
 
         // fo - формы обучения
 
-        val fo = mutableListOf("очное", "заочное", "заочное (смежное)", "очно-заочное", "очно-заочное (смежное)", "экстернат")
+        fo = mutableListOf("очное", "заочное", "заочное (смежное)", "очно-заочное", "очно-заочное (смежное)", "экстернат")
         val adapter_fo = ArrayAdapter(_this.context, android.R.layout.simple_spinner_item, fo )
 
         val fo_1 = _this.findViewById<Spinner>(R.id.SPINNER_fo_1)
@@ -66,7 +75,7 @@ class FragmentPageQuestionary(private val SWITCH_doc_2: SwitchCompat) : Fragment
         // TODO : добавить подкурсы
 
         // TODO : настраивать в зависимости от базового документа
-        val course = mutableListOf("на 1й курс", "на 2й курс")
+        course = mutableListOf("на 1й курс", "на 2й курс")
         val adapter_course = ArrayAdapter(_this.context, android.R.layout.simple_spinner_item, course )
 
         val course_1 = _this.findViewById<Spinner>(R.id.SPINNER_course_1)
@@ -95,7 +104,7 @@ class FragmentPageQuestionary(private val SWITCH_doc_2: SwitchCompat) : Fragment
 
         // priority
 
-        val priority = mutableListOf("приоритет -", "приоритет 1")
+        priority = mutableListOf("приоритет -", "приоритет 1")
         val adapter_priority = ArrayAdapter(_this.context, android.R.layout.simple_spinner_item, priority )
 
         val priority_1 = _this.findViewById<Spinner>(R.id.SPINNER_priority_1)
@@ -116,7 +125,7 @@ class FragmentPageQuestionary(private val SWITCH_doc_2: SwitchCompat) : Fragment
         SWITCH_case_2.setOnCheckedChangeListener { _: CompoundButton, b: Boolean ->
             if (b)
             {
-                layout_case_2.layoutParams = LinearLayout.LayoutParams(layout_case_2.layoutParams.width, ActionBar.LayoutParams.WRAP_CONTENT)
+                layout_case_2.layoutParams = LinearLayout.LayoutParams(layout_case_2.layoutParams.width, LinearLayout.LayoutParams.WRAP_CONTENT)
                 priority.add("приоритет 2")
                 adapter_priority.notifyDataSetChanged()
             }
@@ -135,7 +144,7 @@ class FragmentPageQuestionary(private val SWITCH_doc_2: SwitchCompat) : Fragment
         SWITCH_case_3.setOnCheckedChangeListener { _: CompoundButton, b: Boolean ->
             if (b)
             {
-                layout_case_3.layoutParams = LinearLayout.LayoutParams(layout_case_3.layoutParams.width, ActionBar.LayoutParams.WRAP_CONTENT)
+                layout_case_3.layoutParams = LinearLayout.LayoutParams(layout_case_3.layoutParams.width, LinearLayout.LayoutParams.WRAP_CONTENT)
                 priority.add("приоритет 3")
                 adapter_priority.notifyDataSetChanged()
             }
@@ -211,22 +220,60 @@ class FragmentPageQuestionary(private val SWITCH_doc_2: SwitchCompat) : Fragment
 
         // scrolls hiding
 
+        fun setListener(scroll: HorizontalScrollView): (ValueAnimator) -> Unit
+        {
+            return { animator: ValueAnimator ->
+                val layoutParams = scroll.layoutParams
+                layoutParams.height = animator.animatedValue as Int
+                scroll.layoutParams = layoutParams
+            }
+        }
+
+        SCROLLs_f[0].measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
+        SCROLLs_f[1].measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
+        SCROLLs_f[2].measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
+        SCROLLs_f[3].measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
+        SCROLLs_f[4].measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
+        SCROLLs_f[5].measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
+        SCROLLs_f[6].measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
+        SCROLLs_f[7].measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
+
+        val animatorsOpen = arrayOf(
+            ValueAnimator.ofInt(SCROLLs_f[0].measuredHeight).setDuration(500),
+            ValueAnimator.ofInt(SCROLLs_f[1].measuredHeight).setDuration(500),
+            ValueAnimator.ofInt(SCROLLs_f[2].measuredHeight).setDuration(500),
+            ValueAnimator.ofInt(SCROLLs_f[3].measuredHeight).setDuration(500),
+            ValueAnimator.ofInt(SCROLLs_f[4].measuredHeight).setDuration(500),
+            ValueAnimator.ofInt(SCROLLs_f[5].measuredHeight).setDuration(500),
+            ValueAnimator.ofInt(SCROLLs_f[6].measuredHeight).setDuration(500),
+            ValueAnimator.ofInt(SCROLLs_f[7].measuredHeight).setDuration(500)
+        )
+        animatorsOpen.forEachIndexed{ i, v -> v.addUpdateListener(setListener(SCROLLs_f[i])) }
+        val animatorsClose = arrayOf(
+            ValueAnimator.ofInt(SCROLLs_f[0].measuredHeight, 0).setDuration(500),
+            ValueAnimator.ofInt(SCROLLs_f[1].measuredHeight, 0).setDuration(500),
+            ValueAnimator.ofInt(SCROLLs_f[2].measuredHeight, 0).setDuration(500),
+            ValueAnimator.ofInt(SCROLLs_f[3].measuredHeight, 0).setDuration(500),
+            ValueAnimator.ofInt(SCROLLs_f[4].measuredHeight, 0).setDuration(500),
+            ValueAnimator.ofInt(SCROLLs_f[5].measuredHeight, 0).setDuration(500),
+            ValueAnimator.ofInt(SCROLLs_f[6].measuredHeight, 0).setDuration(500),
+            ValueAnimator.ofInt(SCROLLs_f[7].measuredHeight, 0).setDuration(500)
+        )
+        animatorsClose.forEachIndexed{ i, v -> v.addUpdateListener(setListener(SCROLLs_f[i])) }
+
         BTNs_f.forEachIndexed { n, btn ->
             btn.setOnCheckedChangeListener { _: CompoundButton, b: Boolean ->
                 if (b)
                 {
                     BTNs_f.forEachIndexed { i, v -> if (i != n) v.isChecked = false }
 
-                    SCROLLs_f[n].layoutParams = LinearLayout.LayoutParams(
-                        SCROLLs_f[n].layoutParams.width,
-                        ActionBar.LayoutParams.WRAP_CONTENT
-                    )
+                    animatorsOpen[n].start()
+                    btn.text = btn.textOn
                 }
                 else
                 {
-                    SCROLLs_f[n].layoutParams = LinearLayout.LayoutParams(
-                        SCROLLs_f[n].layoutParams.width, 0
-                    )
+                    animatorsClose[n].start()
+                    btn.text = btn.textOff
                 }
             }
         }
@@ -254,16 +301,56 @@ class FragmentPageQuestionary(private val SWITCH_doc_2: SwitchCompat) : Fragment
     {
         super.onResume()
 
-        if (!SWITCH_doc_2.isChecked && docs.size < 3)
+        val switch = pageBaseDocs._this.findViewById<SwitchCompat>(R.id.SWITCH_doc_2)
+
+        if (!switch.isChecked && docs.size < 3)
         {
             docs.add("базовый документ №2")
             adapter_docs.notifyDataSetChanged()
         }
         else
-        if (SWITCH_doc_2.isChecked && docs.size > 2)
+        if (switch.isChecked && docs.size > 2)
         {
             docs.remove("базовый документ №2")
             adapter_docs.notifyDataSetChanged()
+        }
+    }
+
+    override fun onPause()
+    {
+        super.onPause()
+
+        // page questionary
+
+        cases = mutableListOf(
+            Case(
+                priority[_this.findViewById<Spinner>(R.id.SPINNER_priority_1).selectedItemPosition], // priority
+                fo      [_this.findViewById<Spinner>(R.id.SPINNER_fo_1      ).selectedItemPosition], // fo
+                course  [_this.findViewById<Spinner>(R.id.SPINNER_course_1  ).selectedItemPosition], // course
+                _this.findViewById<Button>(R.id.BTN_stream_1).text.toString()                        // stream
+            )
+        )
+        if (_this.findViewById<SwitchCompat>(R.id.SWITCH_case_2).isChecked)
+        {
+            cases.add(
+                Case(
+                    priority[_this.findViewById<Spinner>(R.id.SPINNER_priority_2).selectedItemPosition], // priority
+                    fo      [_this.findViewById<Spinner>(R.id.SPINNER_fo_2      ).selectedItemPosition], // fo
+                    course  [_this.findViewById<Spinner>(R.id.SPINNER_course_2  ).selectedItemPosition], // course
+                    _this.findViewById<Button>(R.id.BTN_stream_2).text.toString()                        // stream
+                )
+            )
+        }
+        if (_this.findViewById<SwitchCompat>(R.id.SWITCH_case_3).isChecked)
+        {
+            cases.add(
+                Case(
+                    priority[_this.findViewById<Spinner>(R.id.SPINNER_priority_3).selectedItemPosition], // priority
+                    fo      [_this.findViewById<Spinner>(R.id.SPINNER_fo_3      ).selectedItemPosition], // fo
+                    course  [_this.findViewById<Spinner>(R.id.SPINNER_course_3  ).selectedItemPosition], // course
+                    _this.findViewById<Button>(R.id.BTN_stream_3).text.toString()                        // stream
+                )
+            )
         }
     }
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -10,7 +11,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/TXT_date"
+            android:id="@+id/TXT_lang"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="10dp"
@@ -86,7 +87,7 @@
 
             android:background="@drawable/back_border"
             android:hint="@string/HINT_inn"
-            android:inputType="textPersonName"
+            android:inputType="number"
             android:padding="15dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColorHint="@color/teal_900"
@@ -141,7 +142,8 @@
                 android:padding="15dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColorHint="@color/teal_900"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="DuplicateSpeakableTextCheck" />
 
             <EditText
                 android:id="@+id/TXT_reg_city"
@@ -222,7 +224,7 @@
 
                 android:background="@drawable/back_border"
                 android:hint="@string/HINT_index"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 android:padding="15dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColorHint="@color/teal_900"
@@ -359,7 +361,7 @@
 
                 android:background="@drawable/back_border"
                 android:hint="@string/HINT_index"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 android:padding="15dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColorHint="@color/teal_900"

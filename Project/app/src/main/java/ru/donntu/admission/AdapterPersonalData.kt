@@ -6,7 +6,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 
 class AdapterPersonalData(fragment: FragmentActivity) : FragmentStateAdapter(fragment)
 {
-    val fragments = arrayOfNulls<Fragment>(5)
+    val fragments = arrayOfNulls<Fragment>(6)
 
     override fun getItemCount(): Int = fragments.size
     override fun createFragment(pos: Int): Fragment
@@ -16,7 +16,8 @@ class AdapterPersonalData(fragment: FragmentActivity) : FragmentStateAdapter(fra
             1 -> fragments[pos] = FragmentPageParentsData()
             2 -> fragments[pos] = FragmentPageDocs()
             3 -> fragments[pos] = FragmentPageBaseDocs()
-            4 -> fragments[pos] = FragmentPageQuestionary((fragments[3] as FragmentPageBaseDocs).SWITCH_doc_2)
+            4 -> fragments[pos] = FragmentPageQuestionary(fragments[3] as FragmentPageBaseDocs)
+            5 -> fragments[pos] = FragmentPageConfirm()
             else -> throw Error("Incorrect fragment")
         }
         return fragments[pos]!!
