@@ -6,7 +6,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 
 class AdapterPersonalData(fragment: FragmentActivity) : FragmentStateAdapter(fragment)
 {
-    val fragments = arrayOfNulls<Fragment>(6)
+    private val fragments = arrayOfNulls<Fragment>(6)
 
     override fun getItemCount(): Int = fragments.size
     override fun createFragment(pos: Int): Fragment

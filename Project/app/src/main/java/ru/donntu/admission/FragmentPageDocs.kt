@@ -16,9 +16,7 @@ import androidx.fragment.app.Fragment
 
 class FragmentPageDocs: Fragment()
 {
-    companion object {
-        var docs = ""
-    }
+    companion object { var docs = "" }
 
     @Suppress("PropertyName")
     private lateinit var _this : View
@@ -125,6 +123,7 @@ class FragmentPageDocs: Fragment()
     override fun onPause()
     {
         super.onPause()
-        docs  = (items.map { v -> v[keys[0]] }).joinToString("\n")
+        FragmentPageConfirm.personalData = null
+        docs = (items.map { v -> v[keys[0]] }).joinToString("\n")
     }
 }

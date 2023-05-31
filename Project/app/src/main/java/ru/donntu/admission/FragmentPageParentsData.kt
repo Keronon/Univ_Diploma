@@ -9,10 +9,7 @@ import android.widget.EditText
 
 class FragmentPageParentsData: Fragment()
 {
-    companion object {
-        var father = Human("", "", "", "", "")
-        var mother = Human("", "", "", "", "")
-    }
+    companion object { val parents = Parents() }
 
     @Suppress("PropertyName")
     private lateinit var _this : View
@@ -26,20 +23,18 @@ class FragmentPageParentsData: Fragment()
     override fun onPause()
     {
         super.onPause()
+        FragmentPageConfirm.personalData = null
 
-        father = Human(
-            _this.findViewById<EditText>(R.id.TXT_father_surname).text.toString(),
-            _this.findViewById<EditText>(R.id.TXT_father_name).text.toString(),
-            _this.findViewById<EditText>(R.id.TXT_father_fathername).text.toString(),
-            _this.findViewById<EditText>(R.id.TXT_father_phone).text.toString(),
-            _this.findViewById<EditText>(R.id.TXT_father_reg).text.toString()
-        )
-            mother = Human(
-            _this.findViewById<EditText>(R.id.TXT_mother_surname).text.toString(),
-            _this.findViewById<EditText>(R.id.TXT_mother_name).text.toString(),
-            _this.findViewById<EditText>(R.id.TXT_mother_fathername).text.toString(),
-            _this.findViewById<EditText>(R.id.TXT_mother_phone).text.toString(),
-            _this.findViewById<EditText>(R.id.TXT_mother_reg).text.toString()
-        )
+        parents.father.surname    = _this.findViewById<EditText>(R.id.TXT_father_surname   ).text.toString()
+        parents.father.name       = _this.findViewById<EditText>(R.id.TXT_father_name      ).text.toString()
+        parents.father.fathername = _this.findViewById<EditText>(R.id.TXT_father_fathername).text.toString()
+        parents.father.phone      = _this.findViewById<EditText>(R.id.TXT_father_phone     ).text.toString()
+        parents.father.reg        = _this.findViewById<EditText>(R.id.TXT_father_reg       ).text.toString()
+
+        parents.mother.surname    = _this.findViewById<EditText>(R.id.TXT_mother_surname   ).text.toString()
+        parents.mother.name       = _this.findViewById<EditText>(R.id.TXT_mother_name      ).text.toString()
+        parents.mother.fathername = _this.findViewById<EditText>(R.id.TXT_mother_fathername).text.toString()
+        parents.mother.phone      = _this.findViewById<EditText>(R.id.TXT_mother_phone     ).text.toString()
+        parents.mother.reg        = _this.findViewById<EditText>(R.id.TXT_mother_reg       ).text.toString()
     }
 }

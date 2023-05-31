@@ -8,9 +8,15 @@
     <string name="LBL_parents_data_x">данные о родителях</string>
     <string name="LBL_docs">СКАНЫ ДОКУМЕНТОВ</string>
     <string name="LBL_docs_x">сканы документов</string>
+    <string name="LBL_base_docs">БАЗИСНЫЕ ДОКУМЕНТЫ</string>
+    <string name="LBL_base_docs_x">базисные документы</string>
     <string name="LBL_questionary">АНКЕТА</string>
     <string name="LBL_questionary_x">анкета</string>
 
+    <string name="HINT_confirm_prev_educ">* ОП, на которые вы уже зачислялись раньше</string>
+
+    <string name="HINT_doc_1">Базисный документ №1</string>
+    <string name="HINT_doc_2">Базисный документ №2</string>
     <string name="HINT_case_1">Запись в анкете №1</string>
     <string name="HINT_case_2">Запись в анкете №2</string>
     <string name="HINT_case_3">Запись в анкете №3</string>

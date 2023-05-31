@@ -10,11 +10,7 @@ import androidx.appcompat.widget.SwitchCompat
 
 class FragmentPageOwnData: Fragment()
 {
-    companion object {
-        var own = Own("", "", "", false,
-                      OwnAddress("", "", "", "", "", ""),
-                      OwnAddress("", "", "", "", "", ""))
-    }
+    companion object { var own = Own() }
 
     @Suppress("PropertyName")
     private lateinit var _this : View
@@ -40,34 +36,37 @@ class FragmentPageOwnData: Fragment()
     override fun onPause()
     {
         super.onPause()
+        FragmentPageConfirm.personalData = null
 
-        val id = _this.findViewById<RadioGroup>(R.id.RADIO_lang).checkedRadioButtonId
+        val id        = _this.findViewById<RadioGroup>(R.id.RADIO_lang).checkedRadioButtonId
+        own.lang      = if (id != -1) _this.findViewById<RadioButton>(id).text.toString() else ""
+        own.country   = _this.findViewById<EditText>(R.id.TXT_country).text.toString()
+        own.inn       = _this.findViewById<EditText>(R.id.TXT_inn).text.toString()
+        own.dormitory = _this.findViewById<SwitchCompat>(R.id.SWITCH_dormitory).isChecked
 
-        val address = OwnAddress( // address reg
-            _this.findViewById<EditText>(R.id.TXT_reg_region).text.toString(),
-            _this.findViewById<EditText>(R.id.TXT_reg_city).text.toString(),
-            _this.findViewById<EditText>(R.id.TXT_reg_district).text.toString(),
-            _this.findViewById<EditText>(R.id.TXT_reg_street).text.toString(),
-            _this.findViewById<EditText>(R.id.TXT_reg_house).text.toString(),
-            _this.findViewById<EditText>(R.id.TXT_reg_index).text.toString()
-        )
+        own.address_reg.region   = _this.findViewById<EditText>(R.id.TXT_reg_region  ).text.toString()
+        own.address_reg.city     = _this.findViewById<EditText>(R.id.TXT_reg_city    ).text.toString()
+        own.address_reg.district = _this.findViewById<EditText>(R.id.TXT_reg_district).text.toString()
+        own.address_reg.street   = _this.findViewById<EditText>(R.id.TXT_reg_street  ).text.toString()
+        own.address_reg.house    = _this.findViewById<EditText>(R.id.TXT_reg_house   ).text.toString()
+        own.address_reg.index    = _this.findViewById<EditText>(R.id.TXT_reg_index   ).text.toString()
 
-        own = Own(
-            if (id != -1) _this.findViewById<RadioButton>(id).text.toString() else "", // lang
-            _this.findViewById<EditText>(R.id.TXT_country).text.toString(),
-            _this.findViewById<EditText>(R.id.TXT_inn).text.toString(),
-            _this.findViewById<SwitchCompat>(R.id.SWITCH_dormitory).isChecked,
-
-            address,
-            if (_this.findViewById<SwitchCompat>(R.id.SWITCH_equal).isChecked) address.copy()
-            else OwnAddress( // address live
-                _this.findViewById<EditText>(R.id.TXT_live_region).text.toString(),
-                _this.findViewById<EditText>(R.id.TXT_live_city).text.toString(),
-                _this.findViewById<EditText>(R.id.TXT_live_district).text.toString(),
-                _this.findViewById<EditText>(R.id.TXT_live_street).text.toString(),
-                _this.findViewById<EditText>(R.id.TXT_live_house).text.toString(),
-                _this.findViewById<EditText>(R.id.TXT_live_index).text.toString()
-            )
-        )
+        if (_this.findViewById<SwitchCompat>(R.id.SWITCH_equal).isChecked)
+        {
+            own.address_live.region   = own.address_reg.region
+            own.address_live.city     = own.address_reg.city
+            own.address_live.district = own.address_reg.district
+            own.address_live.street   = own.address_reg.street
+            own.address_live.house    = own.address_reg.house
+            own.address_live.index    = own.address_reg.index
+        }
+        else {
+            own.address_live.region   = _this.findViewById<EditText>(R.id.TXT_live_region  ).text.toString()
+            own.address_live.city     = _this.findViewById<EditText>(R.id.TXT_live_city    ).text.toString()
+            own.address_live.district = _this.findViewById<EditText>(R.id.TXT_live_district).text.toString()
+            own.address_live.street   = _this.findViewById<EditText>(R.id.TXT_live_street  ).text.toString()
+            own.address_live.house    = _this.findViewById<EditText>(R.id.TXT_live_house   ).text.toString()
+            own.address_live.index    = _this.findViewById<EditText>(R.id.TXT_live_index   ).text.toString()
+        }
     }
 }

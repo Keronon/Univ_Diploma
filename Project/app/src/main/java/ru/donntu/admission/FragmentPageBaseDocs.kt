@@ -11,15 +11,20 @@ import androidx.appcompat.widget.SwitchCompat
 @Suppress("PropertyName")
 class FragmentPageBaseDocs: Fragment()
 {
+    companion object { var baseDocsInfo = BaseDocsInfo() }
+
     lateinit var _this: View
+
+    private lateinit var op  : Array<String>
+    private lateinit var educ: Array<String>
 
     @Suppress("LocalVariableName")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _this = inflater.inflate(R.layout.fragment_page_base_docs, container, false)
 
-        val op   = arrayOf(getString(R.string.bachelor), getString(R.string.expert), getString(R.string.master))
-        val educ = arrayOf("Ср. общ.", "Ср. проф.")
+        op   = arrayOf(getString(R.string.bachelor), getString(R.string.expert), getString(R.string.master))
+        educ = arrayOf("Ср. общ.", "Ср. проф.")
 
         // spinners
 
@@ -46,5 +51,41 @@ class FragmentPageBaseDocs: Fragment()
         }
 
         return _this
+    }
+
+    override fun onPause()
+    {
+        super.onPause()
+        FragmentPageConfirm.personalData = null
+
+        baseDocsInfo.prevEducations.clear()
+        var check: CheckBox = _this.findViewById(R.id.CHECK_bachelor)
+        if (check.isChecked) baseDocsInfo.prevEducations.add(check.text.toString())
+        check = _this.findViewById(R.id.CHECK_expert)
+        if (check.isChecked) baseDocsInfo.prevEducations.add(check.text.toString())
+        check = _this.findViewById(R.id.CHECK_master)
+        if (check.isChecked) baseDocsInfo.prevEducations.add(check.text.toString())
+
+        baseDocsInfo.baseDocs.clear()
+        var id = _this.findViewById<RadioGroup>(R.id.RADIO_educ_1).checkedRadioButtonId
+        baseDocsInfo.baseDocs.add(
+            BaseDoc(
+                op  [_this.findViewById<Spinner>(R.id.SPINNER_op_1  ).selectedItemPosition],
+                educ[_this.findViewById<Spinner>(R.id.SPINNER_educ_1).selectedItemPosition],
+                if (id != -1) _this.findViewById<RadioButton>(id).text.toString() else "" // educ status
+            )
+        )
+
+        if (!_this.findViewById<SwitchCompat>(R.id.SWITCH_doc_2).isChecked)
+        {
+            id = _this.findViewById<RadioGroup>(R.id.RADIO_educ_2).checkedRadioButtonId
+            baseDocsInfo.baseDocs.add(
+                BaseDoc(
+                    op  [_this.findViewById<Spinner>(R.id.SPINNER_op_2  ).selectedItemPosition],
+                    educ[_this.findViewById<Spinner>(R.id.SPINNER_educ_2).selectedItemPosition],
+                    if (id != -1) _this.findViewById<RadioButton>(id).text.toString() else "" // educ status
+                )
+            )
+        }
     }
 }

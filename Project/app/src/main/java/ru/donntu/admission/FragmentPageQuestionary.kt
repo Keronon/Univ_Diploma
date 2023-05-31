@@ -13,9 +13,7 @@ import androidx.appcompat.widget.SwitchCompat
 
 class FragmentPageQuestionary(private val pageBaseDocs: FragmentPageBaseDocs) : Fragment()
 {
-    companion object {
-        var cases = mutableListOf<Case>()
-    }
+    companion object { var cases = mutableListOf<Case>() }
 
     @Suppress("PropertyName")
     private lateinit var _this : View
@@ -26,8 +24,8 @@ class FragmentPageQuestionary(private val pageBaseDocs: FragmentPageBaseDocs) : 
     private lateinit var fo      : MutableList<String>
     private lateinit var course  : MutableList<String>
     private lateinit var priority: MutableList<String>
+    private lateinit var docs    : MutableList<String>
 
-    private val docs = mutableListOf("базовый документ не выбран", "базовый документ №1")
     @Suppress("PrivatePropertyName")
     private lateinit var adapter_docs: ArrayAdapter<String>
 
@@ -47,6 +45,7 @@ class FragmentPageQuestionary(private val pageBaseDocs: FragmentPageBaseDocs) : 
 
         // docs
 
+        docs = mutableListOf("базовый документ не выбран", "базовый документ №1")
         adapter_docs = ArrayAdapter(_this.context, android.R.layout.simple_spinner_item, docs )
 
         val docs_1 = _this.findViewById<Spinner>(R.id.SPINNER_docs_1)
@@ -319,25 +318,25 @@ class FragmentPageQuestionary(private val pageBaseDocs: FragmentPageBaseDocs) : 
     override fun onPause()
     {
         super.onPause()
+        FragmentPageConfirm.personalData = null
 
-        // page questionary
-
-        cases = mutableListOf(
+        cases.clear()
+        cases.add(
             Case(
-                priority[_this.findViewById<Spinner>(R.id.SPINNER_priority_1).selectedItemPosition], // priority
-                fo      [_this.findViewById<Spinner>(R.id.SPINNER_fo_1      ).selectedItemPosition], // fo
-                course  [_this.findViewById<Spinner>(R.id.SPINNER_course_1  ).selectedItemPosition], // course
-                _this.findViewById<Button>(R.id.BTN_stream_1).text.toString()                        // stream
+                priority[_this.findViewById<Spinner>(R.id.SPINNER_priority_1).selectedItemPosition],
+                fo      [_this.findViewById<Spinner>(R.id.SPINNER_fo_1      ).selectedItemPosition],
+                course  [_this.findViewById<Spinner>(R.id.SPINNER_course_1  ).selectedItemPosition],
+                _this.findViewById<Button>(R.id.BTN_stream_1).text.toString() // stream
             )
         )
         if (_this.findViewById<SwitchCompat>(R.id.SWITCH_case_2).isChecked)
         {
             cases.add(
                 Case(
-                    priority[_this.findViewById<Spinner>(R.id.SPINNER_priority_2).selectedItemPosition], // priority
-                    fo      [_this.findViewById<Spinner>(R.id.SPINNER_fo_2      ).selectedItemPosition], // fo
-                    course  [_this.findViewById<Spinner>(R.id.SPINNER_course_2  ).selectedItemPosition], // course
-                    _this.findViewById<Button>(R.id.BTN_stream_2).text.toString()                        // stream
+                    priority[_this.findViewById<Spinner>(R.id.SPINNER_priority_2).selectedItemPosition],
+                    fo      [_this.findViewById<Spinner>(R.id.SPINNER_fo_2      ).selectedItemPosition],
+                    course  [_this.findViewById<Spinner>(R.id.SPINNER_course_2  ).selectedItemPosition],
+                    _this.findViewById<Button>(R.id.BTN_stream_2).text.toString() // stream
                 )
             )
         }
@@ -345,10 +344,10 @@ class FragmentPageQuestionary(private val pageBaseDocs: FragmentPageBaseDocs) : 
         {
             cases.add(
                 Case(
-                    priority[_this.findViewById<Spinner>(R.id.SPINNER_priority_3).selectedItemPosition], // priority
-                    fo      [_this.findViewById<Spinner>(R.id.SPINNER_fo_3      ).selectedItemPosition], // fo
-                    course  [_this.findViewById<Spinner>(R.id.SPINNER_course_3  ).selectedItemPosition], // course
-                    _this.findViewById<Button>(R.id.BTN_stream_3).text.toString()                        // stream
+                    priority[_this.findViewById<Spinner>(R.id.SPINNER_priority_3).selectedItemPosition],
+                    fo      [_this.findViewById<Spinner>(R.id.SPINNER_fo_3      ).selectedItemPosition],
+                    course  [_this.findViewById<Spinner>(R.id.SPINNER_course_3  ).selectedItemPosition],
+                    _this.findViewById<Button>(R.id.BTN_stream_3).text.toString() // stream
                 )
             )
         }

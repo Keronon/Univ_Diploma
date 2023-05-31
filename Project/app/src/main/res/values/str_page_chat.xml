@@ -1,0 +1,16 @@
+<resources>
+
+    <string name="HEAD_chat">СОСТОЯНИЕ ЗАЯВЛЕНИЯ</string>
+
+    <string name="HINT_id">Ваш регистрационный номер :</string>
+    <string name="HINT_status">Статус вашего заявления :</string>
+    <string name="HINT_data">Ваша анкета</string>
+    <string name="HINT_documents">ВАШИ ДОКУМЕНТЫ</string>
+    <string name="HINT_documents_x">ваши документы</string>
+    <string name="HINT_chat">ЧАТ С ОПЕРАТОРОМ СИСТЕМЫ</string>
+    <string name="HINT_chat_info">время работы > ПН–ПТ : 9.00 – 16.00 , СБ : 9.00 – 15:00</string>
+    <string name="HINT_message">Ваше сообщение оператору</string>
+
+    <string name="BTN_back">ВЫЙТИ ИЗ СИСТЕМЫ</string>
+
+</resources>

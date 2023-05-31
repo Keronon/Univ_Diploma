@@ -88,12 +88,12 @@
             android:layout_marginRight="5dp"
             android:layout_marginBottom="15dp"
 
-            android:checked="true"
+            android:enabled="false"
             android:background="@drawable/back_border"
             android:padding="15dp"
             android:text="@string/TXT_save"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/teal_900"
+            android:textColor="@color/gray"
             android:textStyle="bold" />
 
         <LinearLayout

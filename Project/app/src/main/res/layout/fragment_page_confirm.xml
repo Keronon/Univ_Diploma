@@ -839,12 +839,256 @@
             android:background="@drawable/hider_btn"
             android:textColor="@color/white"
             android:textAllCaps="false"
+            android:textOn="@string/LBL_base_docs"
+            android:textOff="@string/LBL_base_docs_x"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/LAYOUT_p_4"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/LBL_confirm_prev_educ"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="@string/HINT_confirm_prev_educ"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/teal_900"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/TXT_confirm_prev_educ"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="10dp"
+
+                android:background="@drawable/back_border"
+                android:padding="15dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/teal_900"
+                android:textStyle="bold" />
+
+            <!-- DOC 1 -->
+
+            <LinearLayout
+                android:id="@+id/LAYOUT_doc_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/TXT_doc_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginBottom="10dp"
+
+                    android:text="@string/HINT_doc_1"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/teal_900"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/LBL_op_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:text="@string/HINT_op"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/teal_900"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TXT_op_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="10dp"
+
+                    android:background="@drawable/back_border"
+                    android:padding="15dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/teal_900"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/LBL_educ_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:text="@string/HINT_educ"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/teal_900"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TXT_educ_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="10dp"
+
+                    android:background="@drawable/back_border"
+                    android:padding="15dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/teal_900"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/LBL_educ_status_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:text="@string/HINT_educ_status"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/teal_900"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TXT_educ_status_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="10dp"
+
+                    android:background="@drawable/back_border"
+                    android:padding="15dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/teal_900"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <!-- DOC 2 -->
+
+            <LinearLayout
+                android:id="@+id/LAYOUT_doc_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                tools:ignore="TooManyViews">
+
+                <TextView
+                    android:id="@+id/TXT_doc_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginBottom="10dp"
+
+                    android:text="@string/HINT_doc_2"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/teal_900"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/LBL_op_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:text="@string/HINT_op"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/teal_900"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TXT_op_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="10dp"
+
+                    android:background="@drawable/back_border"
+                    android:padding="15dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/teal_900"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/LBL_educ_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:text="@string/HINT_educ"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/teal_900"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TXT_educ_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="10dp"
+
+                    android:background="@drawable/back_border"
+                    android:padding="15dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/teal_900"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/LBL_educ_status_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:text="@string/HINT_educ_status"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/teal_900"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TXT_educ_status_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="10dp"
+
+                    android:background="@drawable/back_border"
+                    android:padding="15dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/teal_900"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ToggleButton
+            android:id="@+id/BTN_p_5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+
+            android:background="@drawable/hider_btn"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
             android:textOn="@string/LBL_questionary"
             android:textOff="@string/LBL_questionary_x"
             android:textStyle="bold" />
 
         <LinearLayout
-            android:id="@+id/LAYOUT_p_4"
+            android:id="@+id/LAYOUT_p_5"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:orientation="vertical">
@@ -1232,7 +1476,7 @@
                 android:textStyle="bold" />
 
             <Spinner
-                android:id="@+id/SPINNER_priority"
+                android:id="@+id/SPINNER_priority_contract"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
