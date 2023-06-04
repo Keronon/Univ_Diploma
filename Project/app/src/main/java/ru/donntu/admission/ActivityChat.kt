@@ -8,8 +8,6 @@ import android.widget.*
 
 class ActivityChat : AppCompatActivity()
 {
-    private var data: PersonalData? = null
-
     @Suppress("PrivatePropertyName")
     private lateinit var TXT_docs: TextView
     private lateinit var animatorOpen : ValueAnimator
@@ -21,6 +19,8 @@ class ActivityChat : AppCompatActivity()
         setContentView(R.layout.activity_chat)
 
         // buttons
+
+        // TODO надо где-то брать анкету, или притягивать сюда данные
 
         // -> BTN data
         findViewById<Button>(R.id.BTN_data).setOnClickListener {
@@ -63,27 +63,14 @@ class ActivityChat : AppCompatActivity()
 
         // -> BTN send
         findViewById<Button>(R.id.BTN_send).setOnClickListener {
-            Toast.makeText(applicationContext, "Отправляем", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "Отправляем сообщение", Toast.LENGTH_SHORT).show()
         }
 
         // -> BTN back
         findViewById<Button>(R.id.BTN_back).setOnClickListener {
             Toast.makeText(applicationContext, "Возвращаемся", Toast.LENGTH_SHORT).show()
-            FragmentPageConfirm.personalData = null
             @Suppress("DEPRECATION")
             onBackPressed()
         }
-    }
-
-    override fun onResume()
-    {
-        data = FragmentPageConfirm.personalData
-        TXT_docs.text = data!!.docs
-
-        TXT_docs.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
-        animatorOpen .setIntValues(TXT_docs.measuredHeight)
-        animatorClose.setIntValues(TXT_docs.measuredHeight, 0)
-
-        super.onResume()
     }
 }

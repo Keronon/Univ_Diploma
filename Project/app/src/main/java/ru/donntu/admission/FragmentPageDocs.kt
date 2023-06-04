@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment
 
 class FragmentPageDocs: Fragment()
 {
-    companion object { var docs = "" }
+    companion object { val docs = mutableMapOf<String, Any>() }
 
     @Suppress("PropertyName")
     private lateinit var _this : View
@@ -50,15 +50,15 @@ class FragmentPageDocs: Fragment()
         // buttons
 
         _this.findViewById<Button>(R.id.BTN_files).setOnClickListener {
-            Toast.makeText(it.context, "Отображаем список файлов", Toast.LENGTH_SHORT).show()
+            show(_this.context, "Отображаем список файлов")
             showPopupFiles()
         }
         _this.findViewById<Button>(R.id.BTN_del).setOnClickListener {
-            Toast.makeText(it.context, "Удаляем", Toast.LENGTH_SHORT).show()
+            show(_this.context, "Удаляем")
 
             if (list.checkedItemCount == 0)
             {
-                Toast.makeText(it.context, "Выберите файл", Toast.LENGTH_SHORT).show()
+                show(_this.context, "Выберите файл")
                 return@setOnClickListener
             }
             items.removeAt(list.checkedItemPosition)
@@ -66,7 +66,7 @@ class FragmentPageDocs: Fragment()
             listAdapter.notifyDataSetChanged()
         }
         _this.findViewById<Button>(R.id.BTN_add).setOnClickListener {
-            Toast.makeText(it.context, "Добавляем", Toast.LENGTH_SHORT).show()
+            show(_this.context, "Добавляем")
 
             val fileIntent = Intent(Intent.ACTION_GET_CONTENT)
                 .setType("*/*")
@@ -89,8 +89,6 @@ class FragmentPageDocs: Fragment()
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         @Suppress("DEPRECATION")
         super.onActivityResult(requestCode, resultCode, data)
-
-        // TODO need to get file to send to the server
 
         when (requestCode) {
             REQ_KEY -> if (resultCode == RESULT_OK)
@@ -120,10 +118,15 @@ class FragmentPageDocs: Fragment()
         }
     }
 
+    override fun onResume()
+    {
+        FragmentPageConfirm.personalData = null
+        super.onResume()
+    }
+
     override fun onPause()
     {
         super.onPause()
-        FragmentPageConfirm.personalData = null
-        docs = (items.map { v -> v[keys[0]] }).joinToString("\n")
+        items.forEach { v -> docs[v[keys[0]] as String] = v[keys[1]] as Any }
     }
 }

@@ -53,18 +53,24 @@ class FragmentPageBaseDocs: Fragment()
         return _this
     }
 
+    override fun onResume()
+    {
+        FragmentPageConfirm.personalData = null
+        super.onResume()
+    }
+
     override fun onPause()
     {
         super.onPause()
-        FragmentPageConfirm.personalData = null
 
-        baseDocsInfo.prevEducations.clear()
+        val list = mutableListOf<String>()
         var check: CheckBox = _this.findViewById(R.id.CHECK_bachelor)
-        if (check.isChecked) baseDocsInfo.prevEducations.add(check.text.toString())
+        if (check.isChecked) list.add(check.text.toString())
         check = _this.findViewById(R.id.CHECK_expert)
-        if (check.isChecked) baseDocsInfo.prevEducations.add(check.text.toString())
+        if (check.isChecked) list.add(check.text.toString())
         check = _this.findViewById(R.id.CHECK_master)
-        if (check.isChecked) baseDocsInfo.prevEducations.add(check.text.toString())
+        if (check.isChecked) list.add(check.text.toString())
+        baseDocsInfo.prevEducations = list.joinToString()
 
         baseDocsInfo.baseDocs.clear()
         var id = _this.findViewById<RadioGroup>(R.id.RADIO_educ_1).checkedRadioButtonId

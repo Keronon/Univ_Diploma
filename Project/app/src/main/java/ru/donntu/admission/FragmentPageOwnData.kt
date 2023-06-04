@@ -33,10 +33,15 @@ class FragmentPageOwnData: Fragment()
         return _this
     }
 
+    override fun onResume()
+    {
+        FragmentPageConfirm.personalData = null
+        super.onResume()
+    }
+
     override fun onPause()
     {
         super.onPause()
-        FragmentPageConfirm.personalData = null
 
         val id        = _this.findViewById<RadioGroup>(R.id.RADIO_lang).checkedRadioButtonId
         own.lang      = if (id != -1) _this.findViewById<RadioButton>(id).text.toString() else ""
@@ -44,29 +49,29 @@ class FragmentPageOwnData: Fragment()
         own.inn       = _this.findViewById<EditText>(R.id.TXT_inn).text.toString()
         own.dormitory = _this.findViewById<SwitchCompat>(R.id.SWITCH_dormitory).isChecked
 
-        own.address_reg.region   = _this.findViewById<EditText>(R.id.TXT_reg_region  ).text.toString()
-        own.address_reg.city     = _this.findViewById<EditText>(R.id.TXT_reg_city    ).text.toString()
-        own.address_reg.district = _this.findViewById<EditText>(R.id.TXT_reg_district).text.toString()
-        own.address_reg.street   = _this.findViewById<EditText>(R.id.TXT_reg_street  ).text.toString()
-        own.address_reg.house    = _this.findViewById<EditText>(R.id.TXT_reg_house   ).text.toString()
-        own.address_reg.index    = _this.findViewById<EditText>(R.id.TXT_reg_index   ).text.toString()
+        own.reg.region   = _this.findViewById<EditText>(R.id.TXT_reg_region  ).text.toString()
+        own.reg.city     = _this.findViewById<EditText>(R.id.TXT_reg_city    ).text.toString()
+        own.reg.district = _this.findViewById<EditText>(R.id.TXT_reg_district).text.toString()
+        own.reg.street   = _this.findViewById<EditText>(R.id.TXT_reg_street  ).text.toString()
+        own.reg.house    = _this.findViewById<EditText>(R.id.TXT_reg_house   ).text.toString()
+        own.reg.index    = _this.findViewById<EditText>(R.id.TXT_reg_index   ).text.toString()
 
         if (_this.findViewById<SwitchCompat>(R.id.SWITCH_equal).isChecked)
         {
-            own.address_live.region   = own.address_reg.region
-            own.address_live.city     = own.address_reg.city
-            own.address_live.district = own.address_reg.district
-            own.address_live.street   = own.address_reg.street
-            own.address_live.house    = own.address_reg.house
-            own.address_live.index    = own.address_reg.index
+            own.live.region   = own.reg.region
+            own.live.city     = own.reg.city
+            own.live.district = own.reg.district
+            own.live.street   = own.reg.street
+            own.live.house    = own.reg.house
+            own.live.index    = own.reg.index
         }
         else {
-            own.address_live.region   = _this.findViewById<EditText>(R.id.TXT_live_region  ).text.toString()
-            own.address_live.city     = _this.findViewById<EditText>(R.id.TXT_live_city    ).text.toString()
-            own.address_live.district = _this.findViewById<EditText>(R.id.TXT_live_district).text.toString()
-            own.address_live.street   = _this.findViewById<EditText>(R.id.TXT_live_street  ).text.toString()
-            own.address_live.house    = _this.findViewById<EditText>(R.id.TXT_live_house   ).text.toString()
-            own.address_live.index    = _this.findViewById<EditText>(R.id.TXT_live_index   ).text.toString()
+            own.live.region   = _this.findViewById<EditText>(R.id.TXT_live_region  ).text.toString()
+            own.live.city     = _this.findViewById<EditText>(R.id.TXT_live_city    ).text.toString()
+            own.live.district = _this.findViewById<EditText>(R.id.TXT_live_district).text.toString()
+            own.live.street   = _this.findViewById<EditText>(R.id.TXT_live_street  ).text.toString()
+            own.live.house    = _this.findViewById<EditText>(R.id.TXT_live_house   ).text.toString()
+            own.live.index    = _this.findViewById<EditText>(R.id.TXT_live_index   ).text.toString()
         }
     }
 }

@@ -89,7 +89,7 @@ class FragmentPageQuestionary(private val pageBaseDocs: FragmentPageBaseDocs) : 
 
         @Suppress("SpellCheckingInspection")
         val onBTNstreamClick = fun (it: View) {
-            Toast.makeText(_this.context, "Отображаем выбор НО", Toast.LENGTH_SHORT).show()
+            show(_this.context, "Отображаем выбор НО")
             // TODO : настраивать список направлений в зависимости от :
             //        базового образования
             //        формы обучения
@@ -161,7 +161,7 @@ class FragmentPageQuestionary(private val pageBaseDocs: FragmentPageBaseDocs) : 
         // other
 
         _this.findViewById<Button>(R.id.BTN_case_info).setOnClickListener {
-            Toast.makeText(_this.context, "Отображаем информацию о заполнении", Toast.LENGTH_SHORT).show()
+            show(_this.context, "Отображаем информацию о заполнении")
             showPopupFiles()
         }
 
@@ -298,6 +298,7 @@ class FragmentPageQuestionary(private val pageBaseDocs: FragmentPageBaseDocs) : 
 
     override fun onResume()
     {
+        FragmentPageConfirm.personalData = null
         super.onResume()
 
         val switch = pageBaseDocs._this.findViewById<SwitchCompat>(R.id.SWITCH_doc_2)
@@ -318,7 +319,6 @@ class FragmentPageQuestionary(private val pageBaseDocs: FragmentPageBaseDocs) : 
     override fun onPause()
     {
         super.onPause()
-        FragmentPageConfirm.personalData = null
 
         cases.clear()
         cases.add(

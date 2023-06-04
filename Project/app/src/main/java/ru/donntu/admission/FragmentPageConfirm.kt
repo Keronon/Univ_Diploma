@@ -12,8 +12,12 @@ class FragmentPageConfirm: Fragment()
 {
     companion object { var personalData: PersonalData? = null }
 
+    @Suppress("PrivatePropertyName")
+    private lateinit var priority_contract: MutableList<String>
+
     @Suppress("PropertyName")
     private lateinit var _this: View
+
     private lateinit var animatorsOpen: Array<ValueAnimator>
     private lateinit var animatorsClose: Array<ValueAnimator>
     @Suppress("PrivatePropertyName")
@@ -94,7 +98,7 @@ class FragmentPageConfirm: Fragment()
         // contract
 
         // TODO : настраивать в зависимости к-ва записей анкеты
-        val priority_contract = mutableListOf("-", "1", "2", "3")
+        priority_contract = mutableListOf("-", "1", "2", "3")
         val adapter_priority_contract = ArrayAdapter(_this.context, android.R.layout.simple_spinner_item, priority_contract )
         _this.findViewById<Spinner>(R.id.SPINNER_priority_contract).adapter = adapter_priority_contract
 
@@ -104,6 +108,7 @@ class FragmentPageConfirm: Fragment()
     override fun onPause()
     {
         BTNs_p.forEach { v -> v.isChecked = false }
+        personalData!!.priority_contract = priority_contract[_this.findViewById<Spinner>(R.id.SPINNER_priority_contract).selectedItemPosition]
         super.onPause()
     }
 
@@ -126,19 +131,19 @@ class FragmentPageConfirm: Fragment()
         _this.findViewById<TextView>(R.id.TXT_inn      ).text = personalData!!.own.inn
         _this.findViewById<TextView>(R.id.TXT_dormitory).text = if (personalData!!.own.dormitory) "Да" else "Нет"
         // -> reg
-        _this.findViewById<TextView>(R.id.TXT_reg_region  ).text = personalData!!.own.address_reg.region
-        _this.findViewById<TextView>(R.id.TXT_reg_city    ).text = personalData!!.own.address_reg.city
-        _this.findViewById<TextView>(R.id.TXT_reg_district).text = personalData!!.own.address_reg.district
-        _this.findViewById<TextView>(R.id.TXT_reg_street  ).text = personalData!!.own.address_reg.street
-        _this.findViewById<TextView>(R.id.TXT_reg_house   ).text = personalData!!.own.address_reg.house
-        _this.findViewById<TextView>(R.id.TXT_reg_index   ).text = personalData!!.own.address_reg.index
+        _this.findViewById<TextView>(R.id.TXT_reg_region  ).text = personalData!!.own.reg.region
+        _this.findViewById<TextView>(R.id.TXT_reg_city    ).text = personalData!!.own.reg.city
+        _this.findViewById<TextView>(R.id.TXT_reg_district).text = personalData!!.own.reg.district
+        _this.findViewById<TextView>(R.id.TXT_reg_street  ).text = personalData!!.own.reg.street
+        _this.findViewById<TextView>(R.id.TXT_reg_house   ).text = personalData!!.own.reg.house
+        _this.findViewById<TextView>(R.id.TXT_reg_index   ).text = personalData!!.own.reg.index
         // -> live
-        _this.findViewById<TextView>(R.id.TXT_live_region  ).text = personalData!!.own.address_live.region
-        _this.findViewById<TextView>(R.id.TXT_live_city    ).text = personalData!!.own.address_live.city
-        _this.findViewById<TextView>(R.id.TXT_live_district).text = personalData!!.own.address_live.district
-        _this.findViewById<TextView>(R.id.TXT_live_street  ).text = personalData!!.own.address_live.street
-        _this.findViewById<TextView>(R.id.TXT_live_house   ).text = personalData!!.own.address_live.house
-        _this.findViewById<TextView>(R.id.TXT_live_index   ).text = personalData!!.own.address_live.index
+        _this.findViewById<TextView>(R.id.TXT_live_region  ).text = personalData!!.own.live.region
+        _this.findViewById<TextView>(R.id.TXT_live_city    ).text = personalData!!.own.live.city
+        _this.findViewById<TextView>(R.id.TXT_live_district).text = personalData!!.own.live.district
+        _this.findViewById<TextView>(R.id.TXT_live_street  ).text = personalData!!.own.live.street
+        _this.findViewById<TextView>(R.id.TXT_live_house   ).text = personalData!!.own.live.house
+        _this.findViewById<TextView>(R.id.TXT_live_index   ).text = personalData!!.own.live.index
 
         // => Parents
         // -> father
@@ -156,9 +161,9 @@ class FragmentPageConfirm: Fragment()
 
         // => Docs
         val txt = _this.findViewById<TextView>(R.id.TXT_docs)
-        txt.text = personalData!!.docs
+        txt.text = personalData!!.docs.map { v -> v.key }.joinToString("\n")
         val param = txt.layoutParams
-        param.height = txt.lineHeight * personalData!!.docs.lines().size + (txt.paddingTop + 5) * 2
+        param.height = txt.lineHeight * txt.text.lines().size + (txt.paddingTop + 5) * 2
         txt.layoutParams = param
 
         var layout: LinearLayout = _this.findViewById(R.id.LAYOUT_p_3)
@@ -167,7 +172,7 @@ class FragmentPageConfirm: Fragment()
         animatorsClose[2].setIntValues(layout.measuredHeight, 0)
 
         // => Base docs
-        _this.findViewById<TextView>(R.id.TXT_confirm_prev_educ).text = personalData!!.baseDocsInfo.prevEducations.joinToString()
+        _this.findViewById<TextView>(R.id.TXT_confirm_prev_educ).text = personalData!!.baseDocsInfo.prevEducations
         // -> doc 1
         if (personalData!!.baseDocsInfo.baseDocs.size > 0)
         {

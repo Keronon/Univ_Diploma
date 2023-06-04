@@ -20,10 +20,15 @@ class FragmentPageParentsData: Fragment()
         return _this
     }
 
+    override fun onResume()
+    {
+        FragmentPageConfirm.personalData = null
+        super.onResume()
+    }
+
     override fun onPause()
     {
         super.onPause()
-        FragmentPageConfirm.personalData = null
 
         parents.father.surname    = _this.findViewById<EditText>(R.id.TXT_father_surname   ).text.toString()
         parents.father.name       = _this.findViewById<EditText>(R.id.TXT_father_name      ).text.toString()

@@ -2,6 +2,7 @@ package ru.donntu.admission
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -14,7 +15,13 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.github.barteksc.pdfviewer.PDFView
 import com.google.android.material.navigation.NavigationView
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.*
+
+fun show(context: Context, txt: String) { Toast.makeText(context, txt, Toast.LENGTH_SHORT).show() }
 
 class ActivityMain : AppCompatActivity() {
 
@@ -63,33 +70,43 @@ class ActivityMain : AppCompatActivity() {
         nav.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.menu_plan -> {
-                    Toast.makeText(applicationContext, "Отображаем план", Toast.LENGTH_SHORT).show()
+                    show(applicationContext, "Отображаем план")
                     drawer.closeDrawer(GravityCompat.START)
                     showPopupPlan()
                 }
                 R.id.menu_info -> {
-                    Toast.makeText(applicationContext, "Отображаем информацию о комиссии", Toast.LENGTH_SHORT).show()
+                    show(applicationContext, "Отображаем информацию о комиссии")
                     drawer.closeDrawer(GravityCompat.START)
                     showPopupInfo()
                 }
                 R.id.menu_register -> {
-                    Toast.makeText(applicationContext, "Начинаем регистрацию", Toast.LENGTH_SHORT).show()
+                    show(applicationContext, "Начинаем регистрацию")
                     drawer.closeDrawer(GravityCompat.START)
                     showPopupReg()
                 }
                 R.id.menu_login -> {
-                    Toast.makeText(applicationContext, "Начинаем вход", Toast.LENGTH_SHORT).show()
+                    show(applicationContext, "Начинаем вход")
                     drawer.closeDrawer(GravityCompat.START)
                     showPopupLogin()
                 }
             }
             true
         }
+
+        // DB
+        lifecycleScope.launch { show(applicationContext, withContext(Dispatchers.IO) { DB_processor.connect(); "БД подключена" }) }
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
         toggle.syncState()
+    }
+
+    override fun onDestroy()
+    {
+        // DB
+        lifecycleScope.launch { show(applicationContext, withContext(Dispatchers.IO) { DB_processor.disconnect(); "БД отключена" }) }
+        super.onDestroy()
     }
 
     @Deprecated("Deprecated in Java")
@@ -101,6 +118,8 @@ class ActivityMain : AppCompatActivity() {
             @Suppress("DEPRECATION")
             super.onBackPressed()
     }
+
+    // PopUps
 
     private fun showPopupPlan()
     {
@@ -142,11 +161,11 @@ class ActivityMain : AppCompatActivity() {
         // buttons
 
         popReg.findViewById<Button>(R.id.BTN_back).setOnClickListener {
-            Toast.makeText(applicationContext, "Возвращаемся", Toast.LENGTH_SHORT).show()
+            show(applicationContext, "Возвращаемся")
             popReg.dismiss()
         }
         popReg.findViewById<Button>(R.id.BTN_reg).setOnClickListener {
-            Toast.makeText(applicationContext, "Подтверждение регистрации", Toast.LENGTH_SHORT).show()
+            show(applicationContext, "Подтверждение регистрации")
             popReg.currentFocus?.clearFocus()
             // TODO : check data
             showPopupRegConfirm(popReg)
@@ -177,11 +196,11 @@ class ActivityMain : AppCompatActivity() {
         // buttons
 
         popRegConfirm.findViewById<Button>(R.id.BTN_back).setOnClickListener {
-            Toast.makeText(applicationContext, "Возвращаемся", Toast.LENGTH_SHORT).show()
+            show(applicationContext, "Возвращаемся")
             popRegConfirm.dismiss()
         }
         popRegConfirm.findViewById<Button>(R.id.BTN_reg).setOnClickListener {
-            Toast.makeText(applicationContext, "Регистрируем", Toast.LENGTH_SHORT).show()
+            show(applicationContext, "Регистрируем")
             popReg.dismiss()
             popRegConfirm.dismiss()
 
@@ -199,11 +218,11 @@ class ActivityMain : AppCompatActivity() {
         // buttons
 
         popLogin.findViewById<Button>(R.id.BTN_back).setOnClickListener {
-            Toast.makeText(applicationContext, "Возвращаемся", Toast.LENGTH_SHORT).show()
+            show(applicationContext, "Возвращаемся")
             popLogin.dismiss()
         }
         popLogin.findViewById<Button>(R.id.BTN_reg).setOnClickListener {
-            Toast.makeText(applicationContext, "Входим", Toast.LENGTH_SHORT).show()
+            show(applicationContext, "Входим")
             // TODO : check data
             popLogin.dismiss()
         }

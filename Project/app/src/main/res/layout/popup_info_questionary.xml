@@ -25,6 +25,9 @@
             android:id="@+id/TXT_size_file"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="20dp"
 
             android:text="@string/TXT_case_info"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"

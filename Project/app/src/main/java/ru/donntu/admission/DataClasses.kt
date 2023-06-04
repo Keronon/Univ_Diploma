@@ -1,19 +1,19 @@
 package ru.donntu.admission
 
 data class Own (
-    var lang        : String = "",
-    var country     : String = "",
-    var inn         : String = "",
-    var dormitory   : Boolean = false,
-    val address_reg : OwnAddress = OwnAddress(),
-    val address_live: OwnAddress = OwnAddress()
+    var lang        : String     = "",
+    var country     : String     = "",
+    var inn         : String     = "",
+    var dormitory   : Boolean    = false,
+    val reg : OwnAddress = OwnAddress(),
+    val live: OwnAddress = OwnAddress()
 ){fun clear() {
     lang         = ""
     country      = ""
     inn          = ""
     dormitory    = false
-    address_reg.clear()
-    address_live.clear()
+    reg.clear()
+    live.clear()
 }}
 data class OwnAddress (
     var region  : String = "",
@@ -53,10 +53,10 @@ data class Human (
 }}
 
 data class BaseDocsInfo (
-    val prevEducations: MutableList<String>  = mutableListOf(),
-    val baseDocs      : MutableList<BaseDoc> = mutableListOf()
+    var prevEducations: String = "",
+    val baseDocs      : MutableList<BaseDoc> = mutableListOf(BaseDoc())
 ){fun clear() {
-    prevEducations.clear()
+    prevEducations = ""
     baseDocs      .clear()
 }}
 data class BaseDoc (
@@ -82,15 +82,17 @@ data class Case (
 }}
 
 data class PersonalData (
-    var own         : Own          = Own         (),
-    var parents     : Parents      = Parents     (),
-    var docs        : String       = String      (),
-    var baseDocsInfo: BaseDocsInfo = BaseDocsInfo(),
-    var cases       : MutableList<Case> = mutableListOf()
+    var own              : Own                     = Own(),
+    var parents          : Parents                 = Parents(),
+    val docs             : MutableMap<String, Any> = mutableMapOf(),
+    var baseDocsInfo     : BaseDocsInfo            = BaseDocsInfo(),
+    val cases            : MutableList<Case>       = mutableListOf(Case()),
+    var priority_contract: String  = ""
 ){fun clear() {
     own         .clear()
     parents     .clear()
-    docs = ""
+    docs        .clear()
     baseDocsInfo.clear()
     cases       .clear()
+    priority_contract = ""
 }}
