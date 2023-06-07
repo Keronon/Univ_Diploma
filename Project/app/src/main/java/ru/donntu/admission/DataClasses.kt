@@ -1,10 +1,39 @@
 package ru.donntu.admission
 
+import android.content.Context
+import android.widget.Toast
+
+fun show(context: Context, txt: String) { Toast.makeText(context, txt, Toast.LENGTH_SHORT).show() }
+
+data class Account (
+    var id        : String  = "",
+    var login     : String  = "",
+    var password  : String  = "",
+    var surname   : String  = "",
+    var name      : String  = "",
+    var fathername: String  = "",
+    var birthday  : String  = "",
+    var email     : String  = "",
+    var phone     : String  = "",
+    var other     : String  = ""
+){fun clear() {
+    id         = ""
+    login      = ""
+    password   = ""
+    surname    = ""
+    name       = ""
+    fathername = ""
+    birthday   = ""
+    email      = ""
+    phone      = ""
+    other      = ""
+}}
+
 data class Own (
-    var lang        : String     = "",
-    var country     : String     = "",
-    var inn         : String     = "",
-    var dormitory   : Boolean    = false,
+    var lang     : String  = "",
+    var country  : String  = "",
+    var inn      : String  = "",
+    var dormitory: Boolean = false,
     val reg : OwnAddress = OwnAddress(),
     val live: OwnAddress = OwnAddress()
 ){fun clear() {
@@ -32,8 +61,8 @@ data class OwnAddress (
 }}
 
 data class Parents (
-    var father : Human = Human(),
-    var mother : Human = Human()
+    var father: Human = Human(),
+    var mother: Human = Human()
 ){fun clear() {
     father.clear()
     mother.clear()

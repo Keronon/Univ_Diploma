@@ -12,7 +12,7 @@
 
     <string name="HEAD_reg">Р Е Г И С Т Р А Ц И Я</string>
 
-    <string name="HINT_info">* - необязательное поле</string>
+    <string name="HINT_info">не используйте символ \'\n* - необязательное поле</string>
     <string name="ERR_info">пожалуйста, заполните все обязательные поля\nи устраните предупреждения</string>
 
     <string name="HINT_reg_confirm">пожалуйста, проверьте данные</string>
@@ -21,7 +21,7 @@
     <string name="ERR_login_exists">имя пользователя уже существует\nпожалуйста, выберите другое</string>
 
     <string name="HINT_pass">Пароль</string>
-    <string name="ERR_pass">пароль должен быть длиннее 8 символов\nи короче 20 символов</string>
+    <string name="ERR_pass">пароль должен быть строго длиннее 7 символов\nи короче 21 символа</string>
 
     <string name="HINT_confirm">Подтвердите пароль</string>
     <string name="ERR_confirm">пароли не совпадают</string>
@@ -31,7 +31,7 @@
     <string name="HINT_fathername">* Отчество</string>
 
     <string name="HINT_email">Электронная почта</string>
-    <string name="ERR_email">принимаются e-mail следующих типов:\n@yandex.ru \ .com\n@gmail.com\n@mail.ru\n@rambler.ru</string>
+    <string name="ERR_email">принимаются e-mail следующих типов:\n@yandex.ru / .ua / .com\n@gmail.com\n@mail.ru\n@rambler.ru</string>
 
     <string name="HINT_phone">Номер телефона</string>
     <string name="ERR_phone">номер должен начинаться с +7… / +380…\nи содержать 10 / 11 цифр в себе</string>

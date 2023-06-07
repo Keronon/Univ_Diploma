@@ -61,12 +61,13 @@ class ActivityPersonalData : AppCompatActivity()
             // TODO проверить существование всех обязательных полей
             // TODO проверить корректность всех полей
             // TODO обработать все поля, исключив из них '
+            // TODO проверить переключатели на confirm
 
             // send to DB
 
             // -> own
 
-            val query_1 = "INSERT INTO own(o_id_account,\n" +
+            val query_1 = "INSERT INTO own (o_id_account,\n" +
                     "o_lang, o_country, o_inn, o_dormitory, " +
                     "o_reg_region, o_reg_city, o_reg_district, o_reg_street, o_reg_house, o_reg_index, " +
                     "o_live_region, o_live_city, o_live_district, o_live_street, o_live_house, o_live_index)\n" +
@@ -76,7 +77,7 @@ class ActivityPersonalData : AppCompatActivity()
 
             // -> parents
 
-            val query_2 = "INSERT INTO parents(p_id_account,\n" +
+            val query_2 = "INSERT INTO parents (p_id_account,\n" +
                     "p_f_surname, p_f_name, p_f_fathername, p_f_phone, p_f_registration, " +
                     "p_m_surname, p_m_name, p_m_fathername, p_m_phone, p_m_registration)\n" +
                     "VALUES ('${1}', '${data.parents.father.surname}', '${data.parents.father.name}', '${data.parents.father.fathername}', '${data.parents.father.phone}', '${data.parents.father.reg}', " +
@@ -89,13 +90,13 @@ class ActivityPersonalData : AppCompatActivity()
 
             // -> base docs
 
-            var query_4 = "INSERT INTO base_docs(b_id_account, b_educ_prog, b_base_educ, b_educ_status) VALUES\n"
+            var query_4 = "INSERT INTO base_docs (b_id_account, b_educ_prog, b_base_educ, b_educ_status) VALUES\n"
             data.baseDocsInfo.baseDocs.forEach { d -> query_4 += "('${1}', '${d.op}', '${d.educ}', '${d.educ_status}'),\n" }
             query_4 = query_4.dropLast(2) + ";"
 
             // -> cases
 
-            var query_5 = "INSERT INTO cases(c_id_account, c_priority, c_educ_form, c_course, c_stream) VALUES\n"
+            var query_5 = "INSERT INTO cases (c_id_account, c_priority, c_educ_form, c_course, c_stream) VALUES\n"
             data.cases.forEach { c -> query_5 += "('${1}', '${c.priority}', '${c.fo}', '${c.course}', '${c.stream}'),\n" }
             query_5 = query_5.dropLast(2) + ";"
 
