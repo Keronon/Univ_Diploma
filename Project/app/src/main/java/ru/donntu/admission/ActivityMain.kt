@@ -29,7 +29,8 @@ class ActivityMain : AppCompatActivity() {
 
     // VARs
 
-    private lateinit var accounts: MutableList<MutableList<Any>> // [ [ 0 = id, 1 = login, 2 = password, 3 = has_own ] ]
+    // [ [ 0 = id, 1 = login, 2 = password, 3 = has_own ] ]
+    private lateinit var accounts: MutableList<MutableList<Any>>
 
     private lateinit var drawer: DrawerLayout
     private lateinit var nav   : NavigationView
@@ -51,11 +52,8 @@ class ActivityMain : AppCompatActivity() {
 
         drawer = findViewById(R.id.LAYOUT_core)
         nav    = findViewById(R.id.VIEW_nav)
-        toggle = ActionBarDrawerToggle(
-            this, drawer,
-            findViewById(R.id.TOOL_bar),
-            R.string.toolbar_opened,
-            R.string.toolbar_closed
+        toggle = ActionBarDrawerToggle(this, drawer, findViewById(R.id.TOOL_bar),
+            R.string.toolbar_opened, R.string.toolbar_closed
         )
 
         popPlan       = Dialog(this)
@@ -97,11 +95,11 @@ class ActivityMain : AppCompatActivity() {
             true
         }
 
-        // DB
         lifecycleScope.launch { show(applicationContext, withContext(Dispatchers.IO) { DB_processor.connect(); "БД подключена" }) }
     }
 
-    override fun onPostCreate(savedInstanceState: Bundle?) {
+    override fun onPostCreate(savedInstanceState: Bundle?)
+    {
         toggle.syncState()
         super.onPostCreate(savedInstanceState)
     }
@@ -109,9 +107,7 @@ class ActivityMain : AppCompatActivity() {
     override fun onResume()
     {
         lifecycleScope.launch { show(applicationContext, withContext(Dispatchers.IO) {
-            accounts = DB_processor.querySelect(
-"SELECT a_id, a_login, a_password, (COUNT(o_id) > 0) FROM accounts\nINNER JOIN own ON o_id_account = a_id\nGROUP BY a_id")
-
+            accounts = DB_processor.querySelect("SELECT a_id, a_login, a_password, (COUNT(o_id) > 0) FROM accounts\nINNER JOIN own ON o_id_account = a_id\nGROUP BY a_id")
             "пользователи загружены"
         }) }
         super.onResume()
@@ -126,7 +122,6 @@ class ActivityMain : AppCompatActivity() {
 
     override fun onDestroy()
     {
-        // DB
         lifecycleScope.launch { show(applicationContext, withContext(Dispatchers.IO) { DB_processor.disconnect(); "БД отключена" }) }
         super.onDestroy()
     }
@@ -160,123 +155,20 @@ class ActivityMain : AppCompatActivity() {
         popInfo.show()
     }
 
+    // popup Reg
+
     @Suppress("LocalVariableName")
     private fun showPopupReg()
     {
         popReg.setContentView(R.layout.popup_reg)
 
-        // date
+        initDatePicker()
 
-        val datePicker: DatePicker = popReg.findViewById(R.id.PICK_date)
-        val calendar = Calendar.getInstance()
-
-        calendar.set(calendar[Calendar.YEAR] - 16, 0, 1)
-        datePicker.updateDate( calendar[Calendar.YEAR], calendar[Calendar.MONTH], calendar[Calendar.DAY_OF_MONTH] )
-
-        calendar.set(calendar[Calendar.YEAR] + 10, 11, 31)
-        datePicker.maxDate = calendar.timeInMillis
-
-        calendar.set(1950, 0, 1)
-        datePicker.minDate = calendar.timeInMillis
-
-        // onLooseFocus
-
-        // -> login
-
-        val LBL_login = popReg.findViewById<TextView>(R.id.LBL_login)
-        var layoutParams = LBL_login.layoutParams
-        popReg.findViewById<EditText>(R.id.TXT_login).setOnFocusChangeListener { txt, focused -> if (!focused) {
-            account.login = (txt as EditText).text.toString()
-            if (
-                account.login.contains("'") ||
-                accounts.find { v -> (v[1] as String) == account.login } != null
-            ) {
-                layoutParams.height = LayoutParams.WRAP_CONTENT
-                LBL_login.layoutParams = layoutParams
-            }
-            else
-            {
-                layoutParams.height = 0
-                LBL_login.layoutParams = layoutParams
-            }
-        } }
-
-        // -> password
-
-        val LBL_password = popReg.findViewById<TextView>(R.id.LBL_password)
-        layoutParams = LBL_password.layoutParams
-        popReg.findViewById<EditText>(R.id.TXT_password).setOnFocusChangeListener { txt, focused -> if (!focused) {
-            account.password = (txt as EditText).text.toString()
-            if (
-                account.password.contains("'") ||
-                account.password.length < 8 || account.password.length > 20
-            ) {
-                layoutParams.height = LayoutParams.WRAP_CONTENT
-                LBL_password.layoutParams = layoutParams
-            }
-            else
-            {
-                layoutParams.height = 0
-                LBL_password.layoutParams = layoutParams
-            }
-        } }
-
-        // -> confirm
-
-        val LBL_confirm = popReg.findViewById<TextView>(R.id.LBL_confirm)
-        layoutParams = LBL_confirm.layoutParams
-        popReg.findViewById<EditText>(R.id.TXT_confirm).setOnFocusChangeListener { txt, focused -> if (!focused) {
-            if ( account.password != (txt as EditText).text.toString() )
-            {
-                layoutParams.height = LayoutParams.WRAP_CONTENT
-                LBL_confirm.layoutParams = layoutParams
-            }
-            else
-            {
-                layoutParams.height = 0
-                LBL_confirm.layoutParams = layoutParams
-            }
-        } }
-
-        // -> email
-
-        val LBL_email = popReg.findViewById<TextView>(R.id.LBL_email)
-        layoutParams = LBL_email.layoutParams
-        popReg.findViewById<EditText>(R.id.TXT_email).setOnFocusChangeListener { txt, focused -> if (!focused) {
-            account.email = (txt as EditText).text.toString()
-            if (
-                account.email.contains("'") ||
-                !account.phone.matches(Regex.fromLiteral("^\\w*@((yandex.((ru)|(ua)|(com)))|(gmail.com)|(mail.ru)|(rambler.ru)|(vk.com))$"))
-            ) {
-                layoutParams.height = LayoutParams.WRAP_CONTENT
-                LBL_email.layoutParams = layoutParams
-            }
-            else
-            {
-                layoutParams.height = 0
-                LBL_email.layoutParams = layoutParams
-            }
-        } }
-
-        // -> phone
-
-        val LBL_phone = popReg.findViewById<TextView>(R.id.LBL_phone)
-        layoutParams = LBL_phone.layoutParams
-        popReg.findViewById<EditText>(R.id.TXT_phone).setOnFocusChangeListener { txt, focused -> if (!focused) {
-            account.phone = (txt as EditText).text.toString()
-            if (
-                account.phone.contains("'") ||
-                account.phone.matches(Regex.fromLiteral("^\\+(7|380) ?\\(?[0-9]{2,3}\\)? ?[0-9]{3}-? ?[0-9]{2}-? ?[0-9]{2}$"))
-            ) {
-                layoutParams.height = LayoutParams.WRAP_CONTENT
-                LBL_phone.layoutParams = layoutParams
-            }
-            else
-            {
-                layoutParams.height = 0
-                LBL_phone.layoutParams = layoutParams
-            }
-        } }
+        val LBL_login    = initLoginFocusChanges()
+        val LBL_password = initPasswordFocusChanges()
+        val LBL_confirm  = initConfirmFocusChanges()
+        val LBL_email    = initEmailFocusChanges()
+        val LBL_phone    = initPhoneFocusChanges()
 
         // buttons
 
@@ -296,7 +188,7 @@ class ActivityMain : AppCompatActivity() {
                 LBL_phone   .layoutParams.height != 0 )
             {
                 val LBL_info = popReg.findViewById<TextView>(R.id.LBL_info)
-                layoutParams = LBL_info.layoutParams
+                val layoutParams = LBL_info.layoutParams
                 layoutParams.height = LayoutParams.WRAP_CONTENT
                 LBL_info.layoutParams = layoutParams
             }
@@ -310,28 +202,141 @@ class ActivityMain : AppCompatActivity() {
         popReg.show()
     }
 
+    private fun initDatePicker()
+    {
+        val datePicker: DatePicker = popReg.findViewById(R.id.PICK_date)
+        val calendar = Calendar.getInstance()
+
+        calendar.set(calendar[Calendar.YEAR] - 16, 0, 1)
+        datePicker.updateDate( calendar[Calendar.YEAR], calendar[Calendar.MONTH], calendar[Calendar.DAY_OF_MONTH] )
+
+        calendar.set(calendar[Calendar.YEAR] + 10, 11, 31)
+        datePicker.maxDate = calendar.timeInMillis
+
+        calendar.set(1950, 0, 1)
+        datePicker.minDate = calendar.timeInMillis
+    }
+
+    // -> focuses
+
+    private fun initLoginFocusChanges(): TextView
+    {
+        @Suppress("LocalVariableName")
+        val LBL_login = popReg.findViewById<TextView>(R.id.LBL_login)
+        val layoutParams = LBL_login.layoutParams
+        popReg.findViewById<EditText>(R.id.TXT_login).setOnFocusChangeListener{ txt, focused -> if (!focused) {
+            account.login = (txt as EditText).text.toString()
+            if (
+                account.login.contains("'") ||
+                accounts.find { v -> (v[1] as String) == account.login } != null
+            ) {
+                layoutParams.height = LayoutParams.WRAP_CONTENT
+                LBL_login.layoutParams = layoutParams
+            }
+            else
+            {
+                layoutParams.height = 0
+                LBL_login.layoutParams = layoutParams
+            }
+        } }
+        return LBL_login
+    }
+
+    private fun initPasswordFocusChanges(): TextView
+    {
+        @Suppress("LocalVariableName")
+        val LBL_password = popReg.findViewById<TextView>(R.id.LBL_password)
+        val layoutParams = LBL_password.layoutParams
+        popReg.findViewById<EditText>(R.id.TXT_password).setOnFocusChangeListener { txt, focused -> if (!focused) {
+            account.password = (txt as EditText).text.toString()
+            if (
+                account.password.contains("'") ||
+                account.password.length < 8 || account.password.length > 20
+            ) {
+                layoutParams.height = LayoutParams.WRAP_CONTENT
+                LBL_password.layoutParams = layoutParams
+            }
+            else
+            {
+                layoutParams.height = 0
+                LBL_password.layoutParams = layoutParams
+            }
+        } }
+        return LBL_password
+    }
+
+    private fun initConfirmFocusChanges(): TextView
+    {
+        @Suppress("LocalVariableName")
+        val LBL_confirm = popReg.findViewById<TextView>(R.id.LBL_confirm)
+        val layoutParams = LBL_confirm.layoutParams
+        popReg.findViewById<EditText>(R.id.TXT_confirm).setOnFocusChangeListener { txt, focused -> if (!focused) {
+            if ( account.password != (txt as EditText).text.toString() )
+            {
+                layoutParams.height = LayoutParams.WRAP_CONTENT
+                LBL_confirm.layoutParams = layoutParams
+            }
+            else
+            {
+                layoutParams.height = 0
+                LBL_confirm.layoutParams = layoutParams
+            }
+        } }
+        return LBL_confirm
+    }
+
+    private fun initEmailFocusChanges(): TextView
+    {
+        @Suppress("LocalVariableName")
+        val LBL_email = popReg.findViewById<TextView>(R.id.LBL_email)
+        val layoutParams = LBL_email.layoutParams
+        popReg.findViewById<EditText>(R.id.TXT_email).setOnFocusChangeListener { txt, focused -> if (!focused) {
+            account.email = (txt as EditText).text.toString()
+            if (
+                account.email.contains("'") ||
+                !account.phone.matches(Regex.fromLiteral("^\\w*@((yandex.((ru)|(ua)|(com)))|(gmail.com)|(mail.ru)|(rambler.ru)|(vk.com))$"))
+            ) {
+                layoutParams.height = LayoutParams.WRAP_CONTENT
+                LBL_email.layoutParams = layoutParams
+            }
+            else
+            {
+                layoutParams.height = 0
+                LBL_email.layoutParams = layoutParams
+            }
+        } }
+        return LBL_email
+    }
+
+    private fun initPhoneFocusChanges(): TextView
+    {
+        @Suppress("LocalVariableName")
+        val LBL_phone = popReg.findViewById<TextView>(R.id.LBL_phone)
+        val layoutParams = LBL_phone.layoutParams
+        popReg.findViewById<EditText>(R.id.TXT_phone).setOnFocusChangeListener { txt, focused -> if (!focused) {
+            account.phone = (txt as EditText).text.toString()
+            if (
+                account.phone.contains("'") ||
+                account.phone.matches(Regex.fromLiteral("^\\+(7|380) ?\\(?\\d{2,3}\\)? ?\\d{3}-? ?\\d{2}-? ?\\d{2}$"))
+            ) {
+                layoutParams.height = LayoutParams.WRAP_CONTENT
+                LBL_phone.layoutParams = layoutParams
+            }
+            else
+            {
+                layoutParams.height = 0
+                LBL_phone.layoutParams = layoutParams
+            }
+        } }
+        return LBL_phone
+    }
+
+    // popup Reg confirm
+
     private fun showPopupRegConfirm()
     {
-        fun DatePicker.getDateString(): String {
-            return "$year/${if (month > 9) month + 1 else "0" + (month + 1)}/${if (dayOfMonth > 9) dayOfMonth else "0$dayOfMonth"}"
-        }
-
         popRegConfirm.setContentView(R.layout.popup_reg_confirm)
-        account.surname    = popReg.findViewById<EditText  >(R.id.TXT_surname   ).text.toString().replace("'", "`")
-        account.name       = popReg.findViewById<EditText  >(R.id.TXT_name      ).text.toString().replace("'", "`")
-        account.fathername = popReg.findViewById<EditText  >(R.id.TXT_fathername).text.toString().replace("'", "`")
-        account.birthday   = popReg.findViewById<DatePicker>(R.id.PICK_date     ).getDateString().replace("'", "`")
-        account.other      = popReg.findViewById<EditText  >(R.id.TXT_other     ).text.toString().replace("'", "`")
-
-        popRegConfirm.findViewById<TextView>(R.id.TXT_login     ).text = account.login
-        popRegConfirm.findViewById<TextView>(R.id.TXT_password  ).text = account.password
-        popRegConfirm.findViewById<TextView>(R.id.TXT_surname   ).text = account.surname
-        popRegConfirm.findViewById<TextView>(R.id.TXT_name      ).text = account.name
-        popRegConfirm.findViewById<TextView>(R.id.TXT_fathername).text = account.fathername
-        popRegConfirm.findViewById<TextView>(R.id.TXT_date      ).text = account.birthday
-        popRegConfirm.findViewById<TextView>(R.id.TXT_email     ).text = account.email
-        popRegConfirm.findViewById<TextView>(R.id.TXT_phone     ).text = account.phone
-        popRegConfirm.findViewById<TextView>(R.id.TXT_other     ).text = account.other
+        prepareRegConfirm()
 
         // buttons
 
@@ -346,10 +351,11 @@ class ActivityMain : AppCompatActivity() {
             val saltStr = salt.joinToString("") { "%02x".format(it) }
             account.password = "${hashPassword(account.password, salt)}::${saltStr}"
 
-            val query = "INSERT INTO accounts (p_id_account,\n" +
+            var query = "INSERT INTO accounts (p_id_account,\n" +
                         "a_login, a_password, a_surname, a_name, a_fathername, a_birthday, a_email, a_phone, a_other)\n" +
-                        "VALUES ('${account.login}', '${account.password}', '${account.surname}', '${account.name}', '${account.fathername}', " +
-                        "'${account.birthday}', '${account.email}', '${account.phone}', '${account.other}') RETURNING a_id;"
+                        "VALUES ('%', '%', '%', '%', '%', '%', '%', '%', '%') RETURNING a_id;"
+            query = query.format(account.login, account.password, account.surname, account.name, account.fathername,
+                                 account.birthday, account.email, account.phone, account.other)
             lifecycleScope.launch { show(applicationContext, withContext(Dispatchers.IO)
             {
                 account.id = (DB_processor.querySelect(query)[0][0] as Int).toString()
@@ -365,6 +371,31 @@ class ActivityMain : AppCompatActivity() {
 
         popRegConfirm.show()
     }
+
+    private fun prepareRegConfirm()
+    {
+        fun DatePicker.getDateString(): String {
+            return "$year/${if (month > 9) month + 1 else "0" + (month + 1)}/${if (dayOfMonth > 9) dayOfMonth else "0$dayOfMonth"}"
+        }
+
+        account.surname    = popReg.findViewById<EditText  >(R.id.TXT_surname   ).text.toString().replace("'", "`")
+        account.name       = popReg.findViewById<EditText  >(R.id.TXT_name      ).text.toString().replace("'", "`")
+        account.fathername = popReg.findViewById<EditText  >(R.id.TXT_fathername).text.toString().replace("'", "`")
+        account.birthday   = popReg.findViewById<DatePicker>(R.id.PICK_date     ).getDateString().replace("'", "`")
+        account.other      = popReg.findViewById<EditText  >(R.id.TXT_other     ).text.toString().replace("'", "`")
+
+        popRegConfirm.findViewById<TextView>(R.id.TXT_login     ).text = account.login
+        popRegConfirm.findViewById<TextView>(R.id.TXT_password  ).text = account.password
+        popRegConfirm.findViewById<TextView>(R.id.TXT_surname   ).text = account.surname
+        popRegConfirm.findViewById<TextView>(R.id.TXT_name      ).text = account.name
+        popRegConfirm.findViewById<TextView>(R.id.TXT_fathername).text = account.fathername
+        popRegConfirm.findViewById<TextView>(R.id.TXT_date      ).text = account.birthday
+        popRegConfirm.findViewById<TextView>(R.id.TXT_email     ).text = account.email
+        popRegConfirm.findViewById<TextView>(R.id.TXT_phone     ).text = account.phone
+        popRegConfirm.findViewById<TextView>(R.id.TXT_other     ).text = account.other
+    }
+
+    // popup Login
 
     private fun showPopupLogin()
     {
@@ -408,6 +439,8 @@ class ActivityMain : AppCompatActivity() {
 
         popLogin.show()
     }
+
+    // crypt
 
     private fun hashPassword(password: String, salt: ByteArray): String {
         val bytes = password.toByteArray(Charsets.UTF_8)

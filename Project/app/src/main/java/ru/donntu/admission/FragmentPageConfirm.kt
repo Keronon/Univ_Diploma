@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.widget.SwitchCompat
+import androidx.fragment.app.FragmentActivity
 
 class FragmentPageConfirm: Fragment()
 {
@@ -101,6 +103,18 @@ class FragmentPageConfirm: Fragment()
         priority_contract = mutableListOf("-", "1", "2", "3")
         val adapter_priority_contract = ArrayAdapter(_this.context, android.R.layout.simple_spinner_item, priority_contract )
         _this.findViewById<Spinner>(R.id.SPINNER_priority_contract).adapter = adapter_priority_contract
+
+        // switches
+
+        val SWITCH_notice_1 = _this.findViewById<SwitchCompat>(R.id.SWITCH_notice_1)
+        val SWITCH_notice_2 = _this.findViewById<SwitchCompat>(R.id.SWITCH_notice_2)
+        val SWITCH_notice_3 = _this.findViewById<SwitchCompat>(R.id.SWITCH_notice_3)
+        val BTN_send        = requireActivity().findViewById<Button>(R.id.BTN_send)
+        fun onChecked (b: CompoundButton, checked: Boolean)
+        { BTN_send.isEnabled = checked && SWITCH_notice_2.isChecked && SWITCH_notice_3.isChecked }
+        SWITCH_notice_1.setOnCheckedChangeListener(::onChecked)
+        SWITCH_notice_2.setOnCheckedChangeListener(::onChecked)
+        SWITCH_notice_3.setOnCheckedChangeListener(::onChecked)
 
         return _this
     }

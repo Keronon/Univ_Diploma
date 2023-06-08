@@ -78,6 +78,7 @@
             android:background="@color/teal_900"
             android:padding="15dp"
 
+            android:enabled="false"
             android:text="@string/BTN_send"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textStyle="bold"
