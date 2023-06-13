@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
+    android:id="@+id/VIEW_scroll"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -154,7 +155,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:layout_marginBottom="10dp"
             android:autofillHints="true"
 
             android:background="@drawable/back_border"
@@ -163,6 +163,18 @@
             android:padding="15dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColorHint="@color/teal_900"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/LBL_name"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="10dp"
+
+            android:text="@string/ERR_name"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/red"
             android:textStyle="bold" />
 
         <EditText

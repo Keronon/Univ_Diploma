@@ -18,7 +18,7 @@
     <string name="HINT_reg_confirm">пожалуйста, проверьте данные</string>
 
     <string name="HINT_login">Имя в системе ( логин )</string>
-    <string name="ERR_login_exists">имя пользователя уже существует\nпожалуйста, выберите другое</string>
+    <string name="ERR_login_exists">имя пользователя не должно быть пустым\nили оно уже используется другим аккаунтом</string>
 
     <string name="HINT_pass">Пароль</string>
     <string name="ERR_pass">пароль должен быть строго длиннее 7 символов\nи короче 21 символа</string>
@@ -29,9 +29,10 @@
     <string name="HINT_surname">Фамилия</string>
     <string name="HINT_name">Имя</string>
     <string name="HINT_fathername">* Отчество</string>
+    <string name="ERR_name">фамилия и имя должны быть указаны</string>
 
     <string name="HINT_email">Электронная почта</string>
-    <string name="ERR_email">принимаются e-mail следующих типов:\n@yandex.ru / .ua / .com\n@gmail.com\n@mail.ru\n@rambler.ru</string>
+    <string name="ERR_email">принимаются e-mail следующих типов:\n…@yandex.ru / .ua / .com\n…@gmail.com\n…@mail.ru\n…@rambler.ru\n…@vk.com</string>
 
     <string name="HINT_phone">Номер телефона</string>
     <string name="ERR_phone">номер должен начинаться с +7… / +380…\nи содержать 10 / 11 цифр в себе</string>

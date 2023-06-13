@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.LinearLayout.LayoutParams
+import android.widget.ScrollView
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -28,6 +29,8 @@ class ActivityMain : AppCompatActivity() {
     companion object { val account = Account() }
 
     // VARs
+
+    private var created = false
 
     // [ [ 0 = id, 1 = login, 2 = password, 3 = has_own ] ]
     private lateinit var accounts: MutableList<MutableList<Any>>
@@ -95,7 +98,14 @@ class ActivityMain : AppCompatActivity() {
             true
         }
 
-        lifecycleScope.launch { show(applicationContext, withContext(Dispatchers.IO) { DB_processor.connect(); "БД подключена" }) }
+        lifecycleScope.launch { show(applicationContext, withContext(Dispatchers.IO)
+        {
+            DB_processor.connect()
+            accounts = DB_processor.querySelect("SELECT a_id, a_login, a_password, a_status FROM accounts")
+
+            created = true
+            "Запущено"
+        }) }
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?)
@@ -106,8 +116,8 @@ class ActivityMain : AppCompatActivity() {
 
     override fun onResume()
     {
-        lifecycleScope.launch { show(applicationContext, withContext(Dispatchers.IO) {
-            accounts = DB_processor.querySelect("SELECT a_id, a_login, a_password, (COUNT(o_id) > 0) FROM accounts\nINNER JOIN own ON o_id_account = a_id\nGROUP BY a_id")
+        if (created) lifecycleScope.launch { show(applicationContext, withContext(Dispatchers.IO) {
+            accounts = DB_processor.querySelect("SELECT a_id, a_login, a_password, a_status FROM accounts")
             "пользователи загружены"
         }) }
         super.onResume()
@@ -115,7 +125,7 @@ class ActivityMain : AppCompatActivity() {
 
     override fun onPause()
     {
-        account.clear()
+        accounts.clear()
         show(applicationContext, "аккаунты очищены")
         super.onPause()
     }
@@ -164,11 +174,35 @@ class ActivityMain : AppCompatActivity() {
 
         initDatePicker()
 
-        val LBL_login    = initLoginFocusChanges()
-        val LBL_password = initPasswordFocusChanges()
-        val LBL_confirm  = initConfirmFocusChanges()
-        val LBL_email    = initEmailFocusChanges()
-        val LBL_phone    = initPhoneFocusChanges()
+        // focus changes
+
+        val LBL_login = popReg.findViewById<TextView>(R.id.LBL_login)
+        val TXT_login = popReg.findViewById<EditText>(R.id.TXT_login)
+        TXT_login.setOnFocusChangeListener{ _, focused -> if (!focused) { checkLogin(TXT_login, LBL_login) } }
+
+        val LBL_password = popReg.findViewById<TextView>(R.id.LBL_password)
+        val TXT_password = popReg.findViewById<EditText>(R.id.TXT_password)
+        TXT_password.setOnFocusChangeListener{ _, focused -> if (!focused) { checkPassword(TXT_password, LBL_password) } }
+
+        val LBL_confirm = popReg.findViewById<TextView>(R.id.LBL_confirm)
+        val TXT_confirm = popReg.findViewById<EditText>(R.id.TXT_confirm)
+        TXT_confirm.setOnFocusChangeListener{ _, focused -> if (!focused) { checkConfirm(TXT_confirm, LBL_confirm) } }
+
+        val LBL_name       = popReg.findViewById<TextView>(R.id.LBL_name      )
+        val TXT_surname    = popReg.findViewById<EditText>(R.id.TXT_surname   )
+        val TXT_name       = popReg.findViewById<EditText>(R.id.TXT_name      )
+        val TXT_fathername = popReg.findViewById<EditText>(R.id.TXT_fathername)
+        TXT_surname   .setOnFocusChangeListener{ _, focused -> if (!focused) { checkNames(TXT_surname, TXT_name, TXT_fathername, LBL_name) } }
+        TXT_name      .setOnFocusChangeListener{ _, focused -> if (!focused) { checkNames(TXT_surname, TXT_name, TXT_fathername, LBL_name) } }
+        TXT_fathername.setOnFocusChangeListener{ _, focused -> if (!focused) { checkNames(TXT_surname, TXT_name, TXT_fathername, LBL_name) } }
+
+        val LBL_email = popReg.findViewById<TextView>(R.id.LBL_email)
+        val TXT_email = popReg.findViewById<EditText>(R.id.TXT_email)
+        TXT_email.setOnFocusChangeListener{ _, focused -> if (!focused) { checkEmail(TXT_email, LBL_email) } }
+
+        val LBL_phone = popReg.findViewById<TextView>(R.id.LBL_phone)
+        val TXT_phone = popReg.findViewById<EditText>(R.id.TXT_phone)
+        TXT_phone.setOnFocusChangeListener{ _, focused -> if (!focused) { checkPhone(TXT_phone, LBL_phone) } }
 
         // buttons
 
@@ -176,21 +210,25 @@ class ActivityMain : AppCompatActivity() {
             show(applicationContext, "Возвращаемся")
             popReg.dismiss()
         }
-        val BTN_reg = popReg.findViewById<Button>(R.id.BTN_reg)
+
+        val VIEW_scroll  = popReg.findViewById<ScrollView>(R.id.VIEW_scroll)
+        val LBL_info     = popReg.findViewById<TextView  >(R.id.LBL_info)
+        val layoutParams = LBL_info.layoutParams
+        val BTN_reg      = popReg.findViewById<Button    >(R.id.BTN_reg)
         BTN_reg.setOnClickListener {
             show(applicationContext, "Подтверждение регистрации")
             popReg.currentFocus?.clearFocus()
 
-            if (LBL_login   .layoutParams.height != 0 ||
-                LBL_password.layoutParams.height != 0 ||
-                LBL_confirm .layoutParams.height != 0 ||
-                LBL_email   .layoutParams.height != 0 ||
-                LBL_phone   .layoutParams.height != 0 )
+            if (!checkLogin   (TXT_login   , LBL_login   ) or
+                !checkPassword(TXT_password, LBL_password) or
+                !checkConfirm (TXT_confirm , LBL_confirm ) or
+                !checkNames   (TXT_surname , TXT_name    , TXT_fathername, LBL_name) or
+                !checkEmail   (TXT_email   , LBL_email   ) or
+                !checkPhone   (TXT_phone   , LBL_phone   ) )
             {
-                val LBL_info = popReg.findViewById<TextView>(R.id.LBL_info)
-                val layoutParams = LBL_info.layoutParams
-                layoutParams.height = LayoutParams.WRAP_CONTENT
+                layoutParams.height   = LayoutParams.WRAP_CONTENT
                 LBL_info.layoutParams = layoutParams
+                VIEW_scroll.scrollY   = 0
             }
             else showPopupRegConfirm()
         }
@@ -219,116 +257,135 @@ class ActivityMain : AppCompatActivity() {
 
     // -> focuses
 
-    private fun initLoginFocusChanges(): TextView
+    private fun checkLogin(txt: EditText, lbl: TextView): Boolean
     {
-        @Suppress("LocalVariableName")
-        val LBL_login = popReg.findViewById<TextView>(R.id.LBL_login)
-        val layoutParams = LBL_login.layoutParams
-        popReg.findViewById<EditText>(R.id.TXT_login).setOnFocusChangeListener{ txt, focused -> if (!focused) {
-            account.login = (txt as EditText).text.toString()
-            if (
-                account.login.contains("'") ||
-                accounts.find { v -> (v[1] as String) == account.login } != null
-            ) {
-                layoutParams.height = LayoutParams.WRAP_CONTENT
-                LBL_login.layoutParams = layoutParams
-            }
-            else
-            {
-                layoutParams.height = 0
-                LBL_login.layoutParams = layoutParams
-            }
-        } }
-        return LBL_login
+        val layoutParams = lbl.layoutParams
+        account.login = txt.text.toString().trim()
+        return if (
+            account.login.contains("'") ||
+            account.login.isEmpty() ||
+            accounts.find { v -> (v[1] as String) == account.login } != null
+        ) {
+            layoutParams.height = LayoutParams.WRAP_CONTENT
+            lbl.layoutParams = layoutParams
+
+            false
+        }
+        else
+        {
+            layoutParams.height = 0
+            lbl.layoutParams = layoutParams
+
+            true
+        }
     }
 
-    private fun initPasswordFocusChanges(): TextView
+    private fun checkPassword(txt: EditText, lbl: TextView): Boolean
     {
-        @Suppress("LocalVariableName")
-        val LBL_password = popReg.findViewById<TextView>(R.id.LBL_password)
-        val layoutParams = LBL_password.layoutParams
-        popReg.findViewById<EditText>(R.id.TXT_password).setOnFocusChangeListener { txt, focused -> if (!focused) {
-            account.password = (txt as EditText).text.toString()
-            if (
-                account.password.contains("'") ||
-                account.password.length < 8 || account.password.length > 20
-            ) {
-                layoutParams.height = LayoutParams.WRAP_CONTENT
-                LBL_password.layoutParams = layoutParams
-            }
-            else
-            {
-                layoutParams.height = 0
-                LBL_password.layoutParams = layoutParams
-            }
-        } }
-        return LBL_password
+        val layoutParams = lbl.layoutParams
+        account.password = txt.text.toString().trim()
+        return if (
+            account.password.contains("'") ||
+            account.password.length < 8 || account.password.length > 20
+        ) {
+            layoutParams.height = LayoutParams.WRAP_CONTENT
+            lbl.layoutParams = layoutParams
+
+            false
+        }
+        else
+        {
+            layoutParams.height = 0
+            lbl.layoutParams = layoutParams
+
+            true
+        }
     }
 
-    private fun initConfirmFocusChanges(): TextView
+    private fun checkNames(txt_s: EditText, txt_n: EditText, txt_f: EditText, lbl: TextView): Boolean
     {
-        @Suppress("LocalVariableName")
-        val LBL_confirm = popReg.findViewById<TextView>(R.id.LBL_confirm)
-        val layoutParams = LBL_confirm.layoutParams
-        popReg.findViewById<EditText>(R.id.TXT_confirm).setOnFocusChangeListener { txt, focused -> if (!focused) {
-            if ( account.password != (txt as EditText).text.toString() )
-            {
-                layoutParams.height = LayoutParams.WRAP_CONTENT
-                LBL_confirm.layoutParams = layoutParams
-            }
-            else
-            {
-                layoutParams.height = 0
-                LBL_confirm.layoutParams = layoutParams
-            }
-        } }
-        return LBL_confirm
+        val layoutParams = lbl.layoutParams
+        account.surname    = txt_s.text.toString().trim()
+        account.name       = txt_n.text.toString().trim()
+        account.fathername = txt_f.text.toString().trim()
+        return if (
+            account.surname.contains("'") || account.name.contains("'") || account.fathername.contains("'") ||
+            account.surname.isEmpty()           || account.name.isEmpty()
+        ) {
+            layoutParams.height = LayoutParams.WRAP_CONTENT
+            lbl.layoutParams = layoutParams
+
+            false
+        }
+        else
+        {
+            layoutParams.height = 0
+            lbl.layoutParams = layoutParams
+
+            true
+        }
     }
 
-    private fun initEmailFocusChanges(): TextView
+    private fun checkConfirm(txt: EditText, lbl: TextView): Boolean
     {
-        @Suppress("LocalVariableName")
-        val LBL_email = popReg.findViewById<TextView>(R.id.LBL_email)
-        val layoutParams = LBL_email.layoutParams
-        popReg.findViewById<EditText>(R.id.TXT_email).setOnFocusChangeListener { txt, focused -> if (!focused) {
-            account.email = (txt as EditText).text.toString()
-            if (
-                account.email.contains("'") ||
-                !account.phone.matches(Regex.fromLiteral("^\\w*@((yandex.((ru)|(ua)|(com)))|(gmail.com)|(mail.ru)|(rambler.ru)|(vk.com))$"))
-            ) {
-                layoutParams.height = LayoutParams.WRAP_CONTENT
-                LBL_email.layoutParams = layoutParams
-            }
-            else
-            {
-                layoutParams.height = 0
-                LBL_email.layoutParams = layoutParams
-            }
-        } }
-        return LBL_email
+        val layoutParams = lbl.layoutParams
+        return if ( account.password != txt.text.toString() )
+        {
+            layoutParams.height = LayoutParams.WRAP_CONTENT
+            lbl.layoutParams = layoutParams
+
+            false
+        }
+        else
+        {
+            layoutParams.height = 0
+            lbl.layoutParams = layoutParams
+
+            true
+        }
     }
 
-    private fun initPhoneFocusChanges(): TextView
+    private fun checkEmail(txt: EditText, lbl: TextView): Boolean
     {
-        @Suppress("LocalVariableName")
-        val LBL_phone = popReg.findViewById<TextView>(R.id.LBL_phone)
-        val layoutParams = LBL_phone.layoutParams
-        popReg.findViewById<EditText>(R.id.TXT_phone).setOnFocusChangeListener { txt, focused -> if (!focused) {
-            account.phone = (txt as EditText).text.toString()
-            if (
-                account.phone.contains("'") ||
-                account.phone.matches(Regex.fromLiteral("^\\+(7|380) ?\\(?\\d{2,3}\\)? ?\\d{3}-? ?\\d{2}-? ?\\d{2}$"))
-            ) {
-                layoutParams.height = LayoutParams.WRAP_CONTENT
-                LBL_phone.layoutParams = layoutParams
-            }
-            else
-            {
-                layoutParams.height = 0
-                LBL_phone.layoutParams = layoutParams
-            }
-        } }
-        return LBL_phone
+        val layoutParams = lbl.layoutParams
+        account.email = txt.text.toString().trim()
+        return if (
+            account.email.contains("'") ||
+            !Regex(".+@((yandex\\.((ru)|(ua)|(com)))|(gmail\\.com)|(mail\\.ru)|(rambler\\.ru)|(vk\\.com))").matches(account.email)
+        ) {
+            layoutParams.height = LayoutParams.WRAP_CONTENT
+            lbl.layoutParams = layoutParams
+
+            false
+        }
+        else
+        {
+            layoutParams.height = 0
+            lbl.layoutParams = layoutParams
+
+            true
+        }
+    }
+
+    private fun checkPhone(txt: EditText, lbl: TextView): Boolean
+    {
+        val layoutParams = lbl.layoutParams
+        account.phone = txt.text.toString().trim()
+        return if (
+            !Regex("\\+(7|380) ?\\(?\\d{2,3}\\)? ?\\d{3}-? ?\\d{2}-? ?\\d{2}").matches(account.phone)
+        ) {
+            layoutParams.height = LayoutParams.WRAP_CONTENT
+            lbl.layoutParams = layoutParams
+
+            false
+        }
+        else
+        {
+            layoutParams.height = 0
+            lbl.layoutParams = layoutParams
+
+            true
+        }
     }
 
     // popup Reg confirm
@@ -351,14 +408,15 @@ class ActivityMain : AppCompatActivity() {
             val saltStr = salt.joinToString("") { "%02x".format(it) }
             account.password = "${hashPassword(account.password, salt)}::${saltStr}"
 
-            var query = "INSERT INTO accounts (p_id_account,\n" +
-                        "a_login, a_password, a_surname, a_name, a_fathername, a_birthday, a_email, a_phone, a_other)\n" +
-                        "VALUES ('%', '%', '%', '%', '%', '%', '%', '%', '%') RETURNING a_id;"
+            var query = "INSERT INTO accounts (" +
+                        "a_login, a_password, a_surname, a_name, a_fathername, a_birthday, a_email, a_phone, a_other, a_status)\n" +
+                        "VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', 'зарегистрировано') RETURNING a_id;"
             query = query.format(account.login, account.password, account.surname, account.name, account.fathername,
                                  account.birthday, account.email, account.phone, account.other)
             lifecycleScope.launch { show(applicationContext, withContext(Dispatchers.IO)
             {
                 account.id = (DB_processor.querySelect(query)[0][0] as Int).toString()
+                account.status = "зарегистрировано"
                 "Отправлено"
             }) }
 
@@ -408,26 +466,28 @@ class ActivityMain : AppCompatActivity() {
             popLogin.dismiss()
         }
 
-        @Suppress("LocalVariableName")
-        val TXT_login = popLogin.findViewById<EditText>(R.id.TXT_login)
         popLogin.findViewById<Button>(R.id.BTN_reg).setOnClickListener {
             show(applicationContext, "Входим")
 
-            val login = TXT_login.text.toString()
+            val login = popLogin.findViewById<EditText>(R.id.TXT_login).text.toString()
             val user = accounts.find { v -> v[1] as String == login }
             if (user != null)
             {
                 val passwordDB = user[2] as String
-                val (hashPasswordStr, saltStr) = passwordDB.split("::")
+                val (dbStrPasswordHash, saltStr) = passwordDB.split("::")
                 val salt = saltStr.chunked(2).map { it.toInt(16).toByte() }.toByteArray()
-                val password = hashPassword(account.password, salt)
+                val sysStrPasswordHash = hashPassword(popLogin.findViewById<EditText>(R.id.TXT_password).text.toString(), salt)
 
-                if (hashPasswordStr == password)
+                if (dbStrPasswordHash == sysStrPasswordHash)
                 {
                     account.id = (user[0] as Int).toString()
-
-                    val nextPage = if (user[3] as Boolean) Intent(this, ActivityChat::class.java)
-                                   else                    Intent(this, ActivityPersonalData::class.java)
+                    account.login  = user[1] as String
+                    account.status = user[3] as String
+                    
+                    val nextPage = if (account.status == "зарегистрировано")
+                         Intent(this, ActivityPersonalData::class.java)
+                    else Intent(this, ActivityChat::class.java)
+                    
                     startActivity(nextPage)
                 }
                 else show(applicationContext, "Не верный пароль")

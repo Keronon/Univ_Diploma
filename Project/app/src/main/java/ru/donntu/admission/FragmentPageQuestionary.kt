@@ -13,7 +13,7 @@ import androidx.appcompat.widget.SwitchCompat
 
 class FragmentPageQuestionary(private val pageBaseDocs: FragmentPageBaseDocs) : Fragment()
 {
-    companion object { var cases = mutableListOf<Case>() }
+    companion object { var cases = mutableListOf(Case()) }
 
     @Suppress("PropertyName")
     private lateinit var _this : View
@@ -45,7 +45,7 @@ class FragmentPageQuestionary(private val pageBaseDocs: FragmentPageBaseDocs) : 
 
         // docs
 
-        docs = mutableListOf("базовый документ не выбран", "базовый документ №1")
+        docs = mutableListOf("базисный документ №1")
         adapter_docs = ArrayAdapter(_this.context, android.R.layout.simple_spinner_item, docs )
 
         val docs_1 = _this.findViewById<Spinner>(R.id.SPINNER_docs_1)

@@ -13,6 +13,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class FragmentPageDocs: Fragment()
 {
@@ -22,7 +25,7 @@ class FragmentPageDocs: Fragment()
     private lateinit var _this : View
 
     private lateinit var listAdapter : SimpleAdapter
-    private val keys  = arrayOf("file", "path")
+    private val keys  = arrayOf("file", "name")
     private val items = ArrayList<Map<String, Any>>()
     @Suppress("PrivatePropertyName")
     private val REQ_KEY = 69
@@ -107,7 +110,8 @@ class FragmentPageDocs: Fragment()
 
                             val item: MutableMap<String, Any> = HashMap()
                             item[keys[0]] = fileName
-                            item[keys[1]] = fileUri
+                            item[keys[1]] = UUID.randomUUID().toString().substring(0, 8) + fileName.substring(fileName.lastIndexOf("."))
+                            item["path"] = fileUri
                             items.add(item)
                             listAdapter.notifyDataSetChanged()
                         }
@@ -127,6 +131,6 @@ class FragmentPageDocs: Fragment()
     override fun onPause()
     {
         super.onPause()
-        items.forEach { v -> docs[v[keys[0]] as String] = v[keys[1]] as Any }
+        items.forEach { v -> docs[v[keys[1]] as String] = v["path"] as Any }
     }
 }

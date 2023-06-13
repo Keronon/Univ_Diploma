@@ -5,6 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ActivityChat : AppCompatActivity()
 {
@@ -17,6 +21,9 @@ class ActivityChat : AppCompatActivity()
     {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
+
+        findViewById<TextView>(R.id.TXT_id    ).text = ActivityMain.account.id
+        findViewById<TextView>(R.id.TXT_status).text = ActivityMain.account.status
 
         // buttons
 
@@ -40,11 +47,18 @@ class ActivityChat : AppCompatActivity()
             }
         }
 
-        TXT_docs.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
-        animatorOpen = ValueAnimator.ofInt(TXT_docs.measuredHeight).setDuration(500)
-        animatorOpen.addUpdateListener(setListener(TXT_docs))
-        animatorClose = ValueAnimator.ofInt(TXT_docs.measuredHeight, 0).setDuration(500)
-        animatorClose.addUpdateListener(setListener(TXT_docs))
+        lifecycleScope.launch { show(applicationContext, withContext(Dispatchers.IO)
+        {
+            TXT_docs.text = DB_processor.querySelect("SELECT d_files_list FROM docs WHERE d_id_account = ${ActivityMain.account.id}")[0][0] as String
+
+            TXT_docs.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
+            animatorOpen = ValueAnimator.ofInt(TXT_docs.measuredHeight).setDuration(500)
+            animatorOpen.addUpdateListener(setListener(TXT_docs))
+            animatorClose = ValueAnimator.ofInt(TXT_docs.measuredHeight, 0).setDuration(500)
+            animatorClose.addUpdateListener(setListener(TXT_docs))
+
+            "Документы загружены"
+        }) }
 
         @Suppress("LocalVariableName")
         val BTN_docs = findViewById<ToggleButton>(R.id.BTN_docs)

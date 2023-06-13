@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.widget.SwitchCompat
-import androidx.fragment.app.FragmentActivity
 
 class FragmentPageConfirm: Fragment()
 {
@@ -110,8 +109,9 @@ class FragmentPageConfirm: Fragment()
         val SWITCH_notice_2 = _this.findViewById<SwitchCompat>(R.id.SWITCH_notice_2)
         val SWITCH_notice_3 = _this.findViewById<SwitchCompat>(R.id.SWITCH_notice_3)
         val BTN_send        = requireActivity().findViewById<Button>(R.id.BTN_send)
-        fun onChecked (b: CompoundButton, checked: Boolean)
-        { BTN_send.isEnabled = checked && SWITCH_notice_2.isChecked && SWITCH_notice_3.isChecked }
+        @Suppress("UNUSED_PARAMETER")
+        fun onChecked (b: CompoundButton, ch: Boolean)
+        { BTN_send.isEnabled = SWITCH_notice_1.isChecked && SWITCH_notice_2.isChecked && SWITCH_notice_3.isChecked }
         SWITCH_notice_1.setOnCheckedChangeListener(::onChecked)
         SWITCH_notice_2.setOnCheckedChangeListener(::onChecked)
         SWITCH_notice_3.setOnCheckedChangeListener(::onChecked)

@@ -1,5 +1,6 @@
 package ru.donntu.admission
 
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -12,12 +13,16 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import android.net.Uri
 import android.view.View
+import android.widget.TextView
 import org.apache.commons.net.ftp.FTP
 import org.apache.commons.net.ftp.FTPClient
 import java.io.BufferedInputStream
 
 class ActivityPersonalData : AppCompatActivity()
 {
+    private lateinit var err: String
+    private lateinit var popErr: Dialog
+
     private lateinit var adapter: AdapterPersonalData
     private lateinit var pager: ViewPager2
 
@@ -29,6 +34,8 @@ class ActivityPersonalData : AppCompatActivity()
     {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_personal_data)
+
+        popErr = Dialog(this)
 
         initPager()
         initButtons()
@@ -62,11 +69,20 @@ class ActivityPersonalData : AppCompatActivity()
         findViewById<Button>(R.id.BTN_send).setOnClickListener(::btnSendOnClick)
     }
 
+    private fun showPopupErr()
+    {
+        popErr.setContentView(R.layout.popup_err)
+        popErr.findViewById<TextView>(R.id.TXT_err).text = err
+        popErr.findViewById<TextView>(R.id.BTN_close).setOnClickListener{ popErr.dismiss() }
+        popErr.show()
+    }
+
     // BTN_send onClick
 
     private fun btnSendOnClick(@Suppress("UNUSED_PARAMETER") it: View)
     {
         show(applicationContext, "Отправка")
+        err = ""
 
         // on not user-checked data
         if (FragmentPageConfirm.personalData == null)
@@ -76,9 +92,13 @@ class ActivityPersonalData : AppCompatActivity()
         }
         data = FragmentPageConfirm.personalData!!
 
-        if (checkData()) return
+        if (!checkData())
+        {
+            showPopupErr()
+            return
+        }
+        sendToFileZilla(data) // FIXme : требует подождать ничего не трогая перед нажатием кнопки SEND ~20 сек для нормальной работы
         sendToDB(data)
-        sendToFileZilla(data)
 
         // finalizing
 
@@ -98,135 +118,135 @@ class ActivityPersonalData : AppCompatActivity()
 
     private fun checkData(): Boolean
     {
-        return checkOwn() && checkParents() && checkDocs() && checkBaseDocs() && checkCases()
+        return checkOwn() and checkParents() and checkDocs() and checkBaseDocs() and checkCases()
     }
 
     private fun checkOwn(): Boolean
     {
-        var stop = false
+        var normal = true
 
         if (data.own.lang == "") {
-            show(applicationContext, "Пожалуйста, укажите изучаемый вами иностранный язык на вкладке '${TABs[0]}'")
-            stop = true
+            err += "Пожалуйста, укажите изучаемый вами иностранный язык на вкладке '${TABs[0]}'\n\n"
+            normal = false
         }
 
         if (data.own.country == "") {
-            show(applicationContext, "Пожалуйста, укажите ваше гражданство на вкладке '${TABs[0]}'")
-            stop = true
+            err += "Пожалуйста, укажите ваше гражданство на вкладке '${TABs[0]}'\n\n"
+            normal = false
         }
         else data.own.country = data.own.country.replace("'", "`")
 
         if (data.own.inn != "") {
             if (data.own.inn.matches(Regex.fromLiteral("^\\d{8,12}$")))
-                show(applicationContext, "Пожалуйста, укажите верный ИНН на вкладке '${TABs[0]}'")
+                err += "Пожалуйста, укажите верный ИНН на вкладке '${TABs[0]}'\n\n"
             else
                 data.own.inn = data.own.inn.replace("'", "`")
         }
 
-        return stop && checkReg() && checkLive()
+        return normal and checkReg() and checkLive()
     }
 
     private fun checkReg(): Boolean
     {
-        var stop = false
+        var normal = true
 
         if (data.own.reg.region == "") {
-            show(applicationContext, "Пожалуйста, укажите область адреса регистрации на вкладке '${TABs[0]}'")
-            stop = true
+            err += "Пожалуйста, укажите область адреса регистрации на вкладке '${TABs[0]}'\n\n"
+            normal = false
         }
         else data.own.reg.region = data.own.reg.region.replace("'", "`")
 
         if (data.own.reg.city == "") {
-            show(applicationContext, "Пожалуйста, укажите населённый пункт адреса регистрации на вкладке '${TABs[0]}'")
-            stop = true
+            err += "Пожалуйста, укажите населённый пункт адреса регистрации на вкладке '${TABs[0]}'\n\n"
+            normal = false
         }
         else data.own.reg.city = data.own.reg.city.replace("'", "`")
 
         if (data.own.reg.district != "") { data.own.reg.district = data.own.reg.district.replace("'", "`") }
 
         if (data.own.reg.street == "") {
-            show(applicationContext, "Пожалуйста, укажите улицу адреса регистрации на вкладке '${TABs[0]}'")
-            stop = true
+            err += "Пожалуйста, укажите улицу адреса регистрации на вкладке '${TABs[0]}'\n\n"
+            normal = false
         }
         else data.own.reg.street = data.own.reg.street.replace("'", "`")
 
         if (data.own.reg.house == "") {
-            show(applicationContext, "Пожалуйста, укажите дом адреса регистрации на вкладке '${TABs[0]}'")
-            stop = true
+            err += "Пожалуйста, укажите дом адреса регистрации на вкладке '${TABs[0]}'\n\n"
+            normal = false
         }
         else data.own.reg.house = data.own.reg.house.replace("'", "`")
 
-        if (data.own.reg.index == "" || !data.own.reg.index.matches(Regex.fromLiteral("^\\d{4,10}$"))) {
-            show(applicationContext, "Пожалуйста, укажите верный почтовый индекс адреса регистрации на вкладке '${TABs[0]}'")
-            stop = true
+        if (data.own.reg.index == "" || !Regex("^\\d{4,10}$").matches(data.own.reg.index)) {
+            err += "Пожалуйста, укажите верный почтовый индекс адреса регистрации на вкладке '${TABs[0]}'\n\n"
+            normal = false
         }
         else data.own.reg.index = data.own.reg.index.replace("'", "`")
 
-        return stop
+        return normal
     }
 
     private fun checkLive(): Boolean
     {
-        var stop = false
+        var normal = true
 
         if (data.own.live.region == "") {
-            show(applicationContext, "Пожалуйста, укажите область адреса проживания на вкладке '${TABs[0]}'")
-            stop = true
+            err += "Пожалуйста, укажите область адреса проживания на вкладке '${TABs[0]}'\n\n"
+            normal = false
         }
         else data.own.live.region = data.own.live.region.replace("'", "`")
 
         if (data.own.live.city == "") {
-            show(applicationContext, "Пожалуйста, укажите населённый пункт адреса проживания на вкладке '${TABs[0]}'")
-            stop = true
+            err += "Пожалуйста, укажите населённый пункт адреса проживания на вкладке '${TABs[0]}'\n\n"
+            normal = false
         }
         else data.own.live.city = data.own.live.city.replace("'", "`")
 
         if (data.own.live.district != "") { data.own.live.district = data.own.live.district.replace("'", "`") }
 
         if (data.own.live.street == "") {
-            show(applicationContext, "Пожалуйста, укажите улицу адреса проживания на вкладке '${TABs[0]}'")
-            stop = true
+            err += "Пожалуйста, укажите улицу адреса проживания на вкладке '${TABs[0]}'\n\n"
+            normal = false
         }
         else data.own.live.street = data.own.live.street.replace("'", "`")
 
         if (data.own.live.house == "") {
-            show(applicationContext, "Пожалуйста, укажите дом адреса проживания на вкладке '${TABs[0]}'")
-            stop = true
+            err += "Пожалуйста, укажите дом адреса проживания на вкладке '${TABs[0]}'\n\n"
+            normal = false
         }
         else data.own.live.house = data.own.live.house.replace("'", "`")
 
-        if (data.own.live.index == "" || !data.own.reg.index.matches(Regex.fromLiteral("^\\d{4,10}$"))) {
-            show(applicationContext, "Пожалуйста, укажите верный почтовый индекс адреса проживания на вкладке '${TABs[0]}'")
-            stop = true
+        if (data.own.live.index == "" || !Regex("^\\d{4,10}$").matches(data.own.live.index)) {
+            err += "Пожалуйста, укажите верный почтовый индекс адреса проживания на вкладке '${TABs[0]}'\n\n"
+            normal = false
         }
         else data.own.live.index = data.own.live.index.replace("'", "`")
 
-        return stop
+        return normal
     }
 
     private fun checkParents(): Boolean
     {
-        var stop = false
+        var normal = true
 
         // -> father
 
         if (data.parents.father.surname == "") {
-            show(applicationContext, "Пожалуйста, укажите фамилию отца на вкладке '${TABs[1]}'")
-            stop = true
+            err += "Пожалуйста, укажите фамилию отца на вкладке '${TABs[1]}'\n\n"
+            normal = false
         }
         else data.parents.father.surname = data.parents.father.surname.replace("'", "`")
 
         if (data.parents.father.name == "") {
-            show(applicationContext, "Пожалуйста, укажите имя отца на вкладке '${TABs[1]}'")
-            stop = true
+            err += "Пожалуйста, укажите имя отца на вкладке '${TABs[1]}'\n\n"
+            normal = false
         }
         else data.parents.father.name = data.parents.father.name.replace("'", "`")
 
         if (data.parents.father.surname != "") { data.parents.father.surname = data.parents.father.surname.replace("'", "`") }
 
         if (data.parents.father.phone == "") {
-            show(applicationContext, "Пожалуйста, укажите контактный телефон отца на вкладке '${TABs[1]}'")
-            stop = true
+            err += "Пожалуйста, укажите контактный телефон отца на вкладке '${TABs[1]}'\n\n"
+            normal = false
         }
         else data.parents.father.phone = data.parents.father.phone.replace("'", "`")
 
@@ -235,38 +255,37 @@ class ActivityPersonalData : AppCompatActivity()
         // -> mother
 
         if (data.parents.mother.surname == "") {
-            show(applicationContext, "Пожалуйста, укажите фамилию отца на вкладке '${TABs[1]}'")
-            stop = true
+            err += "Пожалуйста, укажите фамилию матери на вкладке '${TABs[1]}'\n\n"
+            normal = false
         }
         else data.parents.mother.surname = data.parents.mother.surname.replace("'", "`")
 
         if (data.parents.mother.name == "") {
-            show(applicationContext, "Пожалуйста, укажите имя отца на вкладке '${TABs[1]}'")
-            stop = true
+            err += "Пожалуйста, укажите имя матери на вкладке '${TABs[1]}'\n\n"
+            normal = false
         }
         else data.parents.mother.name = data.parents.mother.name.replace("'", "`")
 
         if (data.parents.mother.surname != "") { data.parents.mother.surname = data.parents.mother.surname.replace("'", "`") }
 
         if (data.parents.mother.phone == "") {
-            show(applicationContext, "Пожалуйста, укажите контактный телефон отца на вкладке '${TABs[1]}'")
-            stop = true
+            err += "Пожалуйста, укажите контактный телефон матери на вкладке '${TABs[1]}'\n\n"
+            normal = false
         }
         else data.parents.mother.phone = data.parents.mother.phone.replace("'", "`")
 
         if (data.parents.mother.reg != "") { data.parents.mother.reg = data.parents.mother.reg.replace("'", "`") }
 
-        return stop
+        return normal
     }
 
     private fun checkDocs(): Boolean
     {
-        var stop = false
+        var normal = true
 
         if (data.docs.size < 5) {
-            show(applicationContext,
-                 "Для передачи подготовлено недостаточно документов. Пожалуйста, ознакомьтесь со списком и загрузите все необходимые документы на вкладке '${TABs[2]}'")
-            stop = true
+            err += "Для передачи подготовлено недостаточно документов. Пожалуйста, ознакомьтесь со списком и загрузите все необходимые документы на вкладке '${TABs[2]}'\n\n"
+            normal = false
         }
         else data.docs.forEach{ (name, _) ->
             @Suppress("LocalVariableName")
@@ -274,52 +293,66 @@ class ActivityPersonalData : AppCompatActivity()
             if (name != name_new) data.docs[name_new] = data.docs.remove(name)!!
         }
 
-        return stop
+        return normal
     }
 
     private fun checkBaseDocs(): Boolean
     {
-        var stop = false
+        var normal = true
 
         if (data.baseDocsInfo.baseDocs.size > 1 &&
             data.baseDocsInfo.baseDocs[0].op == data.baseDocsInfo.baseDocs[1].op)
         {
-            show(applicationContext, "Пожалуйста, укажите разные ОП для документов на вкладке '${TABs[3]}'")
-            stop = true
+            err += "Пожалуйста, укажите разные ОП для документов на вкладке '${TABs[3]}'\n\n"
+            normal = false
         }
 
         if (data.baseDocsInfo.baseDocs.size > 1 &&
             data.baseDocsInfo.baseDocs[0].educ == data.baseDocsInfo.baseDocs[1].educ)
         {
-            show(applicationContext, "Пожалуйста, укажите разные базисные образования для документов на вкладке '${TABs[3]}'")
-            stop = true
+            err += "Пожалуйста, укажите разные базисные образования для документов на вкладке '${TABs[3]}'\n\n"
+            normal = false
         }
 
         data.baseDocsInfo.baseDocs.forEachIndexed { i, doc ->
             if (doc.educ_status == "") {
-                show(applicationContext, "Пожалуйста, укажите, имеется ли у вас уже образование по выбранной ОП в базисном документе №${i} на вкладке '${TABs[3]}'")
-                stop = true
+                err += "Пожалуйста, укажите, имеется ли у вас уже образование по выбранной ОП в базисном документе №${i + 1} на вкладке '${TABs[3]}'\n\n"
+                normal = false
             }
         }
 
-        return stop
+        return normal
     }
 
     private fun checkCases(): Boolean
     {
-        var stop = false
+        var normal = true
+
+        data.cases.forEachIndexed { i, v ->
+            if (v.stream.isEmpty() || v.stream == "направление подготовки не выбрано")
+            {
+                err += "Пожалуйста, укажите направление подготовки №${i + 1} на вкладке '${TABs[4]}'\n\n"
+                normal = false
+            }
+
+            if (v.priority.isEmpty() || v.priority == "приоритет -")
+            {
+                err += "Пожалуйста, укажите приоритет для направления подготовки №${i + 1} на вкладке '${TABs[4]}'\n\n"
+                normal = false
+            }
+        }
 
         if (data.cases.size == 2)
         {
             if (data.cases[0].stream == data.cases[1].stream)
             {
-                show(applicationContext, "Пожалуйста, укажите разные направления подготовки на вкладке '${TABs[4]}'")
-                stop = true
+                err += "Пожалуйста, укажите разные направления подготовки на вкладке '${TABs[4]}'\n\n"
+                normal = false
             }
             if (data.cases[0].priority == data.cases[1].priority)
             {
-                show(applicationContext, "Пожалуйста, укажите разные приоритеты на вкладке '${TABs[4]}'")
-                stop = true
+                err += "Пожалуйста, укажите разные приоритеты на вкладке '${TABs[4]}'\n\n"
+                normal = false
             }
         }
         else if (data.cases.size == 3)
@@ -328,19 +361,19 @@ class ActivityPersonalData : AppCompatActivity()
                 data.cases[0].stream == data.cases[2].stream ||
                 data.cases[1].stream == data.cases[2].stream)
             {
-                show(applicationContext, "Пожалуйста, укажите разные направления подготовки на вкладке '${TABs[4]}'")
-                stop = true
+                err += "Пожалуйста, укажите разные направления подготовки на вкладке '${TABs[4]}'\n\n"
+                normal = false
             }
             if (data.cases[0].priority == data.cases[1].priority ||
                 data.cases[0].priority == data.cases[2].priority ||
                 data.cases[1].priority == data.cases[2].priority)
             {
-                show(applicationContext, "Пожалуйста, укажите разные приоритеты на вкладке '${TABs[4]}'")
-                stop = true
+                err += "Пожалуйста, укажите разные приоритеты на вкладке '${TABs[4]}'\n\n"
+                normal = false
             }
         }
 
-        return stop
+        return normal
     }
 
     // sends
@@ -353,8 +386,8 @@ class ActivityPersonalData : AppCompatActivity()
                       "o_lang, o_country, o_inn, o_dormitory, " +
                       "o_reg_region, o_reg_city, o_reg_district, o_reg_street, o_reg_house, o_reg_index, " +
                       "o_live_region, o_live_city, o_live_district, o_live_street, o_live_house, o_live_index)\n" +
-                      "VALUES ('%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%');"
-        query_1 = query_1.format(1, data.own.lang, data.own.country, data.own.inn, data.own.dormitory,
+                      "VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');"
+        query_1 = query_1.format(ActivityMain.account.id, data.own.lang, data.own.country, data.own.inn, data.own.dormitory,
                                  data.own.reg.region, data.own.reg.city, data.own.reg.district, data.own.reg.street, data.own.reg.house, data.own.reg.index,
                                  data.own.live.region, data.own.live.city, data.own.live.district, data.own.live.street, data.own.live.house, data.own.live.index)
 
@@ -362,24 +395,24 @@ class ActivityPersonalData : AppCompatActivity()
         var query_2 = "INSERT INTO parents (p_id_account,\n" +
                       "p_f_surname, p_f_name, p_f_fathername, p_f_phone, p_f_registration, " +
                       "p_m_surname, p_m_name, p_m_fathername, p_m_phone, p_m_registration)\n" +
-                      "VALUES ('%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%');"
-        query_2 = query_2.format(1,
+                      "VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');"
+        query_2 = query_2.format(ActivityMain.account.id,
                                  data.parents.father.surname, data.parents.father.name, data.parents.father.fathername, data.parents.father.phone, data.parents.father.reg,
                                  data.parents.mother.surname, data.parents.mother.name, data.parents.mother.fathername, data.parents.mother.phone, data.parents.mother.reg)
 
         // -> docs
         var query_3 = "INSERT INTO docs(d_id_account, d_files_list, d_prev_educes_list, d_priority_contract)\n" +
-                      "VALUES ('%', '%', '%', '%');"
-        query_3 = query_3.format(1, data.docs.map { v -> v.key }.joinToString("\n"), data.baseDocsInfo.prevEducations, data.priority_contract)
+                      "VALUES ('%s', '%s', '%s', '%s');"
+        query_3 = query_3.format(ActivityMain.account.id, data.docs.map { v -> v.key }.joinToString("\n"), data.baseDocsInfo.prevEducations, data.priority_contract)
 
         // -> base docs
         var query_4 = "INSERT INTO base_docs (b_id_account, b_educ_prog, b_base_educ, b_educ_status) VALUES\n"
-        data.baseDocsInfo.baseDocs.forEach { d -> query_4 += "('${1}', '${d.op}', '${d.educ}', '${d.educ_status}'),\n" }
+        data.baseDocsInfo.baseDocs.forEach { d -> query_4 += "('${ActivityMain.account.id}', '${d.op}', '${d.educ}', '${d.educ_status}'),\n" }
         query_4 = query_4.dropLast(2) + ";"
 
         // -> cases
         var query_5 = "INSERT INTO cases (c_id_account, c_priority, c_educ_form, c_course, c_stream) VALUES\n"
-        data.cases.forEach { c -> query_5 += "('${1}', '${c.priority}', '${c.fo}', '${c.course}', '${c.stream}'),\n" }
+        data.cases.forEach { c -> query_5 += "('${ActivityMain.account.id}', '${c.priority}', '${c.fo}', '${c.course}', '${c.stream}'),\n" }
         query_5 = query_5.dropLast(2) + ";"
 
         lifecycleScope.launch { show(applicationContext, withContext(Dispatchers.IO) {
@@ -388,7 +421,8 @@ class ActivityPersonalData : AppCompatActivity()
             DB_processor.queryUpdate(query_3)
             DB_processor.queryUpdate(query_4)
             DB_processor.queryUpdate(query_5)
-            "Отправлено"
+            DB_processor.queryUpdate("UPDATE accounts SET a_status = 'проверяется' WHERE a_id = ${ActivityMain.account.id};")
+            "Отправлено в БД"
         }) }
     }
 
@@ -400,7 +434,7 @@ class ActivityPersonalData : AppCompatActivity()
             try
             {
                 val ftpClient = FTPClient()
-                ftpClient.connect("192.168.0.105", 21)
+                ftpClient.connect("10.0.2.2", 21)
                 ftpClient.login("filezilla", "123")
                 ftpClient.enterLocalPassiveMode()
                 ftpClient.setFileType(FTP.BINARY_FILE_TYPE)
@@ -416,7 +450,7 @@ class ActivityPersonalData : AppCompatActivity()
             }
             catch (e: Exception) { throw e }
 
-            "Выполнено"
+            "Отправлено в FileZilla"
         }) }
     }
 }

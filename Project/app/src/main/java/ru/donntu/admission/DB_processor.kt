@@ -17,7 +17,7 @@ class DB_processor
                 try
                 {
                     connection = DriverManager.getConnection(
-                        "jdbc:postgresql://192.168.0.105:5432/DonNTU_Admission",
+                        "jdbc:postgresql://10.0.2.2:5432/DonNTU_Admission",
                         "postgres", "root"
                     )
                     statement = connection!!.createStatement()

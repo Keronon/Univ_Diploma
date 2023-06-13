@@ -47,7 +47,7 @@
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="515dp" />
+        android:layout_height="480dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -59,7 +59,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:background="@color/teal_900"
 
             android:foreground="?attr/actionModeCloseDrawable"
@@ -74,7 +74,7 @@
             android:layout_marginBottom="10dp"
             android:layout_marginStart="0dp"
             android:layout_marginEnd="10dp"
-            android:layout_weight="5"
+            android:layout_weight="7"
             android:background="@color/teal_900"
             android:padding="15dp"
 

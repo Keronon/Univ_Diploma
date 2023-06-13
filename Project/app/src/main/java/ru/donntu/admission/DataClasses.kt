@@ -15,7 +15,8 @@ data class Account (
     var birthday  : String  = "",
     var email     : String  = "",
     var phone     : String  = "",
-    var other     : String  = ""
+    var other     : String  = "",
+    var status    : String  = ""
 ){fun clear() {
     id         = ""
     login      = ""
@@ -27,6 +28,7 @@ data class Account (
     email      = ""
     phone      = ""
     other      = ""
+    status     = ""
 }}
 
 data class Own (
