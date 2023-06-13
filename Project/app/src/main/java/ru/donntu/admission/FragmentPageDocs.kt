@@ -13,7 +13,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
-import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
@@ -25,7 +24,7 @@ class FragmentPageDocs: Fragment()
     private lateinit var _this : View
 
     private lateinit var listAdapter : SimpleAdapter
-    private val keys  = arrayOf("file", "name")
+    private val keys  = arrayOf("file", "path")
     private val items = ArrayList<Map<String, Any>>()
     @Suppress("PrivatePropertyName")
     private val REQ_KEY = 69
@@ -40,10 +39,9 @@ class FragmentPageDocs: Fragment()
 
         popFiles = Dialog(_this.context)
 
-        val list: ListView = _this.findViewById(R.id.VIEW_list)
-
         // list
 
+        val list: ListView = _this.findViewById(R.id.VIEW_list)
         listAdapter = SimpleAdapter(
             _this.context, items, android.R.layout.simple_list_item_activated_2,
             keys, intArrayOf(android.R.id.text1, android.R.id.text2)
@@ -110,8 +108,7 @@ class FragmentPageDocs: Fragment()
 
                             val item: MutableMap<String, Any> = HashMap()
                             item[keys[0]] = fileName
-                            item[keys[1]] = UUID.randomUUID().toString().substring(0, 8) + fileName.substring(fileName.lastIndexOf("."))
-                            item["path"] = fileUri
+                            item[keys[1]] = fileUri
                             items.add(item)
                             listAdapter.notifyDataSetChanged()
                         }
@@ -131,6 +128,6 @@ class FragmentPageDocs: Fragment()
     override fun onPause()
     {
         super.onPause()
-        items.forEach { v -> docs[v[keys[1]] as String] = v["path"] as Any }
+        items.forEach { v -> docs[v[keys[0]] as String] = v[keys[1]] as Any }
     }
 }

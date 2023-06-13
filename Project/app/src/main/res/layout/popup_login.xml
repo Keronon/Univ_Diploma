@@ -86,9 +86,11 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:layout_marginBottom="15dp"
 
+            android:layout_marginBottom="-50dp"
             android:enabled="false"
+            android:visibility="invisible"
+
             android:background="@drawable/back_border"
             android:padding="15dp"
             android:text="@string/TXT_save"

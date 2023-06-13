@@ -9,19 +9,18 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.widget.SwitchCompat
 
+@Suppress("PrivatePropertyName")
 class FragmentPageConfirm: Fragment()
 {
     companion object { var personalData: PersonalData? = null }
 
-    @Suppress("PrivatePropertyName")
-    private lateinit var priority_contract: MutableList<String>
-
-    @Suppress("PropertyName")
     private lateinit var _this: View
+
+    private lateinit var priority_contract: MutableList<String>
+    private lateinit var adapter_priority_contract: ArrayAdapter<String>
 
     private lateinit var animatorsOpen: Array<ValueAnimator>
     private lateinit var animatorsClose: Array<ValueAnimator>
-    @Suppress("PrivatePropertyName")
     private lateinit var BTNs_p: Array<ToggleButton>
 
     @Suppress("LocalVariableName")
@@ -98,9 +97,8 @@ class FragmentPageConfirm: Fragment()
 
         // contract
 
-        // TODO : настраивать в зависимости к-ва записей анкеты
-        priority_contract = mutableListOf("-", "1", "2", "3")
-        val adapter_priority_contract = ArrayAdapter(_this.context, android.R.layout.simple_spinner_item, priority_contract )
+        priority_contract = mutableListOf("-", "1")
+        adapter_priority_contract = ArrayAdapter(_this.context, android.R.layout.simple_spinner_item, priority_contract )
         _this.findViewById<Spinner>(R.id.SPINNER_priority_contract).adapter = adapter_priority_contract
 
         // switches
@@ -217,6 +215,7 @@ class FragmentPageConfirm: Fragment()
         animatorsClose[3].setIntValues(layout.measuredHeight, 0)
 
         // => Questionary
+        priority_contract = mutableListOf("-", "1")
         // -> case 1
         if (personalData!!.cases.size > 0)
         {
@@ -229,6 +228,8 @@ class FragmentPageConfirm: Fragment()
         val layout_case_2 = _this.findViewById<LinearLayout>(R.id.LAYOUT_case_2)
         if (personalData!!.cases.size > 1)
         {
+            priority_contract.add("2")
+
             layout_case_2.layoutParams = LinearLayout.LayoutParams(
                 layout_case_2.layoutParams.width,
                 LinearLayout.LayoutParams.WRAP_CONTENT
@@ -246,6 +247,8 @@ class FragmentPageConfirm: Fragment()
         val layout_case_3 = _this.findViewById<LinearLayout>(R.id.LAYOUT_case_3)
         if (personalData!!.cases.size > 2)
         {
+            priority_contract.add("3")
+
             layout_case_3.layoutParams = LinearLayout.LayoutParams(
                 layout_case_3.layoutParams.width,
                 LinearLayout.LayoutParams.WRAP_CONTENT
@@ -259,6 +262,8 @@ class FragmentPageConfirm: Fragment()
                 layout_case_3.layoutParams.width, 0
             )
         }
+
+        adapter_priority_contract.notifyDataSetChanged()
 
         layout = _this.findViewById(R.id.LAYOUT_p_5)
         layout.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)

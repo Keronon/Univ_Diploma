@@ -433,7 +433,7 @@ class ActivityMain : AppCompatActivity() {
     private fun prepareRegConfirm()
     {
         fun DatePicker.getDateString(): String {
-            return "$year/${if (month > 9) month + 1 else "0" + (month + 1)}/${if (dayOfMonth > 9) dayOfMonth else "0$dayOfMonth"}"
+            return "$year-${if (month > 9) month + 1 else "0" + (month + 1)}-${if (dayOfMonth > 9) dayOfMonth else "0$dayOfMonth"}"
         }
 
         account.surname    = popReg.findViewById<EditText  >(R.id.TXT_surname   ).text.toString().replace("'", "`")

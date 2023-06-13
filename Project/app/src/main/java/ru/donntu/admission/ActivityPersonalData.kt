@@ -14,9 +14,7 @@ import kotlinx.coroutines.withContext
 import android.net.Uri
 import android.view.View
 import android.widget.TextView
-import org.apache.commons.net.ftp.FTP
-import org.apache.commons.net.ftp.FTPClient
-import java.io.BufferedInputStream
+import java.io.FileInputStream
 
 class ActivityPersonalData : AppCompatActivity()
 {
@@ -97,7 +95,11 @@ class ActivityPersonalData : AppCompatActivity()
             showPopupErr()
             return
         }
-        sendToFileZilla(data) // FIXme : требует подождать ничего не трогая перед нажатием кнопки SEND ~20 сек для нормальной работы
+
+        val zipName = "archive.zip"
+        val zipPath = "${filesDir.absolutePath}/$zipName"
+        archiveFiles(data.docs, zipPath)
+        sendToFileZilla(zipPath)
         sendToDB(data)
 
         // finalizing
@@ -108,6 +110,7 @@ class ActivityPersonalData : AppCompatActivity()
         FragmentPageBaseDocs   .baseDocsInfo.clear()
         FragmentPageQuestionary.cases       .clear()
 
+        ActivityMain.account.status = "проверяется"
         finish()
 
         val nextPage = Intent(this, ActivityChat::class.java)
@@ -426,24 +429,21 @@ class ActivityPersonalData : AppCompatActivity()
         }) }
     }
 
-    private fun sendToFileZilla(data: PersonalData)
+    private fun sendToFileZilla(zipPath: String)
     {
         val files = mutableMapOf<String, Any>()
         data.docs.forEach { v -> files[v.key] = v.value }
         lifecycleScope.launch { show(applicationContext, withContext(Dispatchers.IO) {
             try
             {
-                val ftpClient = FTPClient()
+                val ftpClient = org.apache.commons.net.ftp.FTPClient()
                 ftpClient.connect("10.0.2.2", 21)
                 ftpClient.login("filezilla", "123")
                 ftpClient.enterLocalPassiveMode()
-                ftpClient.setFileType(FTP.BINARY_FILE_TYPE)
+                ftpClient.setFileType(org.apache.commons.net.ftp.FTP.BINARY_FILE_TYPE)
 
-                files.forEach { v ->
-                    val inputStream = BufferedInputStream(contentResolver.openInputStream(v.value as Uri))
-                    ftpClient.storeFile(v.key, inputStream)
-                    inputStream.close()
-                }
+                FileInputStream(zipPath).use { inputStream -> ftpClient.storeFile(
+                    "/${ActivityMain.account.id}.${java.util.UUID.randomUUID().toString().substring(0, 8)}.zip", inputStream) }
 
                 ftpClient.logout()
                 ftpClient.disconnect()
@@ -452,5 +452,28 @@ class ActivityPersonalData : AppCompatActivity()
 
             "Отправлено в FileZilla"
         }) }
+    }
+
+    private fun archiveFiles(files: MutableMap<String, Any>, zipPath: String) {
+        val buffer = ByteArray(1024)
+        java.util.zip.ZipOutputStream(
+            java.io.BufferedOutputStream(java.io.FileOutputStream(zipPath))
+        ).use { zipOutputStream ->
+            files.forEach { (name, _uri) ->
+                val uri = _uri as Uri
+                val inputStream = contentResolver.openInputStream(uri)
+                if (inputStream != null) {
+                    java.io.BufferedInputStream(inputStream).use { bufferedInput ->
+                        val entry = java.util.zip.ZipEntry(name)
+                        zipOutputStream.putNextEntry(entry)
+                        var len: Int
+                        while (bufferedInput.read(buffer).also { len = it } > 0) {
+                            zipOutputStream.write(buffer, 0, len)
+                        }
+                        zipOutputStream.closeEntry()
+                    }
+                }
+            }
+        }
     }
 }

@@ -39,7 +39,7 @@
                 android:id="@+id/LBL_id"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="9"
+                android:layout_weight="2"
 
                 android:text="@string/HINT_id"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -50,12 +50,12 @@
                 android:id="@+id/TXT_id"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="5"
+                android:layout_weight="1"
                 android:layout_marginStart="10dp"
 
                 android:padding="10dp"
                 android:background="@color/teal_900"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
@@ -75,7 +75,7 @@
                 android:id="@+id/LBL_status"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="9"
+                android:layout_weight="2"
 
                 android:text="@string/HINT_status"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -86,12 +86,12 @@
                 android:id="@+id/TXT_status"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="5"
+                android:layout_weight="1"
                 android:layout_marginStart="10dp"
 
                 android:padding="10dp"
                 android:background="@color/teal_900"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
@@ -101,7 +101,7 @@
         <Button
             android:id="@+id/BTN_data"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="10dp"
@@ -177,7 +177,7 @@
             android:textStyle="bold" />
 
         <ListView
-            android:id="@+id/LIST_messages"
+            android:id="@+id/VIEW_messages"
             android:layout_width="match_parent"
             android:layout_height="400dp"
             android:layout_marginLeft="5dp"
