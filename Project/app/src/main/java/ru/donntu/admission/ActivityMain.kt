@@ -483,11 +483,11 @@ class ActivityMain : AppCompatActivity() {
                     account.id = (user[0] as Int).toString()
                     account.login  = user[1] as String
                     account.status = user[3] as String
-                    
+
                     val nextPage = if (account.status == "зарегистрировано")
                          Intent(this, ActivityPersonalData::class.java)
                     else Intent(this, ActivityChat::class.java)
-                    
+
                     startActivity(nextPage)
                 }
                 else show(applicationContext, "Не верный пароль")

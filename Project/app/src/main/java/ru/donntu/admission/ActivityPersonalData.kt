@@ -99,8 +99,9 @@ class ActivityPersonalData : AppCompatActivity()
         val zipName = "archive.zip"
         val zipPath = "${filesDir.absolutePath}/$zipName"
         archiveFiles(data.docs, zipPath)
-        sendToFileZilla(zipPath)
-        sendToDB(data)
+        val archiveName = "/${ActivityMain.account.id}.${java.util.UUID.randomUUID().toString().substring(0, 8)}.zip"
+        sendToFileZilla(zipPath, archiveName)
+        sendToDB(data, archiveName)
 
         // finalizing
 
@@ -382,7 +383,7 @@ class ActivityPersonalData : AppCompatActivity()
     // sends
 
     @Suppress("LocalVariableName")
-    private fun sendToDB(data: PersonalData)
+    private fun sendToDB(data: PersonalData, archiveName: String)
     {
         // -> own
         var query_1 = "INSERT INTO own (o_id_account,\n" +
@@ -406,7 +407,8 @@ class ActivityPersonalData : AppCompatActivity()
         // -> docs
         var query_3 = "INSERT INTO docs(d_id_account, d_files_list, d_prev_educes_list, d_priority_contract)\n" +
                       "VALUES ('%s', '%s', '%s', '%s');"
-        query_3 = query_3.format(ActivityMain.account.id, data.docs.map { v -> v.key }.joinToString("\n"), data.baseDocsInfo.prevEducations, data.priority_contract)
+        query_3 = query_3.format(ActivityMain.account.id, data.docs.map { v -> v.key }.joinToString("\n") + "\n-- в : $archiveName",
+                                 data.baseDocsInfo.prevEducations, data.priority_contract)
 
         // -> base docs
         var query_4 = "INSERT INTO base_docs (b_id_account, b_educ_prog, b_base_educ, b_educ_status) VALUES\n"
@@ -429,7 +431,7 @@ class ActivityPersonalData : AppCompatActivity()
         }) }
     }
 
-    private fun sendToFileZilla(zipPath: String)
+    private fun sendToFileZilla(zipPath: String, archiveName: String)
     {
         val files = mutableMapOf<String, Any>()
         data.docs.forEach { v -> files[v.key] = v.value }
@@ -442,8 +444,7 @@ class ActivityPersonalData : AppCompatActivity()
                 ftpClient.enterLocalPassiveMode()
                 ftpClient.setFileType(org.apache.commons.net.ftp.FTP.BINARY_FILE_TYPE)
 
-                FileInputStream(zipPath).use { inputStream -> ftpClient.storeFile(
-                    "/${ActivityMain.account.id}.${java.util.UUID.randomUUID().toString().substring(0, 8)}.zip", inputStream) }
+                FileInputStream(zipPath).use { inputStream -> ftpClient.storeFile(archiveName, inputStream) }
 
                 ftpClient.logout()
                 ftpClient.disconnect()

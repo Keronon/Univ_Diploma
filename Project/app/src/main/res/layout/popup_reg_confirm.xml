@@ -58,7 +58,7 @@
             android:background="@drawable/back_border"
             android:padding="15dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColorHint="@color/teal_900"
+            android:textColor="@color/teal_900"
             android:textStyle="bold" />
 
         <TextView
@@ -83,7 +83,7 @@
             android:background="@drawable/back_border"
             android:padding="15dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColorHint="@color/teal_900"
+            android:textColor="@color/teal_900"
             android:textStyle="bold" />
 
         <TextView
@@ -108,7 +108,7 @@
             android:background="@drawable/back_border"
             android:padding="15dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColorHint="@color/teal_900"
+            android:textColor="@color/teal_900"
             android:textStyle="bold" />
 
         <TextView
@@ -133,7 +133,7 @@
             android:background="@drawable/back_border"
             android:padding="15dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColorHint="@color/teal_900"
+            android:textColor="@color/teal_900"
             android:textStyle="bold" />
 
         <TextView
@@ -158,7 +158,7 @@
             android:background="@drawable/back_border"
             android:padding="15dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColorHint="@color/teal_900"
+            android:textColor="@color/teal_900"
             android:textStyle="bold" />
 
         <TextView
@@ -183,7 +183,7 @@
             android:background="@drawable/back_border"
             android:padding="15dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColorHint="@color/teal_900"
+            android:textColor="@color/teal_900"
             android:textStyle="bold" />
 
         <TextView
@@ -208,7 +208,7 @@
             android:background="@drawable/back_border"
             android:padding="15dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColorHint="@color/teal_900"
+            android:textColor="@color/teal_900"
             android:textStyle="bold" />
 
         <TextView
@@ -233,7 +233,7 @@
             android:background="@drawable/back_border"
             android:padding="15dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColorHint="@color/teal_900"
+            android:textColor="@color/teal_900"
             android:textStyle="bold" />
 
         <TextView
@@ -258,7 +258,7 @@
             android:background="@drawable/back_border"
             android:padding="15dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColorHint="@color/teal_900"
+            android:textColor="@color/teal_900"
             android:textStyle="bold" />
 
         <TextView
@@ -284,7 +284,7 @@
             android:background="@drawable/back_border"
             android:padding="15dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColorHint="@color/teal_900"
+            android:textColor="@color/teal_900"
             android:textStyle="bold" />
 
         <LinearLayout

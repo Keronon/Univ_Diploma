@@ -28,7 +28,7 @@ class FragmentPageDocs: Fragment()
     private val items = ArrayList<Map<String, Any>>()
     @Suppress("PrivatePropertyName")
     private val REQ_KEY = 69
-    
+
     private lateinit var popFiles : Dialog
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?

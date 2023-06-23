@@ -180,7 +180,7 @@ class FragmentPageQuestionary(private val pageBaseDocs: FragmentPageBaseDocs) : 
     {
         popStreamSelect.setContentView(R.layout.popup_stream_select)
         popStreamSelect.findViewById<TextView>(R.id.BTN_close).setOnClickListener{ popStreamSelect.dismiss() }
-        
+
         // hooks
 
         @Suppress("SpellCheckingInspection")
@@ -276,7 +276,7 @@ class FragmentPageQuestionary(private val pageBaseDocs: FragmentPageBaseDocs) : 
                 }
             }
         }
-        
+
         // on select radio
 
         RADIO_GRs_f.forEachIndexed { n, f ->

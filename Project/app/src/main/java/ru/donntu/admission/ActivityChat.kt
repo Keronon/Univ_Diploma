@@ -4,6 +4,7 @@ import android.animation.ValueAnimator
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.recyclerview.widget.RecyclerView
 import android.widget.*
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Dispatchers
@@ -13,9 +14,7 @@ import java.util.*
 
 class ActivityChat : AppCompatActivity()
 {
-    private val items = ArrayList<Map<String, Any>>()
     private val ids   = ArrayList<Long>()
-    private val keys  = arrayOf("message", "footer")
 
     @Suppress("PrivatePropertyName")
     private lateinit var TXT_docs: TextView
@@ -54,7 +53,10 @@ class ActivityChat : AppCompatActivity()
 
         lifecycleScope.launch { show(applicationContext, withContext(Dispatchers.IO)
         {
-            TXT_docs.text = DB_processor.querySelect("SELECT d_files_list FROM docs WHERE d_id_account = ${ActivityMain.account.id}")[0][0] as String
+            val rows = DB_processor.querySelect("SELECT d_files_list FROM docs WHERE d_id_account = ${ActivityMain.account.id}")
+            var txt = ""
+            rows.forEach { r -> txt += r[0] as String }
+            TXT_docs.text = txt
 
             TXT_docs.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
             animatorOpen = ValueAnimator.ofInt(TXT_docs.measuredHeight).setDuration(500)
@@ -120,12 +122,36 @@ class ActivityChat : AppCompatActivity()
 
         // list
 
-        val list: ListView = findViewById(R.id.VIEW_messages)
-        val listAdapter = SimpleAdapter(
-            this, items, android.R.layout.simple_list_item_activated_2,
-            keys, intArrayOf(android.R.id.text1, android.R.id.text2)
-        )
-        list.adapter = listAdapter
+        @Suppress("PropertyName")
+        class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+        {
+            val TXT_title: TextView = itemView.findViewById(R.id.title)
+            val TXT_body : TextView = itemView.findViewById(R.id.body)
+        }
+
+        data class Item(val title: String, val body: String)
+        class ItemAdapter(private val items: MutableList<Item>) : RecyclerView.Adapter<ItemViewHolder>() {
+
+            override fun onCreateViewHolder(parent: android.view.ViewGroup, viewType: Int): ItemViewHolder {
+                val view = android.view.LayoutInflater.from(parent.context).inflate(R.layout.recycler_item, parent, false)
+                return ItemViewHolder(view)
+            }
+
+            override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
+                val item = items[position]
+                holder.TXT_title.text = item.title
+                holder.TXT_body.text = item.body
+            }
+
+            override fun getItemCount(): Int {
+                return items.size
+            }
+        }
+
+        val list = findViewById<RecyclerView>(R.id.VIEW_messages)
+        list.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
+        val items = mutableListOf<Item>()
+        list.adapter = ItemAdapter(items)
 
         // messages timer
 
@@ -139,7 +165,6 @@ class ActivityChat : AppCompatActivity()
                     val res = DB_processor.querySelect(query)
                     val count = ids.size
                     res.forEach { row ->
-                        val item: MutableMap<String, Any> = HashMap()
                         val sender = if (row[4] as String == "to admin")
                         {
                             var str = "${row[1]} ${row[2]}"
@@ -147,12 +172,13 @@ class ActivityChat : AppCompatActivity()
                             if (fathername.isNotEmpty()) str += " $fathername"
                             str
                         } else "оператор"
-                        item[keys[0]] = row[6] as String
-                        item[keys[1]] = "--\n${row[5]} [ ${row[7]} ]\n--\n$sender"
-                        items.add(item)
+                        items.add(Item(
+                            "${row[5]} [ ${row[7]} ]\n$sender\n--",
+                            row[6] as String
+                        ))
                         ids.add(row[0] as Long)
                     }
-                    runOnUiThread { if (count != ids.size) listAdapter.notifyDataSetChanged() }
+                    runOnUiThread { if (count != ids.size) (list.adapter as ItemAdapter).notifyItemRangeChanged(count - 1, ids.size - count) }
                 } }
             }
         }, 0, 5000)
