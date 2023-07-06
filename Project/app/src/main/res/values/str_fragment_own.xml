@@ -1,0 +1,23 @@
+<resources>
+
+    <!-- OWN -->
+
+    <string name="HINT_lang">Иностранный язык, который вы изучали</string>
+    <string name="HINT_en">Английский</string>
+    <string name="HINT_fr">Французский</string>
+    <string name="HINT_de">Немецкий</string>
+    <string name="HINT_country">Гражданство (название страны)</string>
+    <string name="HINT_inn">* ИНН / РНУКН</string>
+
+    <string name="TXT_dormitory">Требуется общежитие</string>
+    <string name="LBL_reg_address">Адрес регистрации</string>
+    <string name="LBL_live_address">Адрес проживания</string>
+    <string name="HINT_region">Область</string>
+    <string name="HINT_city">Населённый пункт</string>
+    <string name="HINT_district">* Район города</string>
+    <string name="HINT_street">Улица</string>
+    <string name="HINT_house">Дом / Квартира</string>
+    <string name="HINT_index">Почтовый индекс</string>
+    <string name="TXT_equal">Адрес регистрации совпадает с адресом проживания</string>
+
+</resources>

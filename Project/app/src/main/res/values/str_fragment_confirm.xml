@@ -1,0 +1,34 @@
+<resources>
+
+    <!-- CONFIRM -->
+
+    <string name="LBL_own_data">ПЕРСОНАЛЬНЫЕ ДАННЫЕ</string>
+    <string name="LBL_own_data_x">персональные данные</string>
+    <string name="LBL_parents_data">ДАННЫЕ О РОДИТЕЛЯХ</string>
+    <string name="LBL_parents_data_x">данные о родителях</string>
+    <string name="LBL_docs">СКАНЫ ДОКУМЕНТОВ</string>
+    <string name="LBL_docs_x">сканы документов</string>
+    <string name="LBL_base_docs">БАЗИСНЫЕ ДОКУМЕНТЫ</string>
+    <string name="LBL_base_docs_x">базисные документы</string>
+    <string name="LBL_questionary">АНКЕТА</string>
+    <string name="LBL_questionary_x">анкета</string>
+
+    <string name="HINT_confirm_prev_educ">* ОП, на которые вы уже зачислялись раньше</string>
+
+    <string name="HINT_doc_1">Базисный документ №1</string>
+    <string name="HINT_doc_2">Базисный документ №2</string>
+    <string name="HINT_case_1">Запись в анкете №1</string>
+    <string name="HINT_case_2">Запись в анкете №2</string>
+    <string name="HINT_case_3">Запись в анкете №3</string>
+
+    <string name="HINT_priority">Приоритет</string>
+    <string name="HINT_fo">Форма обучения</string>
+    <string name="HINT_course">Курс</string>
+    <string name="HINT_stream">Направление подготовки</string>
+
+    <string name="HINT_contract">* Согласен(-а) на контракт\nпо направлению с приоритетом :</string>
+    <string name="TXT_notice_1">Уведомлён(-а), что после подачи заявления изменение приоритетов не допускается, а закрытие дела не отменяет факт подачи заявления</string>
+    <string name="TXT_notice_2">Подтверждаю факт подачи документов не более чем в две образовательные организации</string>
+    <string name="TXT_notice_3">Уведомлён(-а), что после получения рекомендации к зачислению обязан(-а) представить в ДонНТУ оригиналы необходимых для зачисления документов</string>
+
+</resources>

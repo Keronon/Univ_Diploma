@@ -1,0 +1,9 @@
+<resources>
+
+    <!-- PARENTs -->
+
+    <string name="LBL_father">Отец</string>
+    <string name="LBL_mother">Мать</string>
+    <string name="HINT_reg">* Прописка\n(для абитуриентов без паспорта)</string>
+
+</resources>

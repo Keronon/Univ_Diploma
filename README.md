@@ -1,4 +1,4 @@
-> *( main branch to work - 'browser_like' )*
+> *( main branch to work - 'app__v-1-0' )*
 
 -----
 -----
@@ -19,32 +19,47 @@
 
 ----- [Keronon](https://github.com/Keronon) (Artem Nosachenko) -----
 
-### ***Supervisor of the project:***
-
-- ...
-
 **Program classes included in the project:**
 -------------------------------
 
-### <li> ***MainActivity***
+### <li> ***ActivityMain***
+### <li> ***ActivityPersonalData***
+### <li> ***ActivityChat***
+### <li> ***DB_processor***
+### <li> ***AdapterPersonalData***
+### <li> ***FragmentPageOwnData***
+### <li> ***FragmentPageParentsData***
+### <li> ***FragmentPageDocs***
+### <li> ***FragmentPageBaseDocs***
+### <li> ***FragmentPageQuestionary***
+### <li> ***FragmentPageConfirm***
   
 <br>
 <b> (сlasses of the second order)
 
-* ...
+* Account
+* Own
+* OwnAddress
+* Parents
+* Human
+* BaseDocsInfo
+* BaseDoc
+* Case
+* PersonalData
+* < some internal classes >
 
 ===============================
 
 ### ***Essence of the project:***
 
-Project is a realization of browser-like mobile application,
+Project is a realization of mobile application,
 that can be used for admission to DonNTU.
 
 ### ***Show of Results:***
 
 * First showing activity
 
-![image](https://user-images.githubusercontent.com/59052298/223035927-cb84aa89-2998-4cad-b897-ac8df1439405.png)
+[image]
 
 -----
 -----

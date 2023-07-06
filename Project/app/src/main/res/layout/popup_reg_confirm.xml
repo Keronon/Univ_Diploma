@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/TXT_reg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
+            android:background="@drawable/back_gradient_teal_900"
+            android:padding="20dp"
+
+            android:text="@string/HEAD_reg"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/TXT_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
+
+            android:text="@string/HINT_reg_confirm"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/teal_900"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/LBL_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/HINT_login"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/teal_900"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/TXT_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="10dp"
+
+            android:background="@drawable/back_border"
+            android:padding="15dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/teal_900"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/LBL_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/HINT_pass"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/teal_900"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/TXT_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="10dp"
+
+            android:background="@drawable/back_border"
+            android:padding="15dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/teal_900"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/LBL_surname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/HINT_surname"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/teal_900"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/TXT_surname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="10dp"
+
+            android:background="@drawable/back_border"
+            android:padding="15dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/teal_900"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/LBL_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/HINT_name"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/teal_900"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/TXT_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="10dp"
+
+            android:background="@drawable/back_border"
+            android:padding="15dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/teal_900"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/LBL_fathername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/HINT_fathername"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/teal_900"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/TXT_fathername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="10dp"
+
+            android:background="@drawable/back_border"
+            android:padding="15dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/teal_900"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/LBL_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/HINT_date"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/teal_900"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/TXT_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="10dp"
+
+            android:background="@drawable/back_border"
+            android:padding="15dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/teal_900"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/LBL_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/HINT_email"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/teal_900"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/TXT_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="10dp"
+
+            android:background="@drawable/back_border"
+            android:padding="15dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/teal_900"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/LBL_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/HINT_phone"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/teal_900"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/TXT_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="10dp"
+
+            android:background="@drawable/back_border"
+            android:padding="15dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/teal_900"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/LBL_other"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/HINT_other"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/teal_900"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/TXT_other"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="10dp"
+
+            android:background="@drawable/back_border"
+            android:padding="15dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/teal_900"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/LBL_rights"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/HINT_rights"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/teal_900"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/TXT_rights"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="15dp"
+
+            android:text="@string/TXT_rights"
+            android:background="@drawable/back_border"
+            android:padding="15dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/teal_900"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/BTN_back"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@color/teal_900"
+
+                android:foreground="?attr/actionModeCloseDrawable"
+                android:text="@string/x"
+                tools:ignore="ButtonStyle" />
+
+            <Button
+                android:id="@+id/BTN_reg"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="4"
+                android:background="@color/teal_900"
+                android:padding="15dp"
+
+                android:text="@string/BTN_reg"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textStyle="bold"
+                tools:ignore="ButtonStyle" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

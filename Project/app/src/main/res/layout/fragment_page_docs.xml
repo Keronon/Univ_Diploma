@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/TXT_size_files"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+
+        android:text="@string/LBL_size_files"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/teal_900"
+        android:textColorHint="@color/teal_900"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/TXT_size_file"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+
+        android:text="@string/LBL_size_file"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/teal_900"
+        android:textColorHint="@color/teal_900"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/BTN_files"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="20dp"
+
+        android:text="@string/BTN_files"
+        android:background="@drawable/back_border"
+        android:textColor="@color/teal_900"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/TXT_docs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+
+        android:text="@string/LBL_files"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/teal_900"
+        android:textColorHint="@color/teal_900"
+        android:textStyle="bold" />
+
+    <ListView
+        android:id="@+id/VIEW_list"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:choiceMode="singleChoice" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="85dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/BTN_del"
+            android:layout_width="65dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+
+            android:background="@color/teal_900"
+            android:foreground="@android:drawable/ic_menu_delete"
+            android:text="@string/x"
+            tools:ignore="DuplicateSpeakableTextCheck" />
+
+        <Button
+            android:id="@+id/BTN_add"
+            android:layout_width="65dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_alignParentEnd="true"
+
+            android:text="@string/x"
+            android:background="@color/teal_900"
+            android:foreground="@android:drawable/ic_menu_add" />
+    </RelativeLayout>
+
+</LinearLayout>

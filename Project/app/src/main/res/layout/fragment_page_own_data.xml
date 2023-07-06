@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/TXT_lang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="-10dp"
+
+            android:text="@string/HINT_lang"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/teal_900"
+            android:textColorHint="@color/teal_900"
+            android:textStyle="bold" />
+        <RadioGroup
+            android:id="@+id/RADIO_lang"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/RADIO_en"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+
+                android:textColor="@color/teal_900"
+                android:textStyle="bold"
+                android:text="@string/HINT_en" />
+            <RadioButton
+                android:id="@+id/RADIO_fr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+
+                android:textColor="@color/teal_900"
+                android:textStyle="bold"
+                android:text="@string/HINT_fr" />
+            <RadioButton
+                android:id="@+id/RADIO_de"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+
+                android:textColor="@color/teal_900"
+                android:textStyle="bold"
+                android:text="@string/HINT_de" />
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/TXT_country"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="10dp"
+            android:autofillHints="true"
+
+            android:background="@drawable/back_border"
+            android:hint="@string/HINT_country"
+            android:inputType="textPersonName"
+            android:padding="15dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColorHint="@color/teal_900"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/TXT_inn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="10dp"
+            android:autofillHints="true"
+
+            android:background="@drawable/back_border"
+            android:hint="@string/HINT_inn"
+            android:inputType="number"
+            android:padding="15dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColorHint="@color/teal_900"
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/SWITCH_dormitory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="20dp"
+
+            android:background="@drawable/back_border"
+            android:padding="15dp"
+            android:text="@string/TXT_dormitory"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/teal_900"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/LAYOUT_reg_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/TXT_reg_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+
+                android:text="@string/LBL_reg_address"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/teal_900"
+                android:textColorHint="@color/teal_900"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/TXT_reg_region"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="10dp"
+                android:autofillHints="true"
+
+                android:background="@drawable/back_border"
+                android:hint="@string/HINT_region"
+                android:inputType="textPersonName"
+                android:padding="15dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColorHint="@color/teal_900"
+                android:textStyle="bold"
+                tools:ignore="DuplicateSpeakableTextCheck" />
+
+            <EditText
+                android:id="@+id/TXT_reg_city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="10dp"
+                android:autofillHints="true"
+
+                android:background="@drawable/back_border"
+                android:hint="@string/HINT_city"
+                android:inputType="textPersonName"
+                android:padding="15dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColorHint="@color/teal_900"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/TXT_reg_district"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="10dp"
+                android:autofillHints="true"
+
+                android:background="@drawable/back_border"
+                android:hint="@string/HINT_district"
+                android:inputType="textPersonName"
+                android:padding="15dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColorHint="@color/teal_900"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/TXT_reg_street"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="10dp"
+                android:autofillHints="true"
+
+                android:background="@drawable/back_border"
+                android:hint="@string/HINT_street"
+                android:inputType="textPersonName"
+                android:padding="15dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColorHint="@color/teal_900"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/TXT_reg_house"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="10dp"
+                android:autofillHints="true"
+
+                android:background="@drawable/back_border"
+                android:hint="@string/HINT_house"
+                android:inputType="textPersonName"
+                android:padding="15dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColorHint="@color/teal_900"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/TXT_reg_index"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="10dp"
+                android:autofillHints="true"
+
+                android:background="@drawable/back_border"
+                android:hint="@string/HINT_index"
+                android:inputType="number"
+                android:padding="15dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColorHint="@color/teal_900"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/SWITCH_equal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+
+                android:background="@drawable/back_border"
+                android:padding="15dp"
+                android:text="@string/TXT_equal"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/teal_900"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LAYOUT_live_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/TXT_live_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+
+                android:text="@string/LBL_live_address"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/teal_900"
+                android:textColorHint="@color/teal_900"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/TXT_live_region"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="10dp"
+                android:autofillHints="true"
+
+                android:background="@drawable/back_border"
+                android:hint="@string/HINT_region"
+                android:inputType="textPersonName"
+                android:padding="15dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColorHint="@color/teal_900"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/TXT_live_city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="10dp"
+                android:autofillHints="true"
+
+                android:background="@drawable/back_border"
+                android:hint="@string/HINT_city"
+                android:inputType="textPersonName"
+                android:padding="15dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColorHint="@color/teal_900"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/TXT_live_district"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="10dp"
+                android:autofillHints="true"
+
+                android:background="@drawable/back_border"
+                android:hint="@string/HINT_district"
+                android:inputType="textPersonName"
+                android:padding="15dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColorHint="@color/teal_900"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/TXT_live_street"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="10dp"
+                android:autofillHints="true"
+
+                android:background="@drawable/back_border"
+                android:hint="@string/HINT_street"
+                android:inputType="textPersonName"
+                android:padding="15dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColorHint="@color/teal_900"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/TXT_live_house"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="10dp"
+                android:autofillHints="true"
+
+                android:background="@drawable/back_border"
+                android:hint="@string/HINT_house"
+                android:inputType="textPersonName"
+                android:padding="15dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColorHint="@color/teal_900"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/TXT_live_index"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:autofillHints="true"
+
+                android:background="@drawable/back_border"
+                android:hint="@string/HINT_index"
+                android:inputType="number"
+                android:padding="15dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColorHint="@color/teal_900"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,21 @@
+<resources>
+
+    <!-- all app -->
+
+    <string name="app_name">DonNTU Admission</string>
+    <string name="app_title">АИС Абитуриент</string>
+
+    <string name="x">.</string>
+    <string name="menu">меню</string>
+
+    <!-- descriptions -->
+
+    <string name="header_logo">header logo</string>
+    <string name="header_title">header background</string>
+    <string name="plan">plan for applicants</string>
+    <string name="drop_down_list">drop-down list</string>
+
+    <string name="toolbar_opened">Меню открыто</string>
+    <string name="toolbar_closed">Меню закрыто</string>
+
+</resources>

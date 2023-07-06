@@ -1,0 +1,12 @@
+<resources>
+
+    <string name="HEAD_personal_data">ПОДАЧА ДАННЫХ</string>
+
+    <string name="TAB_own">Персональные данные</string>
+    <string name="TAB_parents">Данные о родителях</string>
+
+    <string name="LBL_err">Отправка данных невозможна по следующим причинам:</string>
+
+    <string name="BTN_send">ОТПРАВИТЬ ДАННЫЕ</string>
+
+</resources>
