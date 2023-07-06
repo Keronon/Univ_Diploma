@@ -51,12 +51,9 @@ class FragmentPageDocs: Fragment()
         // buttons
 
         _this.findViewById<Button>(R.id.BTN_files).setOnClickListener {
-            show(_this.context, "Отображаем список файлов")
             showPopupFiles()
         }
         _this.findViewById<Button>(R.id.BTN_del).setOnClickListener {
-            show(_this.context, "Удаляем")
-
             if (list.checkedItemCount == 0)
             {
                 show(_this.context, "Выберите файл")
@@ -67,8 +64,6 @@ class FragmentPageDocs: Fragment()
             listAdapter.notifyDataSetChanged()
         }
         _this.findViewById<Button>(R.id.BTN_add).setOnClickListener {
-            show(_this.context, "Добавляем")
-
             val fileIntent = Intent(Intent.ACTION_GET_CONTENT)
                 .setType("*/*")
                 .putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("image/*", "application/pdf"))

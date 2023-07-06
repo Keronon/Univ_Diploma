@@ -75,22 +75,18 @@ class ActivityMain : AppCompatActivity() {
         nav.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.menu_plan -> {
-                    show(applicationContext, "Отображаем план")
                     drawer.closeDrawer(GravityCompat.START)
                     showPopupPlan()
                 }
                 R.id.menu_info -> {
-                    show(applicationContext, "Отображаем информацию о комиссии")
                     drawer.closeDrawer(GravityCompat.START)
                     showPopupInfo()
                 }
                 R.id.menu_register -> {
-                    show(applicationContext, "Начинаем регистрацию")
                     drawer.closeDrawer(GravityCompat.START)
                     showPopupReg()
                 }
                 R.id.menu_login -> {
-                    show(applicationContext, "Начинаем вход")
                     drawer.closeDrawer(GravityCompat.START)
                     showPopupLogin()
                 }
@@ -104,7 +100,7 @@ class ActivityMain : AppCompatActivity() {
             accounts = DB_processor.querySelect("SELECT a_id, a_login, a_password, a_status FROM accounts")
 
             created = true
-            "Запущено"
+            "Добро пожаловать"
         }) }
     }
 
@@ -116,23 +112,21 @@ class ActivityMain : AppCompatActivity() {
 
     override fun onResume()
     {
-        if (created) lifecycleScope.launch { show(applicationContext, withContext(Dispatchers.IO) {
+        if (created) lifecycleScope.launch { withContext(Dispatchers.IO) {
             accounts = DB_processor.querySelect("SELECT a_id, a_login, a_password, a_status FROM accounts")
-            "пользователи загружены"
-        }) }
+        } }
         super.onResume()
     }
 
     override fun onPause()
     {
         accounts.clear()
-        show(applicationContext, "аккаунты очищены")
         super.onPause()
     }
 
     override fun onDestroy()
     {
-        lifecycleScope.launch { show(applicationContext, withContext(Dispatchers.IO) { DB_processor.disconnect(); "БД отключена" }) }
+        lifecycleScope.launch { withContext(Dispatchers.IO) { DB_processor.disconnect() } }
         super.onDestroy()
     }
 
@@ -207,7 +201,6 @@ class ActivityMain : AppCompatActivity() {
         // buttons
 
         popReg.findViewById<Button>(R.id.BTN_back).setOnClickListener {
-            show(applicationContext, "Возвращаемся")
             popReg.dismiss()
         }
 
@@ -216,7 +209,6 @@ class ActivityMain : AppCompatActivity() {
         val layoutParams = LBL_info.layoutParams
         val BTN_reg      = popReg.findViewById<Button    >(R.id.BTN_reg)
         BTN_reg.setOnClickListener {
-            show(applicationContext, "Подтверждение регистрации")
             popReg.currentFocus?.clearFocus()
 
             if (!checkLogin   (TXT_login   , LBL_login   ) or
@@ -398,12 +390,9 @@ class ActivityMain : AppCompatActivity() {
         // buttons
 
         popRegConfirm.findViewById<Button>(R.id.BTN_back).setOnClickListener {
-            show(applicationContext, "Возвращаемся")
             popRegConfirm.dismiss()
         }
         popRegConfirm.findViewById<Button>(R.id.BTN_reg).setOnClickListener {
-            show(applicationContext, "Регистрируем")
-
             val salt = generateSalt()
             val saltStr = salt.joinToString("") { "%02x".format(it) }
             account.password = "${hashPassword(account.password, salt)}::${saltStr}"
@@ -417,7 +406,7 @@ class ActivityMain : AppCompatActivity() {
             {
                 account.id = (DB_processor.querySelect(query)[0][0] as Int).toString()
                 account.status = "зарегистрировано"
-                "Отправлено"
+                "Зарегистрировано"
             }) }
 
             popReg.dismiss()
@@ -462,13 +451,10 @@ class ActivityMain : AppCompatActivity() {
         // buttons
 
         popLogin.findViewById<Button>(R.id.BTN_back).setOnClickListener {
-            show(applicationContext, "Возвращаемся")
             popLogin.dismiss()
         }
 
         popLogin.findViewById<Button>(R.id.BTN_reg).setOnClickListener {
-            show(applicationContext, "Входим")
-
             val login = popLogin.findViewById<EditText>(R.id.TXT_login).text.toString()
             val user = accounts.find { v -> v[1] as String == login }
             if (user != null)

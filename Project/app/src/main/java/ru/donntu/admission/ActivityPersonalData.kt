@@ -59,7 +59,6 @@ class ActivityPersonalData : AppCompatActivity()
     private fun initButtons()
     {
         findViewById<Button>(R.id.BTN_back).setOnClickListener {
-            show(applicationContext, "Возвращаемся")
             @Suppress("DEPRECATION")
             onBackPressed()
         }
@@ -79,7 +78,6 @@ class ActivityPersonalData : AppCompatActivity()
 
     private fun btnSendOnClick(@Suppress("UNUSED_PARAMETER") it: View)
     {
-        show(applicationContext, "Отправка")
         err = ""
 
         // on not user-checked data
@@ -102,6 +100,8 @@ class ActivityPersonalData : AppCompatActivity()
         val archiveName = "/${ActivityMain.account.id}.${java.util.UUID.randomUUID().toString().substring(0, 8)}.zip"
         sendToFileZilla(zipPath, archiveName)
         sendToDB(data, archiveName)
+
+        show(applicationContext, "Отправлено")
 
         // finalizing
 
@@ -420,22 +420,21 @@ class ActivityPersonalData : AppCompatActivity()
         data.cases.forEach { c -> query_5 += "('${ActivityMain.account.id}', '${c.priority}', '${c.fo}', '${c.course}', '${c.stream}'),\n" }
         query_5 = query_5.dropLast(2) + ";"
 
-        lifecycleScope.launch { show(applicationContext, withContext(Dispatchers.IO) {
+        lifecycleScope.launch { withContext(Dispatchers.IO) {
             DB_processor.queryUpdate(query_1)
             DB_processor.queryUpdate(query_2)
             DB_processor.queryUpdate(query_3)
             DB_processor.queryUpdate(query_4)
             DB_processor.queryUpdate(query_5)
             DB_processor.queryUpdate("UPDATE accounts SET a_status = 'проверяется' WHERE a_id = ${ActivityMain.account.id};")
-            "Отправлено в БД"
-        }) }
+        } }
     }
 
     private fun sendToFileZilla(zipPath: String, archiveName: String)
     {
         val files = mutableMapOf<String, Any>()
         data.docs.forEach { v -> files[v.key] = v.value }
-        lifecycleScope.launch { show(applicationContext, withContext(Dispatchers.IO) {
+        lifecycleScope.launch { withContext(Dispatchers.IO) {
             try
             {
                 val ftpClient = org.apache.commons.net.ftp.FTPClient()
@@ -450,9 +449,7 @@ class ActivityPersonalData : AppCompatActivity()
                 ftpClient.disconnect()
             }
             catch (e: Exception) { throw e }
-
-            "Отправлено в FileZilla"
-        }) }
+        } }
     }
 
     private fun archiveFiles(files: MutableMap<String, Any>, zipPath: String) {

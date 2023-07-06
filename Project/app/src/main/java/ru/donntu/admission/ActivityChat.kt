@@ -32,41 +32,12 @@ class ActivityChat : AppCompatActivity()
         // buttons
 
         // TODO надо где-то брать анкету, или притягивать сюда данные
-
         // -> BTN data
-        findViewById<Button>(R.id.BTN_data).setOnClickListener {
-            Toast.makeText(applicationContext, "Отображаем анкету", Toast.LENGTH_SHORT).show()
-        }
+        // findViewById<Button>(R.id.BTN_data).setOnClickListener {
+        //     Toast.makeText(applicationContext, "Отображаем анкету", Toast.LENGTH_SHORT).show()
+        // }
 
         // -> BTN docs
-        @Suppress("LocalVariableName")
-        TXT_docs = findViewById(R.id.TXT_docs)
-
-        fun setListener(layout: TextView): (ValueAnimator) -> Unit
-        {
-            return { animator: ValueAnimator ->
-                val layoutParams = layout.layoutParams
-                layoutParams.height = animator.animatedValue as Int
-                layout.layoutParams = layoutParams
-            }
-        }
-
-        lifecycleScope.launch { show(applicationContext, withContext(Dispatchers.IO)
-        {
-            val rows = DB_processor.querySelect("SELECT d_files_list FROM docs WHERE d_id_account = ${ActivityMain.account.id}")
-            var txt = ""
-            rows.forEach { r -> txt += r[0] as String }
-            TXT_docs.text = txt
-
-            TXT_docs.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
-            animatorOpen = ValueAnimator.ofInt(TXT_docs.measuredHeight).setDuration(500)
-            animatorOpen.addUpdateListener(setListener(TXT_docs))
-            animatorClose = ValueAnimator.ofInt(TXT_docs.measuredHeight, 0).setDuration(500)
-            animatorClose.addUpdateListener(setListener(TXT_docs))
-
-            "Документы загружены"
-        }) }
-
         @Suppress("LocalVariableName")
         val BTN_docs = findViewById<ToggleButton>(R.id.BTN_docs)
         BTN_docs.setOnCheckedChangeListener { _: CompoundButton, b: Boolean ->
@@ -87,8 +58,6 @@ class ActivityChat : AppCompatActivity()
             @Suppress("LocalVariableName")
             val TXT_message = findViewById<EditText>(R.id.TXT_message)
             if (TXT_message.text.toString().isEmpty()) return@setOnClickListener
-
-            Toast.makeText(applicationContext, "Отправляем сообщение", Toast.LENGTH_SHORT).show()
 
             fun Calendar.toTimeStr(): String {
                 return "${this[Calendar.YEAR]}-${
@@ -115,7 +84,6 @@ class ActivityChat : AppCompatActivity()
 
         // -> BTN back
         findViewById<Button>(R.id.BTN_back).setOnClickListener {
-            Toast.makeText(applicationContext, "Возвращаемся", Toast.LENGTH_SHORT).show()
             @Suppress("DEPRECATION")
             onBackPressed()
         }
@@ -153,12 +121,46 @@ class ActivityChat : AppCompatActivity()
         val items = mutableListOf<Item>()
         list.adapter = ItemAdapter(items)
 
-        // messages timer
+        // inner timer
+
+        @Suppress("LocalVariableName")
+        TXT_docs = findViewById(R.id.TXT_docs)
+
+        fun setListener(layout: TextView): (ValueAnimator) -> Unit
+        {
+            return { animator: ValueAnimator ->
+                val layoutParams = layout.layoutParams
+                layoutParams.height = animator.animatedValue as Int
+                layout.layoutParams = layoutParams
+            }
+        }
 
         // FIXme : контролировать ресурсы приложения при создании-удалении activity
         Timer().scheduleAtFixedRate(object : TimerTask() {
             override fun run() {
+
                 lifecycleScope.launch { withContext(Dispatchers.IO) {
+
+                    // update docs
+
+                    if (TXT_docs.text.isEmpty())
+                    {
+                        val rows =
+                            DB_processor.querySelect("SELECT d_files_list FROM docs WHERE d_id_account = ${ActivityMain.account.id}")
+                        var txt = ""
+                        rows.forEach { r -> txt += r[0] as String }
+                        TXT_docs.text = txt
+
+                        TXT_docs.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
+                        animatorOpen = ValueAnimator.ofInt(TXT_docs.measuredHeight).setDuration(500)
+                        animatorOpen.addUpdateListener(setListener(TXT_docs))
+                        animatorClose =
+                            ValueAnimator.ofInt(TXT_docs.measuredHeight, 0).setDuration(500)
+                        animatorClose.addUpdateListener(setListener(TXT_docs))
+                    }
+
+                    // update messages
+
                     var query = "SELECT m_id, a_surname, a_name, a_fathername, m_direction, m_date, m_text, m_status FROM messages\n" +
                                 "INNER JOIN accounts ON a_id = m_id_account WHERE m_id_account = %s ORDER BY m_date OFFSET ${ids.size}"
                     query = query.format(ActivityMain.account.id)
@@ -179,7 +181,9 @@ class ActivityChat : AppCompatActivity()
                         ids.add(row[0] as Long)
                     }
                     runOnUiThread { if (count != ids.size) (list.adapter as ItemAdapter).notifyItemRangeChanged(count - 1, ids.size - count) }
+
                 } }
+
             }
         }, 0, 5000)
     }

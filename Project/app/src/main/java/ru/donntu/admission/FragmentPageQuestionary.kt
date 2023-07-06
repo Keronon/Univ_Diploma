@@ -89,7 +89,6 @@ class FragmentPageQuestionary(private val pageBaseDocs: FragmentPageBaseDocs) : 
 
         @Suppress("SpellCheckingInspection")
         val onBTNstreamClick = fun (it: View) {
-            show(_this.context, "Отображаем выбор НО")
             // TODO : настраивать список направлений в зависимости от :
             //        базового образования
             //        формы обучения
@@ -161,7 +160,6 @@ class FragmentPageQuestionary(private val pageBaseDocs: FragmentPageBaseDocs) : 
         // other
 
         _this.findViewById<Button>(R.id.BTN_case_info).setOnClickListener {
-            show(_this.context, "Отображаем информацию о заполнении")
             showPopupFiles()
         }
 
