@@ -57,9 +57,20 @@ that can be used for admission to DonNTU.
 
 ### ***Show of Results:***
 
-* First showing activity
+* Main activity
+<img src="https://github.com/Keronon/Univ_Diploma/assets/59052298/0c39d297-89c4-4658-ad96-139ac8648292" alt="Main activity" width="20%">
 
-[image]
+* Login form
+<img src="https://github.com/Keronon/Univ_Diploma/assets/59052298/1b16c044-23c1-449a-82e1-33820bbc9b2b" alt="Login form" width="20%">
+
+* Register form
+<img src="https://github.com/Keronon/Univ_Diploma/assets/59052298/4af0a038-dd7c-48e0-a16e-c3bf5c75c460" alt="Register form" width="20%">
+
+* Cases page
+<img src="https://github.com/Keronon/Univ_Diploma/assets/59052298/7709bc23-f59c-4ce9-acbc-0fcc70083770" alt="Cases page" width="20%">
+
+* Info activity
+<img src="https://github.com/Keronon/Univ_Diploma/assets/59052298/cdcfa2d6-5319-47b8-82f2-be84ee554ed2" alt="Info activity" width="20%">
 
 -----
 -----
