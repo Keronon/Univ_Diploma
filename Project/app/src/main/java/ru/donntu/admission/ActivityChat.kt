@@ -14,51 +14,59 @@ import java.util.*
 
 class ActivityChat : AppCompatActivity()
 {
-    private val ids   = ArrayList<Long>()
+    private val ids = ArrayList<Long>() // контроль подгруженных в приложение id сообщений
 
     @Suppress("PrivatePropertyName")
-    private lateinit var TXT_docs: TextView
-    private lateinit var animatorOpen : ValueAnimator
-    private lateinit var animatorClose: ValueAnimator
+    private lateinit var TXT_docs: TextView // текстовое-поле для вывода перечня отправленных на сервер файлов
+    private lateinit var animatorOpen : ValueAnimator // обработчик анимации раскрытия поля перечня файлов
+    private lateinit var animatorClose: ValueAnimator // обработчик анимации закрытия поля перечня файлов
 
+    // основная функция для класса
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
 
+        // текущее состояние заявления
         findViewById<TextView>(R.id.TXT_id    ).text = ActivityMain.account.id
         findViewById<TextView>(R.id.TXT_status).text = ActivityMain.account.status
 
         // buttons
 
-        // TODO надо где-то брать анкету, или притягивать сюда данные
+        // TODO надо где-то брать анкету, как это сделано на сайте, или притягивать сюда данные, и открывать в информационной форме
         // -> BTN data
         // findViewById<Button>(R.id.BTN_data).setOnClickListener {
         //     Toast.makeText(applicationContext, "Отображаем анкету", Toast.LENGTH_SHORT).show()
         // }
 
-        // -> BTN docs
+        // -> toggle-BTN docs
         @Suppress("LocalVariableName")
         val BTN_docs = findViewById<ToggleButton>(R.id.BTN_docs)
         BTN_docs.setOnCheckedChangeListener { _: CompoundButton, b: Boolean ->
-            if (b)
+            if (b) // если кнопка активна
             {
+                // отобразить перечень документов
                 animatorOpen.start()
                 BTN_docs.text = BTN_docs.textOn
             }
             else
             {
+                // скрыть перечень документов
                 animatorClose.start()
                 BTN_docs.text = BTN_docs.textOff
             }
         }
 
+        // нажатие на кнопку отправки сообщения
         // -> BTN send
         findViewById<Button>(R.id.BTN_send).setOnClickListener {
+
+            // проверяем наличие текста в сообщении
             @Suppress("LocalVariableName")
             val TXT_message = findViewById<EditText>(R.id.TXT_message)
             if (TXT_message.text.toString().isEmpty()) return@setOnClickListener
 
+            // функция для форматирования текущего времени
             fun Calendar.toTimeStr(): String {
                 return "${this[Calendar.YEAR]}-${
                     if (this[Calendar.MONTH       ] > 9) this[Calendar.MONTH   ] + 1 else "0${this[Calendar.MONTH   ] + 1}" }-${
@@ -70,6 +78,7 @@ class ActivityChat : AppCompatActivity()
 
             val time = Calendar.getInstance().toTimeStr()
 
+            // подготовка и отправка сообщения в виде записи в БД
             var query = "INSERT INTO messages (m_id_account, m_direction, m_date, m_text, m_status)\n" +
                           "VALUES ('%s', '%s', '%s', '%s', '%s');"
             query = query.format(ActivityMain.account.id, "to admin", time,
@@ -88,8 +97,9 @@ class ActivityChat : AppCompatActivity()
             onBackPressed()
         }
 
-        // list
+        // список сообщений. его структурирование и отображение
 
+        // класс-структура элемента списка
         @Suppress("PropertyName")
         class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
         {
@@ -97,7 +107,9 @@ class ActivityChat : AppCompatActivity()
             val TXT_body : TextView = itemView.findViewById(R.id.body)
         }
 
+        // класс для определения данных элемента списка
         data class Item(val title: String, val body: String)
+        // класс управляющий поведением списка
         class ItemAdapter(private val items: MutableList<Item>) : RecyclerView.Adapter<ItemViewHolder>() {
 
             override fun onCreateViewHolder(parent: android.view.ViewGroup, viewType: Int): ItemViewHolder {
@@ -105,6 +117,7 @@ class ActivityChat : AppCompatActivity()
                 return ItemViewHolder(view)
             }
 
+            // запись значений в видимые элементы списка
             override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
                 val item = items[position]
                 holder.TXT_title.text = item.title
@@ -116,16 +129,18 @@ class ActivityChat : AppCompatActivity()
             }
         }
 
+        // назначение объектов списка в переменные
         val list = findViewById<RecyclerView>(R.id.VIEW_messages)
         list.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
         val items = mutableListOf<Item>()
         list.adapter = ItemAdapter(items)
 
-        // inner timer
+        // таймер, обновляющий список сообщений
 
         @Suppress("LocalVariableName")
         TXT_docs = findViewById(R.id.TXT_docs)
 
+        // делигируемая функция при настройке анимации текстового поля с перечнем документов
         fun setListener(layout: TextView): (ValueAnimator) -> Unit
         {
             return { animator: ValueAnimator ->
@@ -136,13 +151,15 @@ class ActivityChat : AppCompatActivity()
         }
 
         // FIXme : контролировать ресурсы приложения при создании-удалении activity
+
+        // обработка тика таймера
         Timer().scheduleAtFixedRate(object : TimerTask() {
             override fun run() {
 
+                // всё, что связано с сетевыми запросами требуется выполнять в параллельном потоке
                 lifecycleScope.launch { withContext(Dispatchers.IO) {
 
-                    // update docs
-
+                    // обновление перечня документов, если он пуст
                     if (TXT_docs.text.isEmpty())
                     {
                         val rows =
@@ -159,8 +176,7 @@ class ActivityChat : AppCompatActivity()
                         animatorClose.addUpdateListener(setListener(TXT_docs))
                     }
 
-                    // update messages
-
+                    // обновление списка сообщений
                     var query = "SELECT m_id, a_surname, a_name, a_fathername, m_direction, m_date, m_text, m_status FROM messages\n" +
                                 "INNER JOIN accounts ON a_id = m_id_account WHERE m_id_account = %s ORDER BY m_date OFFSET ${ids.size}"
                     query = query.format(ActivityMain.account.id)

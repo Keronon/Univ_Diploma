@@ -26,19 +26,22 @@ import java.util.*
 
 class ActivityMain : AppCompatActivity() {
 
-    companion object { val account = Account() }
+    companion object { val account = Account() } // статический объект класса
 
     // VARs
 
-    private var created = false
+    private var created = false // используется для игнорирования вызова функций до создания окна
 
+    // хранилище записей из БД, получаемых запросом
     // [ [ 0 = id, 1 = login, 2 = password, 3 = has_own ] ]
     private lateinit var accounts: MutableList<MutableList<Any>>
 
+    // элементы экрана
     private lateinit var drawer: DrawerLayout
     private lateinit var nav   : NavigationView
     private lateinit var toggle: ActionBarDrawerToggle
 
+    // контролируемые формы
     private lateinit var popPlan      : Dialog
     private lateinit var popInfo      : Dialog
     private lateinit var popReg       : Dialog
@@ -70,8 +73,7 @@ class ActivityMain : AppCompatActivity() {
         drawer.addDrawerListener(toggle)
         nav.bringToFront()
 
-        // menu items
-
+        // управление контекстным меню
         nav.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.menu_plan -> {
@@ -94,6 +96,7 @@ class ActivityMain : AppCompatActivity() {
             true
         }
 
+        // загрузка имеющихся аккаунтов для использования при регистрации и авторизации
         lifecycleScope.launch { show(applicationContext, withContext(Dispatchers.IO)
         {
             DB_processor.connect()
@@ -142,6 +145,7 @@ class ActivityMain : AppCompatActivity() {
 
     // PopUps
 
+    // форма плана
     private fun showPopupPlan()
     {
         popPlan.setContentView(R.layout.popup_plan)
@@ -149,6 +153,7 @@ class ActivityMain : AppCompatActivity() {
         popPlan.show()
     }
 
+    // форма информации
     private fun showPopupInfo()
     {
         popInfo.setContentView(R.layout.popup_info)
@@ -159,8 +164,7 @@ class ActivityMain : AppCompatActivity() {
         popInfo.show()
     }
 
-    // popup Reg
-
+    // форма регистрации
     @Suppress("LocalVariableName")
     private fun showPopupReg()
     {
@@ -232,6 +236,7 @@ class ActivityMain : AppCompatActivity() {
         popReg.show()
     }
 
+    // настройка выбора даты при регистрации
     private fun initDatePicker()
     {
         val datePicker: DatePicker = popReg.findViewById(R.id.PICK_date)
@@ -247,7 +252,7 @@ class ActivityMain : AppCompatActivity() {
         datePicker.minDate = calendar.timeInMillis
     }
 
-    // -> focuses
+    // функции проверки данных в полях ввода при регистрации
 
     private fun checkLogin(txt: EditText, lbl: TextView): Boolean
     {
@@ -302,7 +307,7 @@ class ActivityMain : AppCompatActivity() {
         account.fathername = txt_f.text.toString().trim()
         return if (
             account.surname.contains("'") || account.name.contains("'") || account.fathername.contains("'") ||
-            account.surname.isEmpty()           || account.name.isEmpty()
+            account.surname.isEmpty()     || account.name.isEmpty()
         ) {
             layoutParams.height = LayoutParams.WRAP_CONTENT
             lbl.layoutParams = layoutParams
@@ -380,8 +385,7 @@ class ActivityMain : AppCompatActivity() {
         }
     }
 
-    // popup Reg confirm
-
+    // форма подтверждения регистрации
     private fun showPopupRegConfirm()
     {
         popRegConfirm.setContentView(R.layout.popup_reg_confirm)
@@ -393,6 +397,8 @@ class ActivityMain : AppCompatActivity() {
             popRegConfirm.dismiss()
         }
         popRegConfirm.findViewById<Button>(R.id.BTN_reg).setOnClickListener {
+
+            // шифрования регистрируемого пароля
             val salt = generateSalt()
             val saltStr = salt.joinToString("") { "%02x".format(it) }
             account.password = "${hashPassword(account.password, salt)}::${saltStr}"
@@ -419,6 +425,7 @@ class ActivityMain : AppCompatActivity() {
         popRegConfirm.show()
     }
 
+    // подготовка данных на форме подтверждения регистрации
     private fun prepareRegConfirm()
     {
         fun DatePicker.getDateString(): String {
@@ -442,8 +449,7 @@ class ActivityMain : AppCompatActivity() {
         popRegConfirm.findViewById<TextView>(R.id.TXT_other     ).text = account.other
     }
 
-    // popup Login
-
+    // форма авторизации
     private fun showPopupLogin()
     {
         popLogin.setContentView(R.layout.popup_login)
@@ -456,9 +462,12 @@ class ActivityMain : AppCompatActivity() {
 
         popLogin.findViewById<Button>(R.id.BTN_reg).setOnClickListener {
             val login = popLogin.findViewById<EditText>(R.id.TXT_login).text.toString()
+
+            // поиск пользователя
             val user = accounts.find { v -> v[1] as String == login }
             if (user != null)
             {
+                // проверка пароля
                 val passwordDB = user[2] as String
                 val (dbStrPasswordHash, saltStr) = passwordDB.split("::")
                 val salt = saltStr.chunked(2).map { it.toInt(16).toByte() }.toByteArray()
@@ -470,6 +479,7 @@ class ActivityMain : AppCompatActivity() {
                     account.login  = user[1] as String
                     account.status = user[3] as String
 
+                    // открытие разных окон при разном статусе заявления пользователя
                     val nextPage = if (account.status == "зарегистрировано")
                          Intent(this, ActivityPersonalData::class.java)
                     else Intent(this, ActivityChat::class.java)
@@ -486,7 +496,7 @@ class ActivityMain : AppCompatActivity() {
         popLogin.show()
     }
 
-    // crypt
+    // функции шифрования
 
     private fun hashPassword(password: String, salt: ByteArray): String {
         val bytes = password.toByteArray(Charsets.UTF_8)

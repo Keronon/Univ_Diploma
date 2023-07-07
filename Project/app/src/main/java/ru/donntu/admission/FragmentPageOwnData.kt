@@ -10,7 +10,7 @@ import androidx.appcompat.widget.SwitchCompat
 
 class FragmentPageOwnData: Fragment()
 {
-    companion object { var own = Own() }
+    companion object { var own = Own() } // статический объект класса
 
     @Suppress("PropertyName")
     private lateinit var _this : View
@@ -39,6 +39,7 @@ class FragmentPageOwnData: Fragment()
         super.onResume()
     }
 
+    // сохранение данных при остановке страницы
     override fun onPause()
     {
         super.onPause()

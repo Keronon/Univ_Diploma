@@ -12,11 +12,11 @@ import androidx.appcompat.widget.SwitchCompat
 @Suppress("PrivatePropertyName")
 class FragmentPageConfirm: Fragment()
 {
-    companion object { var personalData: PersonalData? = null }
+    companion object { var personalData: PersonalData? = null } // статический объект класса
 
     private lateinit var _this: View
 
-    private lateinit var priority_contract: MutableList<String>
+    private lateinit var priority_contract: MutableList<String> // приоритет направления, по которому есть согласие на контракт
     private lateinit var adapter_priority_contract: ArrayAdapter<String>
 
     private lateinit var animatorsOpen: Array<ValueAnimator>
@@ -28,8 +28,7 @@ class FragmentPageConfirm: Fragment()
     ): View {
         _this = inflater.inflate(R.layout.fragment_page_confirm, container, false)
 
-        // hooks
-
+        // настройка анимаций раскрывающихся областей в зависимойсти от количества их дочерних элементов
         @Suppress("SpellCheckingInspection")
         val LAYOUTs_p: Array<LinearLayout> = arrayOf(
             _this.findViewById(R.id.LAYOUT_p_1),
@@ -95,14 +94,12 @@ class FragmentPageConfirm: Fragment()
             }
         }
 
-        // contract
-
+        // обработчик выпадающего списка приоритета контракта
         priority_contract = mutableListOf("-", "1")
         adapter_priority_contract = ArrayAdapter(_this.context, android.R.layout.simple_spinner_item, priority_contract )
         _this.findViewById<Spinner>(R.id.SPINNER_priority_contract).adapter = adapter_priority_contract
 
-        // switches
-
+        // переключатели соглашений
         val SWITCH_notice_1 = _this.findViewById<SwitchCompat>(R.id.SWITCH_notice_1)
         val SWITCH_notice_2 = _this.findViewById<SwitchCompat>(R.id.SWITCH_notice_2)
         val SWITCH_notice_3 = _this.findViewById<SwitchCompat>(R.id.SWITCH_notice_3)
@@ -124,6 +121,7 @@ class FragmentPageConfirm: Fragment()
         super.onPause()
     }
 
+    // загрузка данных при активации страницы
     @Suppress("LocalVariableName")
     override fun onResume()
     {
