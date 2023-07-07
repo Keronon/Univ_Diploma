@@ -18,15 +18,15 @@ import java.io.FileInputStream
 
 class ActivityPersonalData : AppCompatActivity()
 {
-    private lateinit var err: String
+    private lateinit var err: String // собираемая строка, содержащая список допущенных пользователем ошибок заполнения данных
     private lateinit var popErr: Dialog
 
-    private lateinit var adapter: AdapterPersonalData
-    private lateinit var pager: ViewPager2
+    private lateinit var adapter: AdapterPersonalData // контроллер области с перелистываемыми страницами
+    private lateinit var pager: ViewPager2 // сама область с перелистываемыми страницами
 
     @Suppress("PrivatePropertyName")
-    private lateinit var TABs: Array<String>
-    private lateinit var data: PersonalData
+    private lateinit var TABs: Array<String> // список имён страниц
+    private lateinit var data: PersonalData // переменная для хранения данных
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -45,6 +45,7 @@ class ActivityPersonalData : AppCompatActivity()
         super.onDestroy()
     }
 
+    // инициализация области с перелистываемыми страницами
     private fun initPager()
     {
         TABs = arrayOf("Персональные данные", "Данные о родителях", "Сканы документов", "Базисные документы", "Анкета", "Подтверждение данных")
@@ -80,7 +81,7 @@ class ActivityPersonalData : AppCompatActivity()
     {
         err = ""
 
-        // on not user-checked data
+        // если пользователь не на странице с проверкой данных
         if (FragmentPageConfirm.personalData == null)
         {
             show(applicationContext, "Проверьте свои данные на вкладке '${TABs[5]}'")
@@ -88,12 +89,14 @@ class ActivityPersonalData : AppCompatActivity()
         }
         data = FragmentPageConfirm.personalData!!
 
+        // проверка корректности данных
         if (!checkData())
         {
             showPopupErr()
             return
         }
 
+        // отправка данных на файловый сервер и в БД
         val zipName = "archive.zip"
         val zipPath = "${filesDir.absolutePath}/$zipName"
         archiveFiles(data.docs, zipPath)
@@ -380,7 +383,7 @@ class ActivityPersonalData : AppCompatActivity()
         return normal
     }
 
-    // sends
+    // функции отправки данных
 
     @Suppress("LocalVariableName")
     private fun sendToDB(data: PersonalData, archiveName: String)

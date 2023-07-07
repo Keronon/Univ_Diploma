@@ -7,6 +7,8 @@ import android.util.AttributeSet
 import android.view.*
 import androidx.appcompat.widget.AppCompatImageView
 
+// взятая из сети реализация оконного элемента области с зумом
+
 class CustomZoom : AppCompatImageView, View.OnTouchListener,
                    GestureDetector.OnGestureListener, GestureDetector.OnDoubleTapListener
 {

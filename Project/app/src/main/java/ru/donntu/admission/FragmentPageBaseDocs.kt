@@ -11,12 +11,12 @@ import androidx.appcompat.widget.SwitchCompat
 @Suppress("PropertyName")
 class FragmentPageBaseDocs: Fragment()
 {
-    companion object { var baseDocsInfo = BaseDocsInfo() }
+    companion object { var baseDocsInfo = BaseDocsInfo() } // статический объект класса
 
     lateinit var _this: View
 
-    private lateinit var op  : Array<String>
-    private lateinit var educ: Array<String>
+    private lateinit var op  : Array<String> // названия образовательных программ
+    private lateinit var educ: Array<String> // уровней образования
 
     @Suppress("LocalVariableName")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -26,7 +26,7 @@ class FragmentPageBaseDocs: Fragment()
         op   = arrayOf(getString(R.string.bachelor), getString(R.string.expert), getString(R.string.master))
         educ = arrayOf("Ср. общ.", "Ср. проф.")
 
-        // spinners
+        // выпадающие списки
 
         val op_1 = _this.findViewById<Spinner>(R.id.SPINNER_op_1  )
         val op_2 = _this.findViewById<Spinner>(R.id.SPINNER_op_2  )
@@ -40,7 +40,7 @@ class FragmentPageBaseDocs: Fragment()
         educ_1.adapter   = adapter_educ
         educ_2.adapter   = adapter_educ
 
-        // switch
+        // переключатели
 
         val layout_doc_2: LinearLayout = _this.findViewById(R.id.LAYOUT_doc_2)
         _this.findViewById<SwitchCompat>(R.id.SWITCH_doc_2).setOnCheckedChangeListener { _: CompoundButton, b: Boolean ->
@@ -59,6 +59,7 @@ class FragmentPageBaseDocs: Fragment()
         super.onResume()
     }
 
+    // сохранение данных при остановке страницы
     override fun onPause()
     {
         super.onPause()

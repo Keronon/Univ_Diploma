@@ -13,7 +13,7 @@ import androidx.appcompat.widget.SwitchCompat
 
 class FragmentPageQuestionary(private val pageBaseDocs: FragmentPageBaseDocs) : Fragment()
 {
-    companion object { var cases = mutableListOf(Case()) }
+    companion object { var cases = mutableListOf(Case()) } // статический объект класса
 
     @Suppress("PropertyName")
     private lateinit var _this : View
@@ -21,10 +21,10 @@ class FragmentPageQuestionary(private val pageBaseDocs: FragmentPageBaseDocs) : 
     private lateinit var popInfo : Dialog
     private lateinit var popStreamSelect : Dialog
 
-    private lateinit var fo      : MutableList<String>
-    private lateinit var course  : MutableList<String>
-    private lateinit var priority: MutableList<String>
-    private lateinit var docs    : MutableList<String>
+    private lateinit var fo      : MutableList<String> // названия форм обучения
+    private lateinit var course  : MutableList<String> // номера курсов для поступления
+    private lateinit var priority: MutableList<String> // приоритеты
+    private lateinit var docs    : MutableList<String> // базисные документы
 
     @Suppress("PrivatePropertyName")
     private lateinit var adapter_docs: ArrayAdapter<String>
@@ -160,19 +160,21 @@ class FragmentPageQuestionary(private val pageBaseDocs: FragmentPageBaseDocs) : 
         // other
 
         _this.findViewById<Button>(R.id.BTN_case_info).setOnClickListener {
-            showPopupFiles()
+            showPopupInfo()
         }
 
         return _this
     }
 
-    private fun showPopupFiles()
+    // отображение формы информации
+    private fun showPopupInfo()
     {
         popInfo.setContentView(R.layout.popup_info_questionary)
         popInfo.findViewById<TextView>(R.id.BTN_close).setOnClickListener{ popInfo.dismiss() }
         popInfo.show()
     }
 
+    // отображение формы выбора направления подготовки
     @Suppress("LocalVariableName")
     private fun showPopupStreamSelect(it: Button)
     {
@@ -314,6 +316,7 @@ class FragmentPageQuestionary(private val pageBaseDocs: FragmentPageBaseDocs) : 
         }
     }
 
+    // сохранение данных при остановке страницы
     override fun onPause()
     {
         super.onPause()

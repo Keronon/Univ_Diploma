@@ -18,7 +18,7 @@ import kotlin.collections.HashMap
 
 class FragmentPageDocs: Fragment()
 {
-    companion object { val docs = mutableMapOf<String, Any>() }
+    companion object { val docs = mutableMapOf<String, Any>() } // статический объект класса
 
     @Suppress("PropertyName")
     private lateinit var _this : View
@@ -39,7 +39,7 @@ class FragmentPageDocs: Fragment()
 
         popFiles = Dialog(_this.context)
 
-        // list
+        // обработчик списка файлов
 
         val list: ListView = _this.findViewById(R.id.VIEW_list)
         listAdapter = SimpleAdapter(
@@ -81,6 +81,7 @@ class FragmentPageDocs: Fragment()
         popFiles.show()
     }
 
+    // обработчик выбора файла в системе
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         @Suppress("DEPRECATION")
@@ -120,6 +121,7 @@ class FragmentPageDocs: Fragment()
         super.onResume()
     }
 
+    // сохранение данных при остановке страницы
     override fun onPause()
     {
         super.onPause()

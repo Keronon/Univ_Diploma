@@ -9,7 +9,7 @@ import android.widget.EditText
 
 class FragmentPageParentsData: Fragment()
 {
-    companion object { val parents = Parents() }
+    companion object { val parents = Parents() } // статический объект класса
 
     @Suppress("PropertyName")
     private lateinit var _this : View
@@ -26,6 +26,7 @@ class FragmentPageParentsData: Fragment()
         super.onResume()
     }
 
+    // сохранение данных при остановке страницы
     override fun onPause()
     {
         super.onPause()
